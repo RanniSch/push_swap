@@ -6,12 +6,37 @@
 /*   By: rschlott <rschlott@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/12 22:45:09 by rschlott          #+#    #+#             */
-/*   Updated: 2022/06/13 23:06:05 by rschlott         ###   ########.fr       */
+/*   Updated: 2022/06/15 00:05:15 by rschlott         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdarg.h>
 #include <stdio.h>
+#include <stdlib.h>
+
+int    *ft_one_calloc(int argc, int size)
+{
+    int    *ptr;
+    int     i;
+
+    /*if ((argc - 1) == 0 || size == 0)
+    {
+        (argc - 1) = 1;
+        size = 4;
+    }*/
+    /*if ((argc - 1) >= __SIZE_MAX__ || size >= __SIZE_MAX__)
+        return (0);*/
+    ptr = malloc((argc - 1) * size);
+    if (!ptr)
+        return (NULL);
+    i = 0;
+    while (i < (argc - 1))
+    {
+        ptr[i] = 1;
+        i++;
+    }
+    return (ptr);
+}
 
 int	ft_atoi(const char *str)
 {
@@ -44,24 +69,28 @@ int ft_l_i_subsequence(int argc, int *ints)
 {
     int i;
     int j;
-    int *len;
-    int length;
+    int    *ptr_len;
+    int length[argc - 1];
+
+    ptr_len = &length[0];
 
     j = 0;
     i = 1;
-    length = 1;
-    len = &length[0];
+    ptr_len = *ft_one_calloc(argc, 4);
     while (i <= argc - 1)
     {
-        if (ints[j] < ints[i])
+        j = 0;
+        while (j < i)
         {
-            length[i] = length[j] + length[i];
-        }
-        else
+            if (ints[j] < ints[i])
         {
-            i++
+            ptr_len[i] = ptr_len[j] + 1;
         }
+            j++;
+        }
+        i++;        
     }
+    return (0);         // hier muss noch was anderes hin! Pointer zu length!
 }
 
 int *ft_stack_receive(int argc, char **argv)
