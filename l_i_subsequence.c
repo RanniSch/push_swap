@@ -6,7 +6,7 @@
 /*   By: rschlott <rschlott@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/12 22:45:09 by rschlott          #+#    #+#             */
-/*   Updated: 2022/06/15 00:05:15 by rschlott         ###   ########.fr       */
+/*   Updated: 2022/06/18 12:42:45 by rschlott         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,52 +65,150 @@ int	ft_atoi(const char *str)
 	return (convert * sign);
 }
 
-int ft_l_i_subsequence(int argc, int *ints)
+int *ft_l_i_subsequence(int argc, int *pt_ints)
 {
     int i;
     int j;
     int    *ptr_len;
-    int length[argc - 1];
+    //int length[argc - 1];
 
-    ptr_len = &length[0];
+    //ptr_len = &length[0];
 
     j = 0;
     i = 1;
-    ptr_len = *ft_one_calloc(argc, 4);
+    ptr_len = ft_one_calloc(argc, 4);
     while (i <= argc - 1)
     {
         j = 0;
         while (j < i)
         {
-            if (ints[j] < ints[i])
+            if (pt_ints[j] < pt_ints[i]) //woher soll die Funktion wissen, wie groß der Nachfolger ist!
         {
             ptr_len[i] = ptr_len[j] + 1;
         }
             j++;
         }
-        i++;        
+        i++;
+        printf("ptr_len: %d\n", ptr_len[i]);
     }
-    return (0);         // hier muss noch was anderes hin! Pointer zu length!
+    return (ptr_len);         // hier muss noch was anderes hin! Pointer zu length!
+}
+
+// Define structure for the node
+struct node
+{
+    int data;               //Data of the node
+    struct node *nextPtr;   //Adress of the next node
+}
+
+// declare pointer for the starting node
+struct node *startNode;
+
+// Function to create a list
+static void createNodeList(int argc - 1)
+{
+    struct node *newNode;
+    struct node *nodeBuffer;
+    int nodeData;
+    int nodeCounter;
+
+    startNode = (struct node *)malloc(sizeof(struct node));
+    it (startNode == NULL)
+        return (NULL);
+    else
+    {
+        startNode->data = nodeData; //erster Eintrag muss hier rein
+        startNode->nextPtr = NULL;
+        nodeBuffer = startNode;
+        nodeCounter = 2;
+        while (nodeCounter <= argc)
+        {
+            newNode = (struct node *)malloc(sizeof(struct node));
+            if (newNode == NULL)
+                break;
+            else
+            {
+                newNode->data = nodeData;
+                newNode->nextPtr = NULL;
+                nodeBuffer->nextPtr = newNode;  // Links the previous node to the current node
+                nodeBuffer = nodeBuffer->nextPtr;   // Copies the address of the current node
+            }
+            nodeCounter++;
+        }
+    }
+}
+
+typedef struct s_list
+{
+	void			*pt_ints;
+	struct s_list	*next;
+}					t_list;
+
+t_list	*ft_lstnew(void *pt_ints)
+{
+	t_list	*newnode;
+
+	newnode = (t_list *)malloc(sizeof(t_list));
+	if (newnode == NULL)
+		return (NULL);
+	if (pt_ints == NULL)
+		newnode->pt_ints = NULL;
+	else
+		newnode->pt_ints = pt_ints;
+	newnode->next = NULL;
+	return (newnode);
+}
+
+t_list	*ft_lstlast(t_list *lst)
+{
+	if (lst == NULL)
+		return (NULL);
+	if (lst->next == NULL)
+		return (lst);
+	return (ft_lstlast(lst->next));
+}
+
+void	ft_lstadd_back(t_list **lst, t_list *new)
+{
+	t_list	*lastitem;
+
+	if (!lst)
+		return ;
+	if (*lst)
+	{
+		lastitem = ft_lstlast(*lst);
+		lastitem->next = new;
+	}
+	else
+		*lst = new;
 }
 
 int *ft_stack_receive(int argc, char **argv)
 {
-    int *pointer;
-    int ints[argc - 1];
-    int convert;
+    int *pt_ints;
+    int *ptr_len;
+    int ints;
+    t_list  *newnode;
     int i;
 
-    pointer = &ints[0];
+    pt_ints = &ints[0];
     i = 1;
     while (i < argc)        // argc zählt den ersten String in argv mit und der ist immer ./a.out
     {
-        convert = ft_atoi(argv[i]);
-        ints[i - 1] = convert;
-        ft_l_i_subsequence(argc, ints[i - 1]);
-        printf("loop:%d", ints[i - 1]);
+        ints = ft_atoi(argv[i]);
+        if (i == 1)
+            newnode = ft_lstnew(ints);
+        else
+        {
+            ft_lstadd_back(newnode, ints);  // oder doch ft_lstnew(ints) als Argument?
+        }
+        //ints[i - 1] = convert;
+        //printf("Zahlen: %d", ints[i - 1]);  INTS AUSDRUCKEN!
         i++;
     }
-    return(pointer);
+    ptr_len = ft_l_i_subsequence(argc, pt_ints);
+    //printf("loop:%d & len: %ls", ints[i - 1], ptr_len);
+    return(pt_ints);
 }
 
 int main(int argc, char **argv)

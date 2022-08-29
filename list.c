@@ -6,25 +6,9 @@
 /*   By: rschlott <rschlott@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/12 22:47:30 by rschlott          #+#    #+#             */
-/*   Updated: 2022/06/12 22:50:36 by rschlott         ###   ########.fr       */
+/*   Updated: 2022/06/18 12:40:22 by rschlott         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
-#include "libft.h"
-/* Iterates over all elements in the list 
-and applies the function f to each item of the list. 
-Content is defined as item of the list. */
-
-void	ft_lstiter(t_list *lst, void (*f)(void *))
-{
-	if (!lst || !f)
-		return ;
-	while (lst != NULL)
-	{
-		f(lst->content);
-		lst = lst->next;
-	}
-}
 
 #include "libft.h"
 /* Counts the number of nodes in a list. */
@@ -60,6 +44,26 @@ t_list	*ft_lstnew(void *content)
 		newnode->content = content;
 	newnode->next = NULL;
 	return (newnode);
+}
+
+#include "libft.h"
+/* First checking if list exists. Then checking for the 
+last item and adding a new item behind the last. Else check 
+if the list is empty. If so: creating the first item. */
+
+void	ft_lstadd_back(t_list **lst, t_list *new)
+{
+	t_list	*lastitem;
+
+	if (!lst)
+		return ;
+	if (*lst)
+	{
+		lastitem = ft_lstlast(*lst);
+		lastitem->next = new;
+	}
+	else
+		*lst = new;
 }
 
 #include "libft.h"
@@ -110,3 +114,4 @@ void	ft_lstclear(t_list **lst, void (*del)(void*))
 	}
 	*lst = 0;
 }
+
