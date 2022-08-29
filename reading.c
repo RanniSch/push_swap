@@ -6,7 +6,7 @@
 /*   By: rschlott <rschlott@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/28 13:23:03 by rschlott          #+#    #+#             */
-/*   Updated: 2022/08/28 20:19:55 by rschlott         ###   ########.fr       */
+/*   Updated: 2022/08/29 12:24:10 by rschlott         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,15 +49,43 @@ int	ft_atoi(const char *str)
 	return (convert * sign);
 }
 
-/* receiving arguments from user input */
-int ft_stack_receive(int argc, char **argv)
+/* adds a new node to the list */
+void    add_at_end(struct node *head, int data)
 {
-    int *pt_ints;
+    struct node *ptr;
+    struct node *current;
+
+    ptr = head;
+    current = (struct node *)malloc(sizeof(struct node));
+    current->data = data;
+    current->link = NULL;
+    while(ptr->link != NULL)
+    {
+        ptr = ptr->link;
+    }
+    ptr->link = current;
+}
+
+/* print the data of a linked list */
+void    print_stack(struct node *head)
+{
+    if(head == NULL)
+        printf("Linked List is empty");
+    struct node *ptr = NULL;
+    ptr = head;
+    while(ptr != NULL)
+    {
+        printf("%d ", ptr->data);       // insert printf function!!!!!!!!!!!
+        ptr = ptr->link;
+    }
+}
+
+/* receiving arguments from user input */
+struct node *ft_stack_receive(int argc, char **argv)
+{
     //int *ptr_len;
-    int ints;
     int i;
 
-    pt_ints = &ints;
     i = 1;
     struct node *head = NULL;
     /* argc zählt den ersten String in argv mit und der ist immer ./a.out */
@@ -68,19 +96,24 @@ int ft_stack_receive(int argc, char **argv)
             head = (struct node *)malloc(sizeof(struct node));
             head->data = ft_atoi(argv[i]);
             head->link = NULL;
-            printf("Data: %d", head->data);
+            //printf("Data: %d", head->data);
         }
-        //ints = ft_atoi(argv[i]);      //shows the output of ft_atoi
+        else
+        {
+            add_at_end(head, ft_atoi(argv[i]));
+        }
         //printf("input: %d \n", ints);  //to check each input
-        *pt_ints = ints;
         i++;
     }
     //printf("loop: %d \n", *pt_ints);   //to check the output after the loop (should be the last entry)
-    return(head->data);
+    return(head);         // how to pass all data with the pointer??? struct node *link helpfull???
 }
 
 int main(int argc, char **argv)
 { 
-    printf("output main: %d\n", ft_stack_receive(argc, argv));  
+    struct node *head = NULL;
+    head = ft_stack_receive(argc, argv);
+    print_stack(head);
+    //printf("output main: %d\n", ft_stack_receive(argc, argv));  
     return(0);
 }
