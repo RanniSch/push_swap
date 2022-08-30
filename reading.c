@@ -6,7 +6,7 @@
 /*   By: rschlott <rschlott@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/28 13:23:03 by rschlott          #+#    #+#             */
-/*   Updated: 2022/08/29 12:24:10 by rschlott         ###   ########.fr       */
+/*   Updated: 2022/08/30 21:03:25 by rschlott         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,24 @@ void    add_at_end(struct node *head, int data)
     ptr->link = current;
 }
 
+/* counts the number of nodes */
+int    count_of_nodes(struct node *head)
+{
+    int count;
+    
+    count = 0;
+    if (head == NULL)
+        printf("Stack is empty");
+    struct node *ptr = NULL;
+    ptr = head;
+    while (ptr != NULL)
+    {
+        count++;
+        ptr = ptr->link;
+    }
+    return(count);
+}
+
 /* print the data of a linked list */
 void    print_stack(struct node *head)
 {
@@ -78,6 +96,29 @@ void    print_stack(struct node *head)
         printf("%d ", ptr->data);       // insert printf function!!!!!!!!!!!
         ptr = ptr->link;
     }
+    printf("\nnumber of nodes: %d\n", count_of_nodes(head));       // insert printf function!!!!!!!!!!!   
+}
+
+/* swap function: Swap the first two elements at the top of the stack */
+struct node *swap_elements(struct node *head)
+{
+    int count;
+    struct node *temp2;
+    struct node *temp1;
+
+    count = count_of_nodes(head);
+    if (head != NULL && count > 1)          // später error handling an eigener Stelle; head = NULL abbruch; count = 1 ausdrucken
+    {
+        temp1 = head->link;
+        temp2 = temp1->link;
+        printf("temp1: %d\n", temp1->data);
+        printf("temp2: %d\n", temp2->data);
+        temp1->link = temp2->link;     // 2000 link wird zu 3000 link
+        printf("temp1 neu: %d\n", temp1->data);
+        temp2->link = head->link;     // 3000 link wird zu 1000 link
+        head->link = temp2;
+    }
+    return (head);
 }
 
 /* receiving arguments from user input */
@@ -113,6 +154,8 @@ int main(int argc, char **argv)
 { 
     struct node *head = NULL;
     head = ft_stack_receive(argc, argv);
+    print_stack(head);
+    head = swap_elements(head);
     print_stack(head);
     //printf("output main: %d\n", ft_stack_receive(argc, argv));  
     return(0);
