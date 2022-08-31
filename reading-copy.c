@@ -6,7 +6,7 @@
 /*   By: rschlott <rschlott@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/28 13:23:03 by rschlott          #+#    #+#             */
-/*   Updated: 2022/08/31 17:12:06 by rschlott         ###   ########.fr       */
+/*   Updated: 2022/08/31 17:57:23 by rschlott         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -130,7 +130,7 @@ void   rotate_elements(struct node **liste)
     if (*liste != NULL && count_of_nodes(liste) > 1)
     {
         *liste = temp1;
-        while (*liste != NULL && i <= count_of_nodes(liste))        // später error handling an eigener Stelle; head = NULL abbruch; count = 1 ausdrucken
+        while (i <= count_of_nodes(liste))        // später error handling an eigener Stelle; head = NULL abbruch; count = 1 ausdrucken
         {
             temp2 = temp2->link;
             i++;
@@ -140,7 +140,40 @@ void   rotate_elements(struct node **liste)
     }
     else
         printf("error\n");                            // ft_printf function    
-} 
+}
+
+/* reverse rotate function: Shift down all elements of the stack by 1. The last element becomes the first one */
+void   rotate_rev_elements(struct node **liste)
+{
+    struct node *temp1;
+    struct node *temp2;
+    struct node *ptr_to_head;
+    int i;
+
+    ptr_to_head = *liste;
+    temp1 = ptr_to_head;
+    temp2 = temp1->link;
+    i = 1;
+    if (*liste != NULL && count_of_nodes(liste) > 1)
+    {
+        while (i < count_of_nodes(liste))        // später error handling an eigener Stelle; head = NULL abbruch; count = 1 ausdrucken
+        {
+            if (i < (count_of_nodes(liste) - 1))
+            {
+                temp1 = temp1->link;
+                printf("temp1: %d \n", temp1->data);
+            }                
+            temp2 = temp2->link;
+            printf("temp2: %d \n", temp2->data);
+            i++;
+        }
+        temp2->link = ptr_to_head;                      // letzter link wird zum alten ersten Link (jetzt zweiter Link)
+        *liste = temp2;
+        temp1->link = NULL;                             // vorletzter link wird zu NULL
+    }
+    else
+        printf("error\n");                            // ft_printf function    
+}
 
 /* receiving arguments from user input */
 void ft_stack_receive(int argc, char **argv, struct node **liste)
@@ -164,7 +197,9 @@ int main(int argc, char **argv)
     print_stack(&liste);
     //swap_elements(&liste);
     //print_stack(&liste);
-    rotate_elements(&liste);
+    //rotate_elements(&liste);
+    //print_stack(&liste);
+    rotate_rev_elements(&liste);
     print_stack(&liste);
     return(0);
 }
