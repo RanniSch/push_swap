@@ -6,7 +6,7 @@
 /*   By: rschlott <rschlott@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/28 13:23:03 by rschlott          #+#    #+#             */
-/*   Updated: 2022/08/31 09:33:34 by rschlott         ###   ########.fr       */
+/*   Updated: 2022/08/31 16:33:41 by rschlott         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,22 +102,18 @@ void    print_stack(struct node *head)
 /* swap function: Swap the first two elements at the top of the stack */
 struct node *swap_elements(struct node *head)
 {
-    int count;
-    struct node *temp2;
     struct node *temp1;
+    struct node *temp2;
+    struct node *ptr;
 
-    count = count_of_nodes(head);
-    if (head != NULL && count > 1)          // später error handling an eigener Stelle; head = NULL abbruch; count = 1 ausdrucken
-    {
-        temp1 = head;
-        temp2 = temp1->link;
-        printf("temp1: %d\n", temp1->data);
-        printf("head: %d\n", head->data);
-        printf("temp2: %d\n", temp2->data);
-        temp1->link = temp2->link;     // 2000 link wird zu 3000 link
-        printf("temp1 neu: %d\n", temp1->data);
-        temp2->link = head->link;     // 3000 link wird zu 1000 link
-        head->link = temp2;
+    ptr = head;
+    temp1 = ptr->link;
+    temp2 = temp1->link;
+    if (head != NULL && count_of_nodes(head) > 1)          // später error handling an eigener Stelle; head = NULL abbruch; count = 1 ausdrucken
+    {        
+        head = temp1;
+        ptr->link = temp2;
+        temp1->link = ptr;
     }
     return (head);
 }
