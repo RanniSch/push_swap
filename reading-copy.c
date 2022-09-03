@@ -6,14 +6,14 @@
 /*   By: rschlott <rschlott@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/28 13:23:03 by rschlott          #+#    #+#             */
-/*   Updated: 2022/08/31 17:57:23 by rschlott         ###   ########.fr       */
+/*   Updated: 2022/09/03 12:57:48 by rschlott         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
 /* converts char to int */
-int	ft_atoi(const char *str)
+int ft_atoi(const char *str)
 {
 	int			sign;
 	long int	convert;
@@ -41,12 +41,12 @@ int	ft_atoi(const char *str)
 }
 
 /* adds a new node to the list */
-void    add_at_end(struct node **liste, int data)
+void    add_at_end(struct node **a_liste, int data)
 {
     struct node *ptr;
     struct node *current;
 
-    ptr = *liste;
+    ptr = *a_liste;
     current = (struct node *)malloc(sizeof(struct node));
     current->data = data;
     current->link = NULL;
@@ -59,7 +59,7 @@ void    add_at_end(struct node **liste, int data)
         ptr->link = current;
     }
     else
-        *liste = current;    
+        *a_liste = current;    
 }
 
 /* counts the number of nodes */
@@ -115,8 +115,15 @@ void    swap_elements(struct node **liste)
         printf("error\n");                  // ft_printf function
 }
 
+/* swap elements of both functions at the same time */
+void    swap_a_b(struct node **a_liste, **b_liste)
+{
+    swap_elements(&a_liste);
+    swap_elements(&b_liste);
+}
+
 /* rotate function: Shift up all elements of the stack by 1. The first element becomes the last one */
-void   rotate_elements(struct node **liste)
+void    rotate_elements(struct node **liste)
 {
     struct node *temp1;
     struct node *temp2;
@@ -143,7 +150,7 @@ void   rotate_elements(struct node **liste)
 }
 
 /* reverse rotate function: Shift down all elements of the stack by 1. The last element becomes the first one */
-void   rotate_rev_elements(struct node **liste)
+void    rotate_rev_elements(struct node **liste)
 {
     struct node *temp1;
     struct node *temp2;
@@ -152,7 +159,7 @@ void   rotate_rev_elements(struct node **liste)
 
     ptr_to_head = *liste;
     temp1 = ptr_to_head;
-    temp2 = temp1->link;
+    temp2 = ptr_to_head;
     i = 1;
     if (*liste != NULL && count_of_nodes(liste) > 1)
     {
@@ -160,11 +167,9 @@ void   rotate_rev_elements(struct node **liste)
         {
             if (i < (count_of_nodes(liste) - 1))
             {
-                temp1 = temp1->link;
-                printf("temp1: %d \n", temp1->data);
+                temp1 = temp1->link;                
             }                
             temp2 = temp2->link;
-            printf("temp2: %d \n", temp2->data);
             i++;
         }
         temp2->link = ptr_to_head;                      // letzter link wird zum alten ersten Link (jetzt zweiter Link)
@@ -175,8 +180,34 @@ void   rotate_rev_elements(struct node **liste)
         printf("error\n");                            // ft_printf function    
 }
 
+/*  Take the first argument at the top of one stack and put it at the top of the other stack (from liste to b_liste or the other way round). 
+    Do nothing if first stack is empty. For pushing there is a source list and a destination list. 
+    When the source list is empty -> error 
+    When destination list is empty -> new node
+    If it is not empty, adding element to the top. */
+void    push_first_element(struct node **src, struct node **dest)
+{
+    struct node *ptr_to_head;
+    struct node *ptr_dest;
+    struct node *temp;
+
+    ptr_to_head = *src;
+    ptr_dest = *dest;
+    temp = ptr_to_head;
+    //if (ptr_src = NULL)
+    //    ft_error();
+    *src = ptr_to_head->link;    
+    if (ptr_dest != NULL)
+    {
+        temp->link = ptr_dest;
+    }
+    else
+        temp->link = NULL;
+    *dest = temp;    
+} 
+
 /* receiving arguments from user input */
-void ft_stack_receive(int argc, char **argv, struct node **liste)
+void ft_stack_receive(int argc, char **argv, struct node **a_liste)
 {
     int i;
 
@@ -184,22 +215,32 @@ void ft_stack_receive(int argc, char **argv, struct node **liste)
     /* argc zählt den ersten String in argv mit und der ist immer ./a.out */
     while (i < argc)
     {
-        add_at_end(liste, ft_atoi(argv[i]));
+        add_at_end(a_liste, ft_atoi(argv[i]));
         i++;
     }
 }
 
 int main(int argc, char **argv)
 { 
-    struct node *liste = NULL;
-    /* &liste gibt die Adresse des Pointers, der zur Liste zeigt durch = double pointer */
-    ft_stack_receive(argc, argv, &liste);
-    print_stack(&liste);
-    //swap_elements(&liste);
-    //print_stack(&liste);
-    //rotate_elements(&liste);
-    //print_stack(&liste);
-    rotate_rev_elements(&liste);
-    print_stack(&liste);
+    struct node *a_liste;
+    struct node *b_liste;
+    
+    a_liste = NULL;
+    b_liste = NULL;
+    /* &a_liste gibt die Adresse des Pointers, der zur Liste zeigt durch = double pointer */
+    ft_stack_receive(argc, argv, &a_liste);
+    print_stack(&a_liste);
+    //swap_elements(&a_liste);
+    //print_stack(&a_liste);
+    //rotate_elements(&a_liste);
+    //print_stack(&a_liste);
+    //rotate_rev_elements(&a_liste);
+    //print_stack(&a_liste);
+    push_first_element(&a_liste, &b_liste);
+    print_stack(&a_liste);
+    print_stack(&b_liste);
+    push_first_element(&a_liste, &b_liste);
+    print_stack(&a_liste);
+    print_stack(&b_liste);
     return(0);
 }

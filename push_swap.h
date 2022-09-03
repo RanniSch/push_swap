@@ -6,7 +6,7 @@
 /*   By: rschlott <rschlott@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/31 09:11:10 by rschlott          #+#    #+#             */
-/*   Updated: 2022/08/31 09:25:30 by rschlott         ###   ########.fr       */
+/*   Updated: 2022/09/03 11:14:25 by rschlott         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,6 @@ typedef struct node
 {
     int data;
     struct node *link;
-}               t_node;
+}               s_node;
 
 #endif
