@@ -6,7 +6,7 @@
 /*   By: rschlott <rschlott@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/28 13:23:03 by rschlott          #+#    #+#             */
-/*   Updated: 2022/09/03 12:57:48 by rschlott         ###   ########.fr       */
+/*   Updated: 2022/09/03 13:15:54 by rschlott         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,11 +115,11 @@ void    swap_elements(struct node **liste)
         printf("error\n");                  // ft_printf function
 }
 
-/* swap elements of both functions at the same time */
-void    swap_a_b(struct node **a_liste, **b_liste)
+/* swap elements of both stacks at the same time */
+void    swap_a_b(struct node **a_liste, struct node **b_liste)
 {
-    swap_elements(&a_liste);
-    swap_elements(&b_liste);
+    swap_elements(a_liste);
+    swap_elements(b_liste);
 }
 
 /* rotate function: Shift up all elements of the stack by 1. The first element becomes the last one */
@@ -147,6 +147,13 @@ void    rotate_elements(struct node **liste)
     }
     else
         printf("error\n");                            // ft_printf function    
+}
+
+/* rotate elements of both stacks at the same time */
+void    rotate_a_b(struct node **a_liste, struct node **b_liste)
+{
+    rotate_elements(a_liste);
+    rotate_elements(b_liste);
 }
 
 /* reverse rotate function: Shift down all elements of the stack by 1. The last element becomes the first one */
@@ -180,11 +187,16 @@ void    rotate_rev_elements(struct node **liste)
         printf("error\n");                            // ft_printf function    
 }
 
-/*  Take the first argument at the top of one stack and put it at the top of the other stack (from liste to b_liste or the other way round). 
-    Do nothing if first stack is empty. For pushing there is a source list and a destination list. 
-    When the source list is empty -> error 
-    When destination list is empty -> new node
-    If it is not empty, adding element to the top. */
+/* reverse rotate elements of both stacks at the same time */
+void    rotate_rev_a_b(struct node **a_liste, struct node **b_liste)
+{
+    rotate_rev_elements(a_liste);
+    rotate_rev_elements(b_liste);
+}
+
+/*  Take the first argument at the top of one stack and put it at the top of the other stack. Do nothing if first stack is empty. 
+    For pushing there is a source list and a destination list. When the source list is empty -> error 
+    When destination list is empty -> new node; If it is not empty, adding element to the top. */
 void    push_first_element(struct node **src, struct node **dest)
 {
     struct node *ptr_to_head;
@@ -240,6 +252,12 @@ int main(int argc, char **argv)
     print_stack(&a_liste);
     print_stack(&b_liste);
     push_first_element(&a_liste, &b_liste);
+    print_stack(&a_liste);
+    print_stack(&b_liste);
+    //swap_a_b(&a_liste, &b_liste);
+    //print_stack(&a_liste);
+    //print_stack(&b_liste);
+    rotate_a_b(&a_liste, &b_liste);
     print_stack(&a_liste);
     print_stack(&b_liste);
     return(0);
