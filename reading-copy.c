@@ -6,7 +6,7 @@
 /*   By: rschlott <rschlott@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/28 13:23:03 by rschlott          #+#    #+#             */
-/*   Updated: 2022/09/03 13:15:54 by rschlott         ###   ########.fr       */
+/*   Updated: 2022/09/04 12:00:57 by rschlott         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,6 +93,30 @@ void    print_stack(struct node **liste)
         ptr = ptr->link;
     }
     printf("\nnumber of nodes: %d\n", count_of_nodes(liste));       // insert printf function!!!!!!!!!!!   
+}
+
+/* Identify longest increasing subsequence */
+void    longest_increasing_subsequence(struct node **a_liste, int *length)
+{
+    struct node *walker;
+    struct node *iterator;
+
+    walker = *a_liste;
+    iterator = walker->link;
+    while (iterator != NULL)
+    {
+        walker = *a_liste;
+        while (walker->link < iterator->link) //kann man wahrscheinlich nicht so schreiben, weil Speicheradresse
+        {
+            if (walker->data < iterator->data)
+            {
+                
+                ptr_next = ptr_next->link;
+            }            
+            ptr = ptr->link;
+        }
+        ptr_next = ptr_next->link;
+    }    
 }
 
 /* swap function: Swap the first two elements at the top of the stack */
