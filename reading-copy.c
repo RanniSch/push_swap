@@ -6,7 +6,7 @@
 /*   By: rschlott <rschlott@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/28 13:23:03 by rschlott          #+#    #+#             */
-/*   Updated: 2022/09/04 12:00:57 by rschlott         ###   ########.fr       */
+/*   Updated: 2022/09/22 13:57:39 by rschlott         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,26 @@ void    add_at_end(struct node **a_liste, int data)
         *a_liste = current;    
 }
 
+/* adds an index to each node; one node now has the value of the data and the value of the index */
+void    set_index(struct node **a_liste)
+{
+    struct node *ptr;
+    int i;
+    
+    ptr = *a_liste;
+    i = 0;
+    if (ptr != NULL)
+    {    
+        while(ptr != NULL)
+        {
+            ptr->index = i;
+            ptr = ptr->link;
+            i++;
+        }
+
+    } 
+}
+
 /* counts the number of nodes */
 int    count_of_nodes(struct node **liste)
 {
@@ -95,152 +115,51 @@ void    print_stack(struct node **liste)
     printf("\nnumber of nodes: %d\n", count_of_nodes(liste));       // insert printf function!!!!!!!!!!!   
 }
 
+void    length_initializer_lis(int *subsequence, int *length, struct node **a_liste)
+{
+    int i;
+
+    i = 0;
+    while (i < count_of_nodes(a_liste))
+    {
+        subsequence[i] = 0;
+        length[i] = 1;
+        i++;
+    }   
+}
+
 /* Identify longest increasing subsequence */
-void    longest_increasing_subsequence(struct node **a_liste, int *length)
+void    longest_increasing_subsequence(struct node **a_liste, int *subsequence, int *length)
 {
     struct node *walker;
     struct node *iterator;
 
-    walker = *a_liste;
-    iterator = walker->link;
+    iterator = *a_liste;
+    iterator = iterator->link;
     while (iterator != NULL)
     {
         walker = *a_liste;
-        while (walker->link < iterator->link) //kann man wahrscheinlich nicht so schreiben, weil Speicheradresse
+        while (walker->index < iterator->index)
         {
             if (walker->data < iterator->data)
             {
-                
-                ptr_next = ptr_next->link;
+                length[iterator->link] = length[walker->link] + 1;
+                subsequence[iterator->index] = walker->index;
             }            
-            ptr = ptr->link;
+            walker = walker->link;
         }
-        ptr_next = ptr_next->link;
+        iterator = iterator->link;
     }    
 }
 
-/* swap function: Swap the first two elements at the top of the stack */
-void    swap_elements(struct node **liste)
+void    ft_lis_process(struct node **a_liste, int count)
 {
-    struct node *temp1;
-    struct node *temp2;
-    struct node *ptr_to_head;
+    int length[count];
+    int subsequence[count];
 
-    ptr_to_head = *liste;
-    temp1 = ptr_to_head->link;
-    temp2 = temp1->link;
-    if (*liste != NULL && count_of_nodes(liste) > 1)   // später error handling an eigener Stelle; head = NULL abbruch; count = 1 ausdrucken
-    {
-        *liste = temp1;
-        ptr_to_head->link = temp2;         // 2000 link wird zu 3000 link
-        temp1->link = ptr_to_head;           // 3000 link wird zu 1000 link
-    }
-    else
-        printf("error\n");                  // ft_printf function
+    length_initializer_lis(&subsequence[0], &length[0], a_liste);
+    longest_increasing_subsequence(a_liste, &subsequence[0], &length[0]);
 }
-
-/* swap elements of both stacks at the same time */
-void    swap_a_b(struct node **a_liste, struct node **b_liste)
-{
-    swap_elements(a_liste);
-    swap_elements(b_liste);
-}
-
-/* rotate function: Shift up all elements of the stack by 1. The first element becomes the last one */
-void    rotate_elements(struct node **liste)
-{
-    struct node *temp1;
-    struct node *temp2;
-    struct node *ptr_to_head;
-    int i;
-
-    ptr_to_head = *liste;
-    temp2 = ptr_to_head;
-    temp1 = temp2->link;
-    i = 1;
-    if (*liste != NULL && count_of_nodes(liste) > 1)
-    {
-        *liste = temp1;
-        while (i <= count_of_nodes(liste))        // später error handling an eigener Stelle; head = NULL abbruch; count = 1 ausdrucken
-        {
-            temp2 = temp2->link;
-            i++;
-        }
-        temp2->link = ptr_to_head;                     // letzter link wird zum ersten Link
-        ptr_to_head->link = NULL;                       // erster link wird zu NULL                     
-    }
-    else
-        printf("error\n");                            // ft_printf function    
-}
-
-/* rotate elements of both stacks at the same time */
-void    rotate_a_b(struct node **a_liste, struct node **b_liste)
-{
-    rotate_elements(a_liste);
-    rotate_elements(b_liste);
-}
-
-/* reverse rotate function: Shift down all elements of the stack by 1. The last element becomes the first one */
-void    rotate_rev_elements(struct node **liste)
-{
-    struct node *temp1;
-    struct node *temp2;
-    struct node *ptr_to_head;
-    int i;
-
-    ptr_to_head = *liste;
-    temp1 = ptr_to_head;
-    temp2 = ptr_to_head;
-    i = 1;
-    if (*liste != NULL && count_of_nodes(liste) > 1)
-    {
-        while (i < count_of_nodes(liste))        // später error handling an eigener Stelle; head = NULL abbruch; count = 1 ausdrucken
-        {
-            if (i < (count_of_nodes(liste) - 1))
-            {
-                temp1 = temp1->link;                
-            }                
-            temp2 = temp2->link;
-            i++;
-        }
-        temp2->link = ptr_to_head;                      // letzter link wird zum alten ersten Link (jetzt zweiter Link)
-        *liste = temp2;
-        temp1->link = NULL;                             // vorletzter link wird zu NULL
-    }
-    else
-        printf("error\n");                            // ft_printf function    
-}
-
-/* reverse rotate elements of both stacks at the same time */
-void    rotate_rev_a_b(struct node **a_liste, struct node **b_liste)
-{
-    rotate_rev_elements(a_liste);
-    rotate_rev_elements(b_liste);
-}
-
-/*  Take the first argument at the top of one stack and put it at the top of the other stack. Do nothing if first stack is empty. 
-    For pushing there is a source list and a destination list. When the source list is empty -> error 
-    When destination list is empty -> new node; If it is not empty, adding element to the top. */
-void    push_first_element(struct node **src, struct node **dest)
-{
-    struct node *ptr_to_head;
-    struct node *ptr_dest;
-    struct node *temp;
-
-    ptr_to_head = *src;
-    ptr_dest = *dest;
-    temp = ptr_to_head;
-    //if (ptr_src = NULL)
-    //    ft_error();
-    *src = ptr_to_head->link;    
-    if (ptr_dest != NULL)
-    {
-        temp->link = ptr_dest;
-    }
-    else
-        temp->link = NULL;
-    *dest = temp;    
-} 
 
 /* receiving arguments from user input */
 void ft_stack_receive(int argc, char **argv, struct node **a_liste)
@@ -259,30 +178,32 @@ void ft_stack_receive(int argc, char **argv, struct node **a_liste)
 int main(int argc, char **argv)
 { 
     struct node *a_liste;
-    struct node *b_liste;
+    //struct node *b_liste;
     
     a_liste = NULL;
-    b_liste = NULL;
+    //b_liste = NULL;
     /* &a_liste gibt die Adresse des Pointers, der zur Liste zeigt durch = double pointer */
     ft_stack_receive(argc, argv, &a_liste);
     print_stack(&a_liste);
+    set_index(&a_liste);
+    ft_lis_process(&a_liste, count_of_nodes(&a_liste));
     //swap_elements(&a_liste);
     //print_stack(&a_liste);
     //rotate_elements(&a_liste);
     //print_stack(&a_liste);
     //rotate_rev_elements(&a_liste);
     //print_stack(&a_liste);
-    push_first_element(&a_liste, &b_liste);
-    print_stack(&a_liste);
-    print_stack(&b_liste);
-    push_first_element(&a_liste, &b_liste);
-    print_stack(&a_liste);
-    print_stack(&b_liste);
+    //push_first_element(&a_liste, &b_liste);
+    //print_stack(&a_liste);
+    //print_stack(&b_liste);
+    //push_first_element(&a_liste, &b_liste);
+    //print_stack(&a_liste);
+    //print_stack(&b_liste);
     //swap_a_b(&a_liste, &b_liste);
     //print_stack(&a_liste);
     //print_stack(&b_liste);
-    rotate_a_b(&a_liste, &b_liste);
-    print_stack(&a_liste);
-    print_stack(&b_liste);
+    //rotate_a_b(&a_liste, &b_liste);
+    //print_stack(&a_liste);
+    //print_stack(&b_liste);
     return(0);
 }
