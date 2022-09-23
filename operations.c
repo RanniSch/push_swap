@@ -6,9 +6,11 @@
 /*   By: rschlott <rschlott@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/22 13:44:09 by rschlott          #+#    #+#             */
-/*   Updated: 2022/09/22 13:50:21 by rschlott         ###   ########.fr       */
+/*   Updated: 2022/09/23 13:27:13 by rschlott         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+#include "push_swap.h"
 
 /* swap function: Swap the first two elements at the top of the stack */
 void    swap_elements(struct node **liste)

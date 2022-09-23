@@ -6,7 +6,7 @@
 /*   By: rschlott <rschlott@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/28 13:23:03 by rschlott          #+#    #+#             */
-/*   Updated: 2022/09/22 13:57:39 by rschlott         ###   ########.fr       */
+/*   Updated: 2022/09/23 13:26:17 by rschlott         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,52 +113,6 @@ void    print_stack(struct node **liste)
         ptr = ptr->link;
     }
     printf("\nnumber of nodes: %d\n", count_of_nodes(liste));       // insert printf function!!!!!!!!!!!   
-}
-
-void    length_initializer_lis(int *subsequence, int *length, struct node **a_liste)
-{
-    int i;
-
-    i = 0;
-    while (i < count_of_nodes(a_liste))
-    {
-        subsequence[i] = 0;
-        length[i] = 1;
-        i++;
-    }   
-}
-
-/* Identify longest increasing subsequence */
-void    longest_increasing_subsequence(struct node **a_liste, int *subsequence, int *length)
-{
-    struct node *walker;
-    struct node *iterator;
-
-    iterator = *a_liste;
-    iterator = iterator->link;
-    while (iterator != NULL)
-    {
-        walker = *a_liste;
-        while (walker->index < iterator->index)
-        {
-            if (walker->data < iterator->data)
-            {
-                length[iterator->link] = length[walker->link] + 1;
-                subsequence[iterator->index] = walker->index;
-            }            
-            walker = walker->link;
-        }
-        iterator = iterator->link;
-    }    
-}
-
-void    ft_lis_process(struct node **a_liste, int count)
-{
-    int length[count];
-    int subsequence[count];
-
-    length_initializer_lis(&subsequence[0], &length[0], a_liste);
-    longest_increasing_subsequence(a_liste, &subsequence[0], &length[0]);
 }
 
 /* receiving arguments from user input */
