@@ -6,7 +6,7 @@
 /*   By: rschlott <rschlott@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/23 13:23:47 by rschlott          #+#    #+#             */
-/*   Updated: 2022/09/23 17:59:50 by rschlott         ###   ########.fr       */
+/*   Updated: 2022/09/23 18:06:04 by rschlott         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,23 +113,23 @@ void    correct_subsequence(struct node **a_liste, int *subsequence, int *length
     ptr = *a_liste;
     while (ptr->index != *subsequence)
         ptr = ptr->link;
-    if (*subsequence && subsequence != 0)
+    if (*subsequence)
         subsequence--;  // until sub_index = lis_index  
     printf("num: %d index: %d sub_data %d\n", ptr->data, ptr->index, *subsequence);
     ptr = *a_liste;
     while (ptr->index != *subsequence)
         ptr = ptr->link;
-    if (*subsequence && subsequence != 0)
+    if (*subsequence)
         subsequence--; // until sub_index = lis_index
-    if (*subsequence && subsequence != 0)
+    if (*subsequence)
         subsequence--; // until sub_index = lis_index
     printf("num: %d index: %d sub_data %d\n", ptr->data, ptr->index, *subsequence);
     ptr = *a_liste;
     while (ptr->index != *subsequence)
         ptr = ptr->link;
-    if (*subsequence && subsequence != 0)
+    if (*subsequence)
         subsequence--; // until sub_index = lis_index
-    if (*subsequence && subsequence != 0)
+    if (*subsequence)
         subsequence--; // until sub_index = lis_index
     printf("num: %d index: %d sub_data %d\n", ptr->data, ptr->index, *subsequence);
 }
