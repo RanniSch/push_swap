@@ -6,12 +6,13 @@
 /*   By: rschlott <rschlott@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/23 13:23:47 by rschlott          #+#    #+#             */
-/*   Updated: 2022/09/23 16:07:20 by rschlott         ###   ########.fr       */
+/*   Updated: 2022/09/23 17:59:50 by rschlott         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
+/* identifies the biggest number in an array. */
 int		max(int *tab, unsigned int len)
 {
 	int	max;
@@ -27,6 +28,8 @@ int		max(int *tab, unsigned int len)
 	return(max);
 }
 
+/* creates an array "length" and fills it with ones. Creates an array "subsequence" and fills it with zeroes.
+Both have the same size as the list. */
 void    length_initializer_lis(int *subsequence, int *length, struct node **a_liste)
 {
     int i;
@@ -40,6 +43,7 @@ void    length_initializer_lis(int *subsequence, int *length, struct node **a_li
     }   
 }
 
+/* runs the functions in the correct order. */
 void    ft_lis_process(struct node **a_liste, int count)
 {
     int length[count];
@@ -89,4 +93,43 @@ void    longest_increasing_subsequence(struct node **a_liste, int *subsequence, 
         i++;
     }    
     printf("\n");
+    correct_subsequence(a_liste, &subsequence[0], &length[0]);
+}
+
+void    correct_subsequence(struct node **a_liste, int *subsequence, int *length)
+{
+    int biggest_num;
+    struct node *ptr;
+
+    ptr = *a_liste;
+    biggest_num = max(length, count_of_nodes(a_liste));
+    while (length[ptr->index] != biggest_num)
+    {
+        ptr = ptr->link;
+        subsequence++;
+    }        
+    printf("num: %d index: %d sub_data %d\n", ptr->data, ptr->index, *subsequence);
+    
+    ptr = *a_liste;
+    while (ptr->index != *subsequence)
+        ptr = ptr->link;
+    if (*subsequence && subsequence != 0)
+        subsequence--;  // until sub_index = lis_index  
+    printf("num: %d index: %d sub_data %d\n", ptr->data, ptr->index, *subsequence);
+    ptr = *a_liste;
+    while (ptr->index != *subsequence)
+        ptr = ptr->link;
+    if (*subsequence && subsequence != 0)
+        subsequence--; // until sub_index = lis_index
+    if (*subsequence && subsequence != 0)
+        subsequence--; // until sub_index = lis_index
+    printf("num: %d index: %d sub_data %d\n", ptr->data, ptr->index, *subsequence);
+    ptr = *a_liste;
+    while (ptr->index != *subsequence)
+        ptr = ptr->link;
+    if (*subsequence && subsequence != 0)
+        subsequence--; // until sub_index = lis_index
+    if (*subsequence && subsequence != 0)
+        subsequence--; // until sub_index = lis_index
+    printf("num: %d index: %d sub_data %d\n", ptr->data, ptr->index, *subsequence);
 }

@@ -6,7 +6,7 @@
 /*   By: rschlott <rschlott@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/31 09:11:10 by rschlott          #+#    #+#             */
-/*   Updated: 2022/09/23 15:38:43 by rschlott         ###   ########.fr       */
+/*   Updated: 2022/09/23 16:45:12 by rschlott         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,5 +52,6 @@ int		max(int *tab, unsigned int len);
 void    length_initializer_lis(int *subsequence, int *length, struct node **a_liste);
 void    ft_lis_process(struct node **a_liste, int count);
 void    longest_increasing_subsequence(struct node **a_liste, int *subsequence, int *length);
+void    correct_subsequence(struct node **a_liste, int *subsequence, int *length);
 
 #endif
