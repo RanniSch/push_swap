@@ -6,7 +6,7 @@
 /*   By: rschlott <rschlott@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/28 13:23:03 by rschlott          #+#    #+#             */
-/*   Updated: 2022/09/23 13:26:17 by rschlott         ###   ########.fr       */
+/*   Updated: 2022/09/24 12:13:11 by rschlott         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -132,15 +132,17 @@ void ft_stack_receive(int argc, char **argv, struct node **a_liste)
 int main(int argc, char **argv)
 { 
     struct node *a_liste;
-    //struct node *b_liste;
+    struct node *b_liste;
+    struct node *ptr_lis;
     
     a_liste = NULL;
-    //b_liste = NULL;
+    b_liste = NULL;
+    ptr_lis = NULL;
     /* &a_liste gibt die Adresse des Pointers, der zur Liste zeigt durch = double pointer */
     ft_stack_receive(argc, argv, &a_liste);
     print_stack(&a_liste);
     set_index(&a_liste);
-    ft_lis_process(&a_liste, count_of_nodes(&a_liste));
+    ft_lis_process(&a_liste, &b_liste, &ptr_lis, count_of_nodes(&a_liste));
     //swap_elements(&a_liste);
     //print_stack(&a_liste);
     //rotate_elements(&a_liste);
