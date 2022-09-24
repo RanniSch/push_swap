@@ -6,7 +6,7 @@
 /*   By: rschlott <rschlott@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/31 09:11:10 by rschlott          #+#    #+#             */
-/*   Updated: 2022/09/24 12:13:47 by rschlott         ###   ########.fr       */
+/*   Updated: 2022/09/24 15:46:25 by rschlott         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,9 +50,9 @@ void    push_first_element(struct node **src, struct node **dest);
 /* longest increasing subsequence */
 int		max(int *tab, unsigned int len);
 void    length_initializer_lis(int *subsequence, int *length, struct node **a_liste);
-void    ft_lis_process(struct node **a_liste, struct node **b_liste, struct node **ptr_lis, int count);
+void    ft_lis_process(struct node **a_liste, struct node **b_liste, int count);
 void    longest_increasing_subsequence(struct node **a_liste, int *subsequence, int *length);
-void    correct_subsequence(struct node **a_liste, struct node **ptr_lis, int *subsequence, int *length);
-void    only_subsequence_in_a(struct node **a_liste, struct node **b_liste, struct node **ptr_lis);
+int     correct_subsequence(struct node **a_liste, int *subsequence, int *length, int *array_lis);
+void    only_subsequence_in_a(struct node **a_liste, struct node **b_liste, int *array_lis, int len_lis);
 
 #endif
