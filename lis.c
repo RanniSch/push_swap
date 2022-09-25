@@ -6,7 +6,7 @@
 /*   By: rschlott <rschlott@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/23 13:23:47 by rschlott          #+#    #+#             */
-/*   Updated: 2022/09/24 15:57:58 by rschlott         ###   ########.fr       */
+/*   Updated: 2022/09/25 20:27:59 by rschlott         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,9 +115,7 @@ int    correct_subsequence(struct node **a_liste, int *subsequence, int *length,
         i++;
     }
     array_lis[len_lis] = ptr->data;
-    printf("lis: %d ", array_lis[len_lis]);
     len_lis++;
-    //printf("num: %d index: %d sub_data %d\n", ptr_lis->data, ptr_lis->index, subsequence[i]);
     while (subsequence[i] != 0)
     {
         ptr = *a_liste;
@@ -127,13 +125,9 @@ int    correct_subsequence(struct node **a_liste, int *subsequence, int *length,
         while (i < ptr->index)
             i++;
         array_lis[len_lis] = ptr->data;
-        printf("%d ", array_lis[len_lis]);
         len_lis++;
-        //printf("num: %d index: %d sub_data %d\n", ptr_lis->data, ptr_lis->index, subsequence[i]);
     }
-    printf("\nlen_lis: %d\n", len_lis);
-    print_stack(a_liste);
-    return (len_lis);
+    return (len_lis - 1);
 }
 
 void    only_subsequence_in_a(struct node **a_liste, struct node **b_liste, int *array_lis, int len_lis)
@@ -141,21 +135,16 @@ void    only_subsequence_in_a(struct node **a_liste, struct node **b_liste, int 
     struct node *ptr_a;
 
     ptr_a = *a_liste;
-    if (ptr_a != NULL)
+    while ((len_lis) > 0)
     {
-        while (ptr_a->link != NULL && array_lis[len_lis])
+        if (ptr_a->data == array_lis[len_lis])
         {
-            ptr_a = *a_liste;
-            if (ptr_a->data != array_lis[len_lis])
-            {
-                push_first_element(a_liste, b_liste);
-            }
-            else
-            {
-                rotate_elements(a_liste);
-                len_lis--;
-            }
+            rotate_elements(a_liste);
+            len_lis--;
         }
+        else
+            push_first_element(a_liste, b_liste);
+        ptr_a = *a_liste;
     }
     print_stack(a_liste);
     print_stack(b_liste);

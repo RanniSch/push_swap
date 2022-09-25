@@ -6,7 +6,7 @@
 /*   By: rschlott <rschlott@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/28 13:23:03 by rschlott          #+#    #+#             */
-/*   Updated: 2022/09/24 15:41:16 by rschlott         ###   ########.fr       */
+/*   Updated: 2022/09/25 09:40:21 by rschlott         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,7 +112,8 @@ void    print_stack(struct node **liste)
         printf("%d ", ptr->data);       // insert printf function!!!!!!!!!!!
         ptr = ptr->link;
     }
-    printf("\nnumber of nodes: %d\n", count_of_nodes(liste));       // insert printf function!!!!!!!!!!!   
+    printf("\n");
+    //printf("\nnumber of nodes: %d\n", count_of_nodes(liste));       // insert printf function!!!!!!!!!!!   
 }
 
 /* receiving arguments from user input */
