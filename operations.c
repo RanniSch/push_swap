@@ -6,7 +6,7 @@
 /*   By: rschlott <rschlott@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/22 13:44:09 by rschlott          #+#    #+#             */
-/*   Updated: 2022/09/23 13:27:13 by rschlott         ###   ########.fr       */
+/*   Updated: 2022/09/25 20:37:36 by rschlott         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ void    swap_elements(struct node **liste)
     }
     else
         printf("error\n");                  // ft_printf function
+    write (1, "swap\n", 5);
 }
 
 /* swap elements of both stacks at the same time */
@@ -37,6 +38,7 @@ void    swap_a_b(struct node **a_liste, struct node **b_liste)
 {
     swap_elements(a_liste);
     swap_elements(b_liste);
+    write (1, "swap\n", 5);
 }
 
 /* rotate function: Shift up all elements of the stack by 1. The first element becomes the last one */
@@ -63,7 +65,8 @@ void    rotate_elements(struct node **liste)
         ptr_to_head->link = NULL;                       // erster link wird zu NULL                     
     }
     else
-        printf("error\n");                            // ft_printf function    
+        printf("error\n");                            // ft_printf function
+    write (1, "ro\n", 3);  
 }
 
 /* rotate elements of both stacks at the same time */
@@ -71,6 +74,7 @@ void    rotate_a_b(struct node **a_liste, struct node **b_liste)
 {
     rotate_elements(a_liste);
     rotate_elements(b_liste);
+    write (1, "ro a & b\n", 9);
 }
 
 /* reverse rotate function: Shift down all elements of the stack by 1. The last element becomes the first one */
@@ -101,7 +105,8 @@ void    rotate_rev_elements(struct node **liste)
         temp1->link = NULL;                             // vorletzter link wird zu NULL
     }
     else
-        printf("error\n");                            // ft_printf function    
+        printf("error\n");                           // ft_printf function
+    write (1, "ro rev\n", 7);
 }
 
 /* reverse rotate elements of both stacks at the same time */
@@ -109,6 +114,7 @@ void    rotate_rev_a_b(struct node **a_liste, struct node **b_liste)
 {
     rotate_rev_elements(a_liste);
     rotate_rev_elements(b_liste);
+    write (1, "ro rev a & b\n", 13);
 }
 
 /*  Take the first argument at the top of one stack and put it at the top of the other stack. Do nothing if first stack is empty. 
@@ -132,5 +138,6 @@ void    push_first_element(struct node **src, struct node **dest)
     }
     else
         temp->link = NULL;
-    *dest = temp;    
+    *dest = temp;
+    write (1, "push\n", 5);  
 }

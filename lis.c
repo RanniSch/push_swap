@@ -6,7 +6,7 @@
 /*   By: rschlott <rschlott@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/23 13:23:47 by rschlott          #+#    #+#             */
-/*   Updated: 2022/09/25 20:27:59 by rschlott         ###   ########.fr       */
+/*   Updated: 2022/09/25 20:32:14 by rschlott         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -133,8 +133,10 @@ int    correct_subsequence(struct node **a_liste, int *subsequence, int *length,
 void    only_subsequence_in_a(struct node **a_liste, struct node **b_liste, int *array_lis, int len_lis)
 {
     struct node *ptr_a;
+    struct node *ptr_aa;
 
     ptr_a = *a_liste;
+    ptr_aa = ptr_a->link;
     while ((len_lis) > 0)
     {
         if (ptr_a->data == array_lis[len_lis])
@@ -145,6 +147,14 @@ void    only_subsequence_in_a(struct node **a_liste, struct node **b_liste, int 
         else
             push_first_element(a_liste, b_liste);
         ptr_a = *a_liste;
+    }
+    print_stack(a_liste);
+    print_stack(b_liste);
+    while (ptr_a->data > ptr_aa->data)
+    {
+        rotate_elements(a_liste);
+        ptr_a = *a_liste;
+        ptr_aa = ptr_a->link;      
     }
     print_stack(a_liste);
     print_stack(b_liste);

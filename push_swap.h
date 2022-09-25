@@ -6,7 +6,7 @@
 /*   By: rschlott <rschlott@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/31 09:11:10 by rschlott          #+#    #+#             */
-/*   Updated: 2022/09/24 15:46:25 by rschlott         ###   ########.fr       */
+/*   Updated: 2022/09/25 20:38:28 by rschlott         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 # include <stdarg.h>
 # include <stdio.h>
 # include <stdlib.h>
+# include <unistd.h>
 
 /* defines the data structure; in front needs to be typedef to declare the data type */
 typedef struct node
