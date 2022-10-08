@@ -6,14 +6,14 @@
 /*   By: rschlott <rschlott@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/28 13:23:03 by rschlott          #+#    #+#             */
-/*   Updated: 2022/09/25 09:40:21 by rschlott         ###   ########.fr       */
+/*   Updated: 2022/10/08 10:52:07 by rschlott         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
 /* converts char to int */
-int ft_atoi(const char *str)
+/*int ft_atoi(const char *str)
 {
 	int			sign;
 	long int	convert;
@@ -36,6 +36,62 @@ int ft_atoi(const char *str)
 			return (-1);
 		if (convert > 2147483648 && sign == -1)
 			return (0);
+	}
+	return (convert * sign);
+}*/
+
+void    error_manager(const char *str)
+{
+    while (*str == 32 || (*str >= 9 && *str <= 13))
+		str++;
+	if (*str == '-' || *str == '+')
+		str++;
+    if (*str == '-' || *str == '+')
+    {
+        printf("Error1\n");
+        exit (0);
+    }
+    while (*str != '\0')
+    {
+        if (!(*str > 47 && *str < 58))
+        {
+            printf("Error1\n");
+            exit (0);
+        }
+        str++;
+    }
+}
+
+/* modified */
+int ft_atoi(const char *str)
+{
+	int			sign;
+	long int	convert;
+
+	sign = 1;
+	convert = 0;
+	while (*str == 32 || (*str >= 9 && *str <= 13))
+		str++;
+	if (*str == '-' || *str == '+')
+	{
+		if (*str == '-')
+			sign = sign * (-1);
+		str++;
+	}
+    /*if (!(*str > 47 && *str < 58))
+    {
+        printf("Error2\n");
+        exit (0);
+    }*/
+	while (*str && *str > 47 && *str < 58)
+	{
+		convert = (convert * 10) + *str - '0';
+		str++;
+		if ((convert > 2147483647 && sign == 1) || (convert > 2147483648 && sign == -1))
+        {
+            printf("Error2\n");
+            exit (0);
+        }
 	}
 	return (convert * sign);
 }
@@ -104,7 +160,10 @@ int    count_of_nodes(struct node **liste)
 void    print_stack(struct node **liste)
 {
     if(*liste == NULL)
-        printf("Linked List is empty");
+    {
+        printf("Linked List is empty!\n");
+        exit(0);
+    }        
     struct node *ptr = NULL;
     ptr = *liste;
     while(ptr != NULL)
@@ -123,11 +182,20 @@ void ft_stack_receive(int argc, char **argv, struct node **a_liste)
 
     i = 1;
     /* argc zählt den ersten String in argv mit und der ist immer ./a.out */
-    while (i < argc)
+    if (argc >= 2)
     {
-        add_at_end(a_liste, ft_atoi(argv[i]));
-        i++;
+        while (i < argc)
+        {
+            error_manager(argv[i]);
+            add_at_end(a_liste, ft_atoi(argv[i]));
+            i++;
+        }
     }
+    else
+    {
+        printf("No input!\n");
+        exit(0);
+    }       
 }
 
 int main(int argc, char **argv)
