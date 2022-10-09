@@ -6,7 +6,7 @@
 /*   By: rschlott <rschlott@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/23 13:23:47 by rschlott          #+#    #+#             */
-/*   Updated: 2022/09/29 16:56:39 by rschlott         ###   ########.fr       */
+/*   Updated: 2022/10/09 08:25:31 by rschlott         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,19 +40,21 @@ void    length_initializer_lis(int *subsequence, int *length, struct node **a_li
         subsequence[i] = 0;
         length[i] = 1;
         i++;
-    }   
+    }
 }
 
 /* runs the functions in the correct order. */
 void    ft_lis_process(struct node **a_liste, struct node **b_liste, int count)
 {
-    int length[count];
+    int length[count];              // muss alles noch gefreed werden!!!
     int subsequence[count];
     int array_lis[count];
+    //int array_anti_lis[count];
 
     length_initializer_lis(&subsequence[0], &length[0], a_liste);
     longest_increasing_subsequence(a_liste, &subsequence[0], &length[0]);
     //correct_subsequence(a_liste, &subsequence[0], &length[0], &array_lis[0]);
+    //anti_subsequence(a_liste, &array_lis[0], &array_anti_lis[0]);
     only_subsequence_in_a(a_liste, b_liste, &array_lis[0], correct_subsequence(a_liste, &subsequence[0], &length[0], &array_lis[0]));
 }
 
@@ -80,22 +82,22 @@ void    longest_increasing_subsequence(struct node **a_liste, int *subsequence, 
         }
         iterator = iterator->link;
     }
-    /* checks if function works correct
+    /* checks if function works correct */
     int i = 0;
     printf("subseq: ");
-    while (i <= 5)
+    while (i < count_of_nodes(a_liste))
     {
         printf("%d ", subsequence[i]);
         i++;
     }
     printf("\nlength: ");
     i = 0;
-    while (i <= 5)
+    while (i < count_of_nodes(a_liste))
     {
         printf("%d ", length[i]);
         i++;
     }    
-    printf("\n");*/
+    printf("\n");
 }
 
 int    correct_subsequence(struct node **a_liste, int *subsequence, int *length, int *array_lis)
@@ -120,7 +122,9 @@ int    correct_subsequence(struct node **a_liste, int *subsequence, int *length,
     {
         ptr = *a_liste;
         while (ptr->index != subsequence[i])
+        {
             ptr = ptr->link;
+        }
         i = 0;
         while (i < ptr->index)
             i++;
@@ -129,6 +133,11 @@ int    correct_subsequence(struct node **a_liste, int *subsequence, int *length,
     }
     return (len_lis - 1);
 }
+
+/*void    anti_subsequence(struct node **a_liste, int *array_lis, int *array_anti_lis)
+{
+
+}*/
 
 void    only_subsequence_in_a(struct node **a_liste, struct node **b_liste, int *array_lis, int len_lis)
 {

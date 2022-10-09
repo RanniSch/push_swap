@@ -6,7 +6,7 @@
 /*   By: rschlott <rschlott@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/28 13:23:03 by rschlott          #+#    #+#             */
-/*   Updated: 2022/10/09 06:39:33 by rschlott         ###   ########.fr       */
+/*   Updated: 2022/10/09 08:21:03 by rschlott         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -122,6 +122,7 @@ void    print_stack(struct node **liste)
 /* receiving arguments from user input */
 void ft_stack_receive(int argc, char **argv, struct node **a_liste)
 {
+    struct node *ptr;
     int i;
 
     i = 1;
@@ -134,13 +135,19 @@ void ft_stack_receive(int argc, char **argv, struct node **a_liste)
             add_at_end(a_liste, ft_atoi(argv[i]));
             i++;
         }
+        ptr = *a_liste;
+        if (ptr->link == NULL)
+        {
+            printf("%d\n", ptr->data);
+            exit(0);
+        }
         error_manager_duplicate(a_liste);
     }
     else
     {
         printf("No input! Input some numbers!\n");
         exit(0);
-    }       
+    }
 }
 
 int main(int argc, char **argv)
