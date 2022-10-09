@@ -6,7 +6,7 @@
 /*   By: rschlott <rschlott@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/23 13:23:47 by rschlott          #+#    #+#             */
-/*   Updated: 2022/10/09 08:25:31 by rschlott         ###   ########.fr       */
+/*   Updated: 2022/10/09 18:06:19 by rschlott         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ void    ft_lis_process(struct node **a_liste, struct node **b_liste, int count)
     only_subsequence_in_a(a_liste, b_liste, &array_lis[0], correct_subsequence(a_liste, &subsequence[0], &length[0], &array_lis[0]));
 }
 
-/* Identify longest increasing subsequence. 
+/* Identifies longest increasing subsequence. 
 The highest number of length is at the same index as the biggest number of lis. At the same index, 
 the number of the subsequence shows to which index to jump next, to get the second biggest number of lis and so on. */
 void    longest_increasing_subsequence(struct node **a_liste, int *subsequence, int *length)
@@ -75,8 +75,11 @@ void    longest_increasing_subsequence(struct node **a_liste, int *subsequence, 
         {
             if (walker->data < iterator->data)
             {
-                length[iterator->index] = length[walker->index] + 1;
-                subsequence[iterator->index] = walker->index;
+                if (length[iterator->index] <= length[walker->index] + 1)
+                {
+                    length[iterator->index] = length[walker->index] + 1;
+                    subsequence[iterator->index] = walker->index;
+                }
             }            
             walker = walker->link;
         }
@@ -100,6 +103,7 @@ void    longest_increasing_subsequence(struct node **a_liste, int *subsequence, 
     printf("\n");
 }
 
+/* Puts the longest increasing subsequence in one array -> array_lis */
 int    correct_subsequence(struct node **a_liste, int *subsequence, int *length, int *array_lis)
 {
     int biggest_num;
@@ -117,18 +121,18 @@ int    correct_subsequence(struct node **a_liste, int *subsequence, int *length,
         i++;
     }
     array_lis[len_lis] = ptr->data;
+    printf("array: %d\n", array_lis[len_lis]);
     len_lis++;
-    while (subsequence[i] != 0)
+    while (ptr->index != 0 && length[ptr->index] != 1)
     {
         ptr = *a_liste;
         while (ptr->index != subsequence[i])
-        {
             ptr = ptr->link;
-        }
         i = 0;
         while (i < ptr->index)
             i++;
         array_lis[len_lis] = ptr->data;
+        printf("array: %d\n", array_lis[len_lis]);
         len_lis++;
     }
     return (len_lis - 1);
