@@ -6,7 +6,7 @@
 /*   By: rschlott <rschlott@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/31 09:11:10 by rschlott          #+#    #+#             */
-/*   Updated: 2022/09/25 20:38:28 by rschlott         ###   ########.fr       */
+/*   Updated: 2022/10/09 06:18:19 by rschlott         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,12 +32,16 @@ typedef struct node
 }               t_program;*/
 
 /* reading */
-int     ft_atoi(const char *str);
 void    add_at_end(struct node **a_liste, int data);
 void    set_index(struct node **a_liste);
 int     count_of_nodes(struct node **liste);
 void    print_stack(struct node **liste);
 void    ft_stack_receive(int argc, char **argv, struct node **a_liste);
+
+/* error manager */
+void    error_manager_int(const char *str);
+void    error_manager_duplicate(struct node **a_liste);
+int     ft_atoi(const char *str);
 
 /* operations */
 void    swap_elements(struct node **liste);

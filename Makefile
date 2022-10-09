@@ -6,7 +6,7 @@
 #    By: rschlott <rschlott@student.42wolfsburg.de> +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/09/23 13:34:43 by rschlott          #+#    #+#              #
-#    Updated: 2022/09/23 16:13:48 by rschlott         ###   ########.fr        #
+#    Updated: 2022/10/09 06:19:21 by rschlott         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,6 +19,7 @@ RM			:= rm -f
 
 HEADER		:=	push_swap.h
 SRCS		:=	reading-copy.c	\
+				error_manager.c	\
 				lis.c	\
 				operations.c	\
 

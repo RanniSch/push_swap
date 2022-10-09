@@ -6,7 +6,7 @@
 /*   By: rschlott <rschlott@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/28 13:23:03 by rschlott          #+#    #+#             */
-/*   Updated: 2022/10/08 10:52:07 by rschlott         ###   ########.fr       */
+/*   Updated: 2022/10/09 06:39:33 by rschlott         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,62 +39,6 @@
 	}
 	return (convert * sign);
 }*/
-
-void    error_manager(const char *str)
-{
-    while (*str == 32 || (*str >= 9 && *str <= 13))
-		str++;
-	if (*str == '-' || *str == '+')
-		str++;
-    if (*str == '-' || *str == '+')
-    {
-        printf("Error1\n");
-        exit (0);
-    }
-    while (*str != '\0')
-    {
-        if (!(*str > 47 && *str < 58))
-        {
-            printf("Error1\n");
-            exit (0);
-        }
-        str++;
-    }
-}
-
-/* modified */
-int ft_atoi(const char *str)
-{
-	int			sign;
-	long int	convert;
-
-	sign = 1;
-	convert = 0;
-	while (*str == 32 || (*str >= 9 && *str <= 13))
-		str++;
-	if (*str == '-' || *str == '+')
-	{
-		if (*str == '-')
-			sign = sign * (-1);
-		str++;
-	}
-    /*if (!(*str > 47 && *str < 58))
-    {
-        printf("Error2\n");
-        exit (0);
-    }*/
-	while (*str && *str > 47 && *str < 58)
-	{
-		convert = (convert * 10) + *str - '0';
-		str++;
-		if ((convert > 2147483647 && sign == 1) || (convert > 2147483648 && sign == -1))
-        {
-            printf("Error2\n");
-            exit (0);
-        }
-	}
-	return (convert * sign);
-}
 
 /* adds a new node to the list */
 void    add_at_end(struct node **a_liste, int data)
@@ -186,14 +130,15 @@ void ft_stack_receive(int argc, char **argv, struct node **a_liste)
     {
         while (i < argc)
         {
-            error_manager(argv[i]);
+            error_manager_int(argv[i]);
             add_at_end(a_liste, ft_atoi(argv[i]));
             i++;
         }
+        error_manager_duplicate(a_liste);
     }
     else
     {
-        printf("No input!\n");
+        printf("No input! Input some numbers!\n");
         exit(0);
     }       
 }
