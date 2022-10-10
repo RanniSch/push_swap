@@ -6,7 +6,7 @@
 /*   By: rschlott <rschlott@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/09 06:13:46 by rschlott          #+#    #+#             */
-/*   Updated: 2022/10/10 05:50:09 by rschlott         ###   ########.fr       */
+/*   Updated: 2022/10/10 08:05:31 by rschlott         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,14 +21,14 @@ void	error_manager_int(const char *str)
 		str++;
 	if (*str == '-' || *str == '+')
 	{
-		printf("Error1\n");
+		write(1, "Error! More than one sign.\n", 27);
 		exit(0);
 	}
 	while (*str != '\0')
 	{
 		if (!(*str > 47 && *str < 58))
 		{
-			printf("Error isn't int\n");
+			write(1, "Error isn't int\n", 16);
 			exit(0);
 		}
 		str++;
@@ -49,7 +49,7 @@ void	error_manager_duplicate(struct s_node **a_liste)
 		{
 			if (ptr->data == next->data)
 			{
-				printf("Error duplicate\n");
+				write(1, "Error duplicate\n", 16);
 				exit(0);
 			}
 			else
@@ -80,10 +80,9 @@ int	ft_atoi(const char *str)
 	{
 		convert = (convert * 10) + *str - '0';
 		str++;
-		if ((convert > 2147483647 && sign == 1) || (convert > 2147483648
-				&& sign == -1))
+		if ((convert > 2147483647 && sign == 1) || (convert > 2147483648 && sign == -1))
 		{
-			printf("Error bigger than int\n");
+			write(1, "Error bigger than int\n", 22);
 			exit(0);
 		}
 	}

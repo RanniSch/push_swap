@@ -6,7 +6,7 @@
 /*   By: rschlott <rschlott@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/28 13:23:03 by rschlott          #+#    #+#             */
-/*   Updated: 2022/10/10 07:53:35 by rschlott         ###   ########.fr       */
+/*   Updated: 2022/10/10 08:05:51 by rschlott         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,7 +90,7 @@ int	count_of_nodes(struct s_node **liste)
 
 	count = 0;
 	if (*liste == NULL)
-		printf("Stack is empty");
+		write(1, "Stack is empty\n", 15);
 	ptr = NULL;
 	ptr = *liste;
 	while (ptr != NULL)
@@ -108,7 +108,7 @@ void	print_stack(struct s_node **liste)
 
 	if (*liste == NULL)
 	{
-		printf("Linked List is empty!\n");
+		write(1, "Linked List is empty!\n", 22);
 		exit(0);
 	}
 	ptr = NULL;
@@ -149,7 +149,7 @@ void	ft_stack_receive(int argc, char **argv, struct s_node **a_liste)
 	}
 	else
 	{
-		printf("No input! Input some numbers!\n");
+		write(1, "No input! Input some numbers!\n", 30);
 		exit(0);
 	}
 }

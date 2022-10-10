@@ -6,7 +6,7 @@
 /*   By: rschlott <rschlott@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/23 13:23:47 by rschlott          #+#    #+#             */
-/*   Updated: 2022/10/10 07:11:45 by rschlott         ###   ########.fr       */
+/*   Updated: 2022/10/10 08:05:33 by rschlott         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -164,12 +164,4 @@ void	only_subsequence_in_a(struct s_node **a_liste, struct s_node **b_liste, int
 	}
 	print_stack(a_liste);
 	print_stack(b_liste);
-	/*while (ptr_a->data > ptr_aa->data)
-    {
-        rotate_elements(a_liste);
-        ptr_a = *a_liste;
-        ptr_aa = ptr_a->link;      
-    }
-    print_stack(a_liste);
-    print_stack(b_liste);*/
 }
