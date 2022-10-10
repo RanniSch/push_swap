@@ -6,7 +6,7 @@
 /*   By: rschlott <rschlott@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/23 13:23:47 by rschlott          #+#    #+#             */
-/*   Updated: 2022/10/10 08:05:33 by rschlott         ###   ########.fr       */
+/*   Updated: 2022/10/10 09:20:06 by rschlott         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,15 +46,18 @@ void	length_initializer_lis(int *subsequence, int *length, struct s_node **a_lis
 /* runs the functions in the correct order. */
 void	ft_lis_process(struct s_node **a_liste, struct s_node **b_liste, int count)
 {
-	int	subsequence[count];
-	int	array_lis[count];
-    int length[count]; // muss alles noch gefreed werden!!!
+	int	*subsequence;
+	int	*array_lis;
+    int *length; // muss alles noch gefreed werden!!!
     int len_lis;
     
-	length_initializer_lis(&subsequence[0], &length[0], a_liste);
-	longest_increasing_subsequence(a_liste, &subsequence[0], &length[0]);
-	len_lis = correct_subsequence(a_liste, &subsequence[0], &length[0], &array_lis[0]);
-	only_subsequence_in_a(a_liste, b_liste, &array_lis[0], len_lis);
+	subsequence = (int *)malloc(count * sizeof(int));
+	array_lis = (int *)malloc(count * sizeof(int));
+	length = (int *)malloc(count * sizeof(int));
+	length_initializer_lis(subsequence, length, a_liste);
+	longest_increasing_subsequence(a_liste, subsequence, length);
+	len_lis = correct_subsequence(a_liste, subsequence, length, array_lis);
+	only_subsequence_in_a(a_liste, b_liste, array_lis, len_lis);
 }
 
 /* Identifies longest increasing subsequence. 
@@ -65,7 +68,7 @@ void	longest_increasing_subsequence(struct s_node **a_liste, int *subsequence, i
 {
 	struct s_node	*walker;
 	struct s_node	*iterator;
-	//int				i;
+	int				i;
 
 	iterator = *a_liste;
 	iterator = iterator->link;
@@ -136,6 +139,8 @@ int	correct_subsequence(struct s_node **a_liste, int *subsequence, int *length, 
 		//printf("array: %d\n", array_lis[len_lis]);
 		len_lis++;
 	}
+	free (subsequence);
+	free (length);
 	return (len_lis - 1);
 }
 
@@ -162,6 +167,7 @@ void	only_subsequence_in_a(struct s_node **a_liste, struct s_node **b_liste, int
         }
 		ptr_a = *a_liste;
 	}
+	free (array_lis);
 	print_stack(a_liste);
 	print_stack(b_liste);
 }
