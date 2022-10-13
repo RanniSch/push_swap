@@ -6,7 +6,7 @@
 /*   By: rschlott <rschlott@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/28 13:23:03 by rschlott          #+#    #+#             */
-/*   Updated: 2022/10/13 06:57:39 by rschlott         ###   ########.fr       */
+/*   Updated: 2022/10/13 11:05:02 by rschlott         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,12 +64,12 @@ void	add_at_end(struct s_node **a_liste, int data)
 }
 
 /* adds an index to each node; one node now has the value of the data and the value of the index */
-void	set_index(struct s_node **a_liste)
+void	set_index(struct s_node **liste)
 {
 	struct s_node	*ptr;
 	int				i;
 
-	ptr = *a_liste;
+	ptr = *liste;
 	i = 0;
 	if (ptr != NULL)
 	{
@@ -167,7 +167,7 @@ int	main(int argc, char **argv)
 	print_stack(&a_liste);
 	set_index(&a_liste);
 	lis_process(&a_liste, &b_liste, count_of_nodes(&a_liste));
-	//minimum_sorting(&a_liste, &b_liste);
+	minimum_sorting(&a_liste, &b_liste);
 	//swap_a(&a_liste);
 	//print_stack(&a_liste);
 	//rotate_a(&a_liste);

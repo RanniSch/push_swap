@@ -6,7 +6,7 @@
 /*   By: rschlott <rschlott@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/31 09:11:10 by rschlott          #+#    #+#             */
-/*   Updated: 2022/10/13 09:51:59 by rschlott         ###   ########.fr       */
+/*   Updated: 2022/10/13 11:04:24 by rschlott         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,5 +71,6 @@ void    only_subsequence_in_a(struct s_node **a_liste, struct s_node **b_liste, 
 
 /* minimum sorting value to put a number from b to a */
 void    minimum_sorting(struct s_node **a_liste, struct s_node **b_liste);
+void    get_smallest(struct s_node **a_liste, struct s_node **b_liste);
 
 #endif
