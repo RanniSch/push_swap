@@ -6,7 +6,7 @@
 /*   By: rschlott <rschlott@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/10 06:56:35 by rschlott          #+#    #+#             */
-/*   Updated: 2022/10/10 08:05:41 by rschlott         ###   ########.fr       */
+/*   Updated: 2022/10/13 06:29:39 by rschlott         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ void	reverse_rotate_b(struct s_node **b_liste)
 }
 
 /* reverse rotate a and b at the same time. The last elements become the first ones */
-void	ft_reverse_rotate_both(struct s_node **a_liste, struct s_node **b_liste)
+void	reverse_rotate_both(struct s_node **a_liste, struct s_node **b_liste)
 {
 	rotate_rev_elements(a_liste);
 	rotate_rev_elements(b_liste);

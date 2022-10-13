@@ -6,7 +6,7 @@
 /*   By: rschlott <rschlott@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/31 09:11:10 by rschlott          #+#    #+#             */
-/*   Updated: 2022/10/10 08:05:49 by rschlott         ###   ########.fr       */
+/*   Updated: 2022/10/13 09:51:59 by rschlott         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ void    add_at_end(struct s_node **a_liste, int data);
 void    set_index(struct s_node **a_liste);
 int     count_of_nodes(struct s_node **liste);
 void    print_stack(struct s_node **liste);
-void    ft_stack_receive(int argc, char **argv, struct s_node **a_liste);
+void    stack_receive(int argc, char **argv, struct s_node **a_liste);
 
 /* error manager */
 void    error_manager_int(const char *str);
@@ -55,7 +55,7 @@ void	rotate_both(struct s_node **a_liste, struct s_node **b_liste);
 void    rotate_rev_elements(struct s_node **liste);
 void	reverse_rotate_a(struct s_node **a_liste);
 void	reverse_rotate_b(struct s_node **b_liste);
-void	ft_reverse_rotate_both(struct s_node **a_liste, struct s_node **b_liste);
+void	reverse_rotate_both(struct s_node **a_liste, struct s_node **b_liste);
 void    push_first_element(struct s_node **src, struct s_node **dest);
 void	push_to_a(struct s_node **a_liste, struct s_node **b_liste);
 void	push_to_b(struct s_node **a_liste, struct s_node **b_liste);
@@ -63,9 +63,13 @@ void	push_to_b(struct s_node **a_liste, struct s_node **b_liste);
 /* longest increasing subsequence */
 int		max(int *tab, unsigned int len);
 void    length_initializer_lis(int *subsequence, int *length, struct s_node **a_liste);
-void    ft_lis_process(struct s_node **a_liste, struct s_node **b_liste, int count);
+int     *lis_process(struct s_node **a_liste, struct s_node **b_liste, int count);
 void    longest_increasing_subsequence(struct s_node **a_liste, int *subsequence, int *length);
 int     correct_subsequence(struct s_node **a_liste, int *subsequence, int *length, int *array_lis);
+int 	anti_subsequence(struct s_node **a_liste, int *array_lis, int *anti_lis, int len_lis);
 void    only_subsequence_in_a(struct s_node **a_liste, struct s_node **b_liste, int *array_lis, int len_lis);
+
+/* minimum sorting value to put a number from b to a */
+void    minimum_sorting(struct s_node **a_liste, struct s_node **b_liste);
 
 #endif

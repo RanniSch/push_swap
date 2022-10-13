@@ -6,7 +6,7 @@
 /*   By: rschlott <rschlott@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/28 13:23:03 by rschlott          #+#    #+#             */
-/*   Updated: 2022/10/10 08:05:51 by rschlott         ###   ########.fr       */
+/*   Updated: 2022/10/13 06:57:39 by rschlott         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -124,7 +124,7 @@ void	print_stack(struct s_node **liste)
 }
 
 /* receiving arguments from user input */
-void	ft_stack_receive(int argc, char **argv, struct s_node **a_liste)
+void	stack_receive(int argc, char **argv, struct s_node **a_liste)
 {
 	struct s_node	*ptr;
 	int				i;
@@ -163,10 +163,11 @@ int	main(int argc, char **argv)
 	b_liste = NULL;
 	/* &a_liste gibt die Adresse des Pointers,
 		der zur Liste zeigt durch = double pointer */
-	ft_stack_receive(argc, argv, &a_liste);
+	stack_receive(argc, argv, &a_liste);
 	print_stack(&a_liste);
 	set_index(&a_liste);
-	ft_lis_process(&a_liste, &b_liste, count_of_nodes(&a_liste));
+	lis_process(&a_liste, &b_liste, count_of_nodes(&a_liste));
+	//minimum_sorting(&a_liste, &b_liste);
 	//swap_a(&a_liste);
 	//print_stack(&a_liste);
 	//rotate_a(&a_liste);
