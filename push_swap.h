@@ -6,7 +6,7 @@
 /*   By: rschlott <rschlott@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/31 09:11:10 by rschlott          #+#    #+#             */
-/*   Updated: 2022/10/13 11:04:24 by rschlott         ###   ########.fr       */
+/*   Updated: 2022/10/14 06:47:22 by rschlott         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ void	push_to_a(struct s_node **a_liste, struct s_node **b_liste);
 void	push_to_b(struct s_node **a_liste, struct s_node **b_liste);
 
 /* longest increasing subsequence */
-int		max(int *tab, unsigned int len);
+int		max(int *length, unsigned int len);
 void    length_initializer_lis(int *subsequence, int *length, struct s_node **a_liste);
 int     *lis_process(struct s_node **a_liste, struct s_node **b_liste, int count);
 void    longest_increasing_subsequence(struct s_node **a_liste, int *subsequence, int *length);
@@ -70,7 +70,9 @@ int 	anti_subsequence(struct s_node **a_liste, int *array_lis, int *anti_lis, in
 void    only_subsequence_in_a(struct s_node **a_liste, struct s_node **b_liste, int *array_lis, int len_lis);
 
 /* minimum sorting value to put a number from b to a */
-void    minimum_sorting(struct s_node **a_liste, struct s_node **b_liste);
-void    get_smallest(struct s_node **a_liste, struct s_node **b_liste);
+int     *minimum_sorting(struct s_node **a_liste, struct s_node **b_liste);
+int     get_smallest(struct s_node **a_liste, struct s_node **b_liste, int *values_b);
+void    runs_smallest(struct node **a_liste, struct node **b_liste, int *values_b, int smallest);
+int     min(int *values_b, unsigned int len);
 
 #endif
