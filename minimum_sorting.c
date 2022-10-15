@@ -6,7 +6,7 @@
 /*   By: rschlott <rschlott@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/13 06:33:00 by rschlott          #+#    #+#             */
-/*   Updated: 2022/10/15 10:31:57 by rschlott         ###   ########.fr       */
+/*   Updated: 2022/10/15 10:37:17 by rschlott         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -154,15 +154,15 @@ void    runs_smallest(struct s_node **a_liste, struct s_node **b_liste, int chec
             ptr_b = *b_liste;
         }
     }
-    /*now check if rotate or reverse rotate a to push number from b to a!!!   KANN MAN 2 FUNKTIONEN DRAUS MACHEN
-    checks for first and last; no need --> will be automatically the third case
-    if (array_lis[i] > ptr_b->data && array_lis[len_lis] < ptr_b->data)
-    {
-        push_to_a(a_liste, b_liste);
-        ptr_a = *a_liste;
-        ptr_b = *b_liste;
-    }*/      
-    // checks for first half || Größte Zahl und kleinste Zahl nicht immer in lis!!! Rotate in a and b before push = rr
+    //now check if rotate or reverse rotate a to push number from b to a!!!   KANN MAN 2 FUNKTIONEN DRAUS MACHEN
+    //checks for first and last; no need --> will be automatically the third case
+    //if (array_lis[i] > ptr_b->data && array_lis[len_lis] < ptr_b->data)
+    //{
+    //    push_to_a(a_liste, b_liste);
+    //    ptr_a = *a_liste;
+    //    ptr_b = *b_liste;
+    //}      
+    //checks for first half || Größte Zahl und kleinste Zahl nicht immer in lis!!! Rotate in a and b before push = rr*/
     if (checker_a == 1)
     {
         while (!(ptr_b->data > array_lis[i] && ptr_b->data < array_lis[i + 1]))
