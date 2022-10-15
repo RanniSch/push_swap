@@ -6,7 +6,7 @@
 /*   By: rschlott <rschlott@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/23 13:23:47 by rschlott          #+#    #+#             */
-/*   Updated: 2022/10/14 06:35:37 by rschlott         ###   ########.fr       */
+/*   Updated: 2022/10/15 10:31:54 by rschlott         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -152,7 +152,7 @@ void	only_subsequence_in_a(struct s_node **a_liste, struct s_node **b_liste, int
 		count--;
 		ptr_a = *a_liste;
 	}
-	free (array_lis);
+	//free (array_lis);
 	print_stack(a_liste);
 	print_stack(b_liste);
 }
@@ -183,6 +183,7 @@ int	*lis_process(struct s_node **a_liste, struct s_node **b_liste, int count)
 	len_lis = correct_subsequence(a_liste, subsequence, length, array_lis);
 	//anti_subsequence(a_liste, array_lis, anti_lis, len_lis);
 	only_subsequence_in_a(a_liste, b_liste, array_lis, len_lis);
+	minimum_sorting(a_liste, b_liste, array_lis, len_lis);
 	return(0);
 }
 

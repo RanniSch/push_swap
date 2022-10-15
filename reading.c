@@ -6,7 +6,7 @@
 /*   By: rschlott <rschlott@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/28 13:23:03 by rschlott          #+#    #+#             */
-/*   Updated: 2022/10/13 11:05:02 by rschlott         ###   ########.fr       */
+/*   Updated: 2022/10/15 10:31:52 by rschlott         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -167,7 +167,6 @@ int	main(int argc, char **argv)
 	print_stack(&a_liste);
 	set_index(&a_liste);
 	lis_process(&a_liste, &b_liste, count_of_nodes(&a_liste));
-	minimum_sorting(&a_liste, &b_liste);
 	//swap_a(&a_liste);
 	//print_stack(&a_liste);
 	//rotate_a(&a_liste);
