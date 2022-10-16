@@ -6,7 +6,7 @@
 /*   By: rschlott <rschlott@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/28 13:23:03 by rschlott          #+#    #+#             */
-/*   Updated: 2022/10/15 10:31:52 by rschlott         ###   ########.fr       */
+/*   Updated: 2022/10/16 11:00:38 by rschlott         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -154,6 +154,22 @@ void	stack_receive(int argc, char **argv, struct s_node **a_liste)
 	}
 }
 
+/* identifies the biggest number in Stack a after receiving arguments. */
+int	biggest_in_a(struct s_node **a_liste)
+{
+	int	*array_a;
+	int	len_a;
+	int	biggest_num;
+
+	array_a = (int *)malloc((count_of_nodes(a_liste)) * sizeof(int));
+    if (!array_a)
+		return(0);
+	len_a = current_a(a_liste, array_a);
+	biggest_num = max(array_a, len_a);
+	free(array_a);
+	return (biggest_num);
+}
+
 int	main(int argc, char **argv)
 {
 	struct s_node	*a_liste;
@@ -165,8 +181,10 @@ int	main(int argc, char **argv)
 		der zur Liste zeigt durch = double pointer */
 	stack_receive(argc, argv, &a_liste);
 	print_stack(&a_liste);
+	printf("biggest %d\n", biggest_in_a(&a_liste));
 	set_index(&a_liste);
 	lis_process(&a_liste, &b_liste, count_of_nodes(&a_liste));
+	minimum_sorting(&a_liste, &b_liste);
 	//swap_a(&a_liste);
 	//print_stack(&a_liste);
 	//rotate_a(&a_liste);

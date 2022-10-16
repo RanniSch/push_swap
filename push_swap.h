@@ -6,7 +6,7 @@
 /*   By: rschlott <rschlott@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/31 09:11:10 by rschlott          #+#    #+#             */
-/*   Updated: 2022/10/15 10:31:46 by rschlott         ###   ########.fr       */
+/*   Updated: 2022/10/16 10:58:21 by rschlott         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,8 @@ void    set_index(struct s_node **a_liste);
 int     count_of_nodes(struct s_node **liste);
 void    print_stack(struct s_node **liste);
 void    stack_receive(int argc, char **argv, struct s_node **a_liste);
+int     smallest_in_a(struct s_node **a_liste);
+int     biggest_in_a(struct s_node **a_liste);
 
 /* error manager */
 void    error_manager_int(const char *str);
@@ -63,19 +65,20 @@ void	push_to_b(struct s_node **a_liste, struct s_node **b_liste);
 /* longest increasing subsequence */
 int		max(int *length, unsigned int len);
 void    length_initializer_lis(int *subsequence, int *length, struct s_node **a_liste);
-int     *lis_process(struct s_node **a_liste, struct s_node **b_liste, int count);
+int     lis_process(struct s_node **a_liste, struct s_node **b_liste, int count);
 void    longest_increasing_subsequence(struct s_node **a_liste, int *subsequence, int *length);
 int     correct_subsequence(struct s_node **a_liste, int *subsequence, int *length, int *array_lis);
 int 	anti_subsequence(struct s_node **a_liste, int *array_lis, int *anti_lis, int len_lis);
 void    only_subsequence_in_a(struct s_node **a_liste, struct s_node **b_liste, int *array_lis, int len_lis);
 
 /* minimum sorting value to put a number from b to a */
-int    *minimum_sorting(struct s_node **a_liste, struct s_node **b_liste, int *array_lis, int len_lis);
-void    runs_smallest(struct s_node **a_liste, struct s_node **b_liste, int checker_b, unsigned int index, int *array_lis, int checker_a);
+int     minimum_sorting(struct s_node **a_liste, struct s_node **b_liste);
+void    runs_smallest(struct s_node **a_liste, struct s_node **b_liste, int checker_b, unsigned int index, int *array_a, int len_a, int checker_a);
 int     sorting_position_a(int *array_lis, int len_lis, struct s_node **b_liste, int index);
 int     index_value(int *values_b, int smallest);
 int     location_value(struct s_node **b_liste, int *values_b, int smallest);
 void    get_smallest(int *array_lis, int len_lis, struct s_node **b_liste, int *values_b);
+int     current_a(struct s_node **a_liste, int *array_a);
 int     min(struct s_node **b_liste, int *values_b);
 
 #endif

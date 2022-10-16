@@ -6,7 +6,7 @@
 /*   By: rschlott <rschlott@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/23 13:23:47 by rschlott          #+#    #+#             */
-/*   Updated: 2022/10/15 10:31:54 by rschlott         ###   ########.fr       */
+/*   Updated: 2022/10/16 10:53:40 by rschlott         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -152,13 +152,13 @@ void	only_subsequence_in_a(struct s_node **a_liste, struct s_node **b_liste, int
 		count--;
 		ptr_a = *a_liste;
 	}
-	//free (array_lis);
+	free (array_lis);
 	print_stack(a_liste);
 	print_stack(b_liste);
 }
 
 /* runs the functions in the correct order. */
-int	*lis_process(struct s_node **a_liste, struct s_node **b_liste, int count)
+int	lis_process(struct s_node **a_liste, struct s_node **b_liste, int count)
 {
 	int	*subsequence;
 	int *length;
@@ -168,13 +168,13 @@ int	*lis_process(struct s_node **a_liste, struct s_node **b_liste, int count)
     
 	subsequence = (int *)malloc(count * sizeof(int));
 	if (subsequence == NULL)
-		return(NULL);
+		return(0);
 	length = (int *)malloc(count * sizeof(int));
 	if (length == NULL)
-		return(NULL);
+		return(0);
 	array_lis = (int *)malloc(count * sizeof(int));
 	if (array_lis == NULL)
-		return(NULL);
+		return(0);
 	//anti_lis = (int *)malloc(count * sizeof(int));
 	//if (anti_lis == NULL)
 		//return(NULL);
@@ -183,7 +183,6 @@ int	*lis_process(struct s_node **a_liste, struct s_node **b_liste, int count)
 	len_lis = correct_subsequence(a_liste, subsequence, length, array_lis);
 	//anti_subsequence(a_liste, array_lis, anti_lis, len_lis);
 	only_subsequence_in_a(a_liste, b_liste, array_lis, len_lis);
-	minimum_sorting(a_liste, b_liste, array_lis, len_lis);
 	return(0);
 }
 
