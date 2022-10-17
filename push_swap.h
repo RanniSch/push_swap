@@ -6,7 +6,7 @@
 /*   By: rschlott <rschlott@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/31 09:11:10 by rschlott          #+#    #+#             */
-/*   Updated: 2022/10/16 20:55:39 by rschlott         ###   ########.fr       */
+/*   Updated: 2022/10/17 06:27:45 by rschlott         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,12 +72,12 @@ int 	anti_subsequence(struct s_node **a_liste, int *array_lis, int *anti_lis, in
 void    only_subsequence_in_a(struct s_node **a_liste, struct s_node **b_liste, int *array_lis, int len_lis);
 
 /* minimum sorting value to put a number from b to a */
-int     minimum_sorting(struct s_node **a_liste, struct s_node **b_liste);
+int     minimum_sorting(struct s_node **a_liste, struct s_node **b_liste, int smallest_a, int biggest_a);
 void    runs_smallest(struct s_node **a_liste, struct s_node **b_liste, int checker_b, unsigned int index, int *array_a, int len_a, int checker_a);
-int     sorting_position_a(int *array_lis, int len_lis, struct s_node **b_liste, int index);
+int     sorting_position_a(int *array_a, int len_a, struct s_node **b_liste, int index, int smallest_a, int biggest_a);
 int     index_value(int *values_b, int smallest);
 int     location_value(struct s_node **b_liste, int *values_b, int smallest);
-void    get_smallest(int *array_lis, int len_lis, struct s_node **b_liste, int *values_b);
+void    get_smallest(int *array_a, int len_a, struct s_node **b_liste, int *values_b, int smallest_a, int biggest_a);
 int     current_a(struct s_node **a_liste, int *array_a);
 int     min(struct s_node **b_liste, int *values_b);
 

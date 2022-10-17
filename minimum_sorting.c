@@ -6,7 +6,7 @@
 /*   By: rschlott <rschlott@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/13 06:33:00 by rschlott          #+#    #+#             */
-/*   Updated: 2022/10/16 20:50:06 by rschlott         ###   ########.fr       */
+/*   Updated: 2022/10/17 06:30:04 by rschlott         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ int    current_a(struct s_node **a_liste, int *array_a)
 }
 
 /* checks which number from b needs the smallest amount of opperations to get pushed to a */
-void    get_smallest(int *array_a, int len_a, struct s_node **b_liste, int *values_b)
+void    get_smallest(int *array_a, int len_a, struct s_node **b_liste, int *values_b, int smallest_a, int biggest_a)
 {
     struct s_node *ptr_b;
     int     i;
@@ -67,21 +67,56 @@ void    get_smallest(int *array_a, int len_a, struct s_node **b_liste, int *valu
     ptr_b = *b_liste;
     while (ptr_b != NULL)
     {
-        // checks for first and last 
+        // checks for first and last; EIGENE FUNKTION
         if (ptr_b->data < array_a[i] && ptr_b->data > array_a[len_a])
+            op = 0;
+        if (ptr_b->data == smallest_a && ptr_b->data < array_a[i] && array_a[len_a] > array_a[i])
+            op = 0;
+        if (ptr_b->data == biggest_a && ptr_b->data > array_a[len_a] && array_a[i] < array_a[len_a])
             op = 0;
         // checks for first and second
         if (ptr_b->data > array_a[i] && ptr_b->data < array_a[i + 1])
             op = 1;
+        if (ptr_b->data == smallest_a && ptr_b->data < array_a[i + 1] && array_a[i] > array_a[i + 1])
+            op = 1;
+        if (ptr_b->data == biggest_a && ptr_b->data > array_a[i] && array_a[i + 1] < array_a[i])
+            op = 1;
         // checks for first and second half
-        while (!(ptr_b->data > array_a[i] && ptr_b->data < array_a[i + 1]))
+        if (ptr_b->data != smallest_a && ptr_b->data != biggest_a)
         {
-            if (i < (len_a / 2))
-                op = i + 1;
-            else
-                op = len_a - (i + 1);
-            //printf("op: %d\n", op);
-            i++;
+            while (!(ptr_b->data > array_a[i] && ptr_b->data < array_a[i + 1]))
+            {
+                if (i < (len_a / 2))
+                    op = i + 1;
+                else
+                    op = len_a - (i + 1);
+                //printf("op: %d\n", op);
+                i++;
+            }
+        }
+        if (ptr_b->data == smallest_a)
+        {
+            while (!(ptr_b->data < array_a[i] && array_a[len_a] > array_a[i]))
+            {
+                if (i < (len_a / 2))
+                    op = i + 1;
+                else
+                    op = len_a - (i + 1);
+                //printf("op: %d\n", op);
+                i++;
+            }
+        }
+        if (ptr_b->data == biggest_a)
+        {
+            while (!(ptr_b->data > array_a[i] && array_a[i + 1] < array_a[i]))
+            {
+                if (i < (len_a / 2))
+                    op = i + 1;
+                else
+                    op = len_a - (i + 1);
+                //printf("op: %d\n", op);
+                i++;
+            }
         }
         if (b > (count_of_nodes(b_liste) / 2))
         {    
@@ -132,7 +167,7 @@ int index_value(int *values_b, int smallest)
 }
 
 /* identifies the position where to sort in number from b in stack a */
-int sorting_position_a(int *array_a, int len_a, struct s_node **b_liste, int index)
+int sorting_position_a(int *array_a, int len_a, struct s_node **b_liste, int index, int smallest_a, int biggest_a)
 {
     int checker_a;
     int i;
@@ -147,12 +182,19 @@ int sorting_position_a(int *array_a, int len_a, struct s_node **b_liste, int ind
     //printf("b data %d\n", ptr_b->data);
     while (i < len_a)
     {
-        // CHECKER A = 3 for smallest number to sort in; CHECKER A = 4 for biggest nuber to sort in!!!
         //printf("i %d len_a %d b_data %d array %d\n", i, len_a, ptr_b->data, array_a[i]);
         if (((ptr_b->data > array_a[i] && ptr_b->data < array_a[i + 1]) && i < (len_a / 2)) || len_a == 1)
             checker_a = 1;
         if ((ptr_b->data > array_a[i] && ptr_b->data < array_a[i + 1]) && i >= (len_a / 2))
             checker_a = 2;
+        if ((ptr_b->data == smallest_a && ptr_b->data < array_a[i + 1] && array_a[i] > array_a[i + 1] && i < (len_a / 2)) || len_a == 1)
+            checker_a = 3;
+        if ((ptr_b->data == smallest_a && ptr_b->data < array_a[i + 1] && array_a[i] > array_a[i + 1]) && i >= (len_a / 2))
+            checker_a = 4;
+        if ((ptr_b->data == biggest_a && ptr_b->data > array_a[i] && array_a[i + 1] < array_a[i] && i < (len_a / 2)) || len_a == 1)
+            checker_a = 5;
+        if ((ptr_b->data == biggest_a && ptr_b->data > array_a[i] && array_a[i + 1] < array_a[i] && i >= (len_a / 2)))
+            checker_a = 6;
         i++;
     }
     //printf("checker a %d\n", checker_a);
@@ -189,15 +231,42 @@ void    runs_smallest(struct s_node **a_liste, struct s_node **b_liste, int chec
         }
     }
     //now check if rotate or reverse rotate a to push number from b to a!!!   KANN MAN 2 FUNKTIONEN DRAUS MACHEN     
-    //Größte Zahl und kleinste Zahl nicht immer in lis!!! Rotate in a and b before push = rr*/
-    while(!(ptr_b->data < array_a[i] && ptr_b->data > array_a[len_a]))
+    //Rotate in a and b in the same direction before push = RR or RRR*/
+    if (checker_a == 1 || checker_a == 2)
     {
-        if (checker_a == 1)
-            rotate_a(a_liste);
-        if (checker_a == 2)
-            reverse_rotate_a(a_liste);
-        free(array_a);
-        current_a(a_liste, array_a);
+        while(!(ptr_b->data < array_a[i] && ptr_b->data > array_a[len_a]))
+        {
+            if (checker_a == 1)
+                rotate_a(a_liste);
+            if (checker_a == 2)
+                reverse_rotate_a(a_liste);
+            free(array_a);
+            current_a(a_liste, array_a);
+        }
+    }
+    if (checker_a == 3 || checker_a == 4)
+    {
+        while (!(ptr_b->data < array_a[i] && array_a[len_a] > array_a[i]))
+        {
+            if (checker_a == 3)
+                rotate_a(a_liste);
+            if (checker_a == 4)
+                reverse_rotate_a(a_liste);
+            free(array_a);
+            current_a(a_liste, array_a);
+        }
+    }
+    if (checker_a == 5 || checker_a == 6)
+    {
+        while (!(ptr_b->data > array_a[len_a] && array_a[i] < array_a[len_a]))
+        {
+            if (checker_a == 5)
+                rotate_a(a_liste);
+            if (checker_a == 6)
+                reverse_rotate_a(a_liste);
+            free(array_a);
+            current_a(a_liste, array_a);
+        }
     }
     push_to_a(a_liste, b_liste);
     //ptr_a = *a_liste;
@@ -207,11 +276,11 @@ void    runs_smallest(struct s_node **a_liste, struct s_node **b_liste, int chec
 }
 
 /* runs the functions in the correct order. */
-int    minimum_sorting(struct s_node **a_liste, struct s_node **b_liste)
+int    minimum_sorting(struct s_node **a_liste, struct s_node **b_liste, int smallest_a, int biggest_a)
 {
     int *array_a;
     int len_a;
-    int *values_b;   // Needs to be freed each time!!! Ggf. auch array mit Zahlen aus Stack a, könnte einfacher sein!!!
+    int *values_b;   // Needs to be freed each time!!!
     int smallest;
     int checker_b;
     int index;
@@ -226,11 +295,11 @@ int    minimum_sorting(struct s_node **a_liste, struct s_node **b_liste)
         if (!values_b)
             return(0);
         len_a = current_a(a_liste, array_a);
-        get_smallest(array_a, len_a, b_liste, values_b);
+        get_smallest(array_a, len_a, b_liste, values_b, smallest_a, biggest_a);
         smallest = min(b_liste, values_b);
         checker_b = location_value(b_liste, values_b, smallest);
         index = index_value(values_b, smallest);
-        checker_a = sorting_position_a(array_a, len_a, b_liste, index);
+        checker_a = sorting_position_a(array_a, len_a, b_liste, index, smallest_a, biggest_a);
         runs_smallest(a_liste, b_liste, checker_b, index, array_a, len_a, checker_a);
         free(array_a);
         free(values_b);
