@@ -6,7 +6,7 @@
 /*   By: rschlott <rschlott@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/13 06:33:00 by rschlott          #+#    #+#             */
-/*   Updated: 2022/10/17 06:30:04 by rschlott         ###   ########.fr       */
+/*   Updated: 2022/10/17 23:01:01 by rschlott         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,7 +96,7 @@ void    get_smallest(int *array_a, int len_a, struct s_node **b_liste, int *valu
         }
         if (ptr_b->data == smallest_a)
         {
-            while (!(ptr_b->data < array_a[i] && array_a[len_a] > array_a[i]))
+            while (!(ptr_b->data < array_a[i] && array_a[i] > array_a[i + 1]))
             {
                 if (i < (len_a / 2))
                     op = i + 1;
