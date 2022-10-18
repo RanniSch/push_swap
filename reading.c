@@ -6,7 +6,7 @@
 /*   By: rschlott <rschlott@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/28 13:23:03 by rschlott          #+#    #+#             */
-/*   Updated: 2022/10/17 05:34:31 by rschlott         ###   ########.fr       */
+/*   Updated: 2022/10/18 06:08:14 by rschlott         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -191,6 +191,8 @@ int	main(int argc, char **argv)
 {
 	struct s_node	*a_liste;
 	struct s_node	*b_liste;
+	int	smallest_a;
+	int	biggest_a;
 
 	a_liste = NULL;
 	b_liste = NULL;
@@ -200,9 +202,13 @@ int	main(int argc, char **argv)
 	print_stack(&a_liste);
 	//printf("biggest %d\n", biggest_in_a(&a_liste));
 	//printf("smallest %d\n", smallest_in_a(&a_liste));
+	smallest_a = smallest_in_a(&a_liste);
+	biggest_a = biggest_in_a(&a_liste);
+	printf("smallest a %d\n", smallest_in_a(&a_liste));
+	printf("biggest a %d\n", biggest_in_a(&a_liste));
 	set_index(&a_liste);
 	lis_process(&a_liste, &b_liste, count_of_nodes(&a_liste));
-	minimum_sorting(&a_liste, &b_liste, smallest_in_a(&a_liste), biggest_in_a(&a_liste));
+	minimum_sorting(&a_liste, &b_liste, smallest_a, biggest_a);
 	//swap_a(&a_liste);
 	//print_stack(&a_liste);
 	//rotate_a(&a_liste);

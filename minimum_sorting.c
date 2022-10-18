@@ -6,7 +6,7 @@
 /*   By: rschlott <rschlott@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/13 06:33:00 by rschlott          #+#    #+#             */
-/*   Updated: 2022/10/17 23:01:01 by rschlott         ###   ########.fr       */
+/*   Updated: 2022/10/18 06:39:03 by rschlott         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,13 +60,13 @@ void    get_smallest(int *array_a, int len_a, struct s_node **b_liste, int *valu
     int     b;
     int     j;
 
-    i = 0;
-    op = 0;
     j = 0;
     b = 0;
     ptr_b = *b_liste;
     while (ptr_b != NULL)
     {
+        i = 0;
+        op = 0;
         // checks for first and last; EIGENE FUNKTION
         if (ptr_b->data < array_a[i] && ptr_b->data > array_a[len_a])
             op = 0;
@@ -102,7 +102,6 @@ void    get_smallest(int *array_a, int len_a, struct s_node **b_liste, int *valu
                     op = i + 1;
                 else
                     op = len_a - (i + 1);
-                //printf("op: %d\n", op);
                 i++;
             }
         }
@@ -118,7 +117,7 @@ void    get_smallest(int *array_a, int len_a, struct s_node **b_liste, int *valu
                 i++;
             }
         }
-        if (b > (count_of_nodes(b_liste) / 2))
+        if (b >= (count_of_nodes(b_liste) / 2))
         {    
             values_b[j] = op + (count_of_nodes(b_liste) - b) + 1; // + 1 because of the push
             //printf("drin 1\n");
