@@ -6,7 +6,7 @@
 /*   By: rschlott <rschlott@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/31 09:11:10 by rschlott          #+#    #+#             */
-/*   Updated: 2022/10/17 06:27:45 by rschlott         ###   ########.fr       */
+/*   Updated: 2022/10/19 07:19:45 by rschlott         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,6 +72,7 @@ int 	anti_subsequence(struct s_node **a_liste, int *array_lis, int *anti_lis, in
 void    only_subsequence_in_a(struct s_node **a_liste, struct s_node **b_liste, int *array_lis, int len_lis);
 
 /* minimum sorting value to put a number from b to a */
+void    final_order(struct s_node **a_liste, int smallest_a, int *array_a, int len_a);
 int     minimum_sorting(struct s_node **a_liste, struct s_node **b_liste, int smallest_a, int biggest_a);
 void    runs_smallest(struct s_node **a_liste, struct s_node **b_liste, int checker_b, unsigned int index, int *array_a, int len_a, int checker_a);
 int     sorting_position_a(int *array_a, int len_a, struct s_node **b_liste, int index, int smallest_a, int biggest_a);
