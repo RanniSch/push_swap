@@ -6,7 +6,7 @@
 /*   By: rschlott <rschlott@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/13 06:33:00 by rschlott          #+#    #+#             */
-/*   Updated: 2022/10/19 07:28:04 by rschlott         ###   ########.fr       */
+/*   Updated: 2022/10/20 07:11:50 by rschlott         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,7 +110,6 @@ void    get_smallest(int *array_a, int len_a, struct s_node **b_liste, int *valu
                 op = i + 1;
             else
                 op = (len_a + 1) - (i + 1);
-            printf("len_a %d op: %d i: %d\n", len_a + 1, op, i);
         }
         if (b > (count_of_nodes(b_liste) / 2))
             values_b[j] = op + (count_of_nodes(b_liste) - b) + 1; // + 1 because of the push
@@ -170,7 +169,6 @@ int sorting_position_a(int *array_a, int len_a, struct s_node **b_liste, int ind
     //printf("b data %d\n", ptr_b->data);
     while (i < len_a)
     {
-        //printf("i %d len_a %d b_data %d array %d\n", i, len_a, ptr_b->data, array_a[i]);
         if (((ptr_b->data > array_a[i] && ptr_b->data < array_a[i + 1]) && i < (len_a / 2)) || len_a == 1)
             checker_a = 1;
         if ((ptr_b->data > array_a[i] && ptr_b->data < array_a[i + 1]) && i >= (len_a / 2))
@@ -185,38 +183,27 @@ int sorting_position_a(int *array_a, int len_a, struct s_node **b_liste, int ind
             checker_a = 6;
         i++;
     }
-    //printf("checker a %d\n", checker_a);
-    //printf("5/2 = 2: %d\n", 5/2);
     return (checker_a);
 }
 
 /* pushes the number from stack b with the smallest amount of operations to stack a */
 void    runs_smallest(struct s_node **a_liste, struct s_node **b_liste, int checker_b, unsigned int index, int *array_a, int len_a, int checker_a)
 {
-    //struct s_node *ptr_a;
     struct s_node *ptr_b;
     int i;
 
-    //ptr_a = *a_liste;
     ptr_b = *b_liste;
     i = 0;
-    //printf("index %d\n", index);
     if (checker_b == 0 && index > 0)
     {
-        //printf("drin\n");
         while (index--)
-        {
             rotate_b(b_liste);
-            //ptr_b = *b_liste;
-        }
     }
     if (checker_b == 1)
     {
+        index = count_of_nodes(b_liste) - index;
         while (index--)
-        {
             reverse_rotate_b(b_liste);
-            //ptr_b = *b_liste;
-        }
     }
     //now check if rotate or reverse rotate a to push number from b to a!!!   KANN MAN 2 FUNKTIONEN DRAUS MACHEN     
     //Rotate in a and b in the same direction before push = RR or RRR*/
@@ -257,8 +244,11 @@ void    runs_smallest(struct s_node **a_liste, struct s_node **b_liste, int chec
         }
     }
     push_to_a(a_liste, b_liste);
-    //ptr_a = *a_liste;
-    //ptr_b = *b_liste;
+    /*if (ptr_b == NULL)
+    {
+        free(ptr_b);
+        free(b_liste);
+    }*/
     print_stack(a_liste);       // muss noch raus
     print_stack(b_liste);       // muss noch raus
 }
@@ -271,7 +261,6 @@ void    final_order(struct s_node **a_liste, int smallest_a, int *array_a, int l
 
     i = 0;
     ptr_a = *a_liste;
-    printf("smallest a %d", smallest_a);
     while (array_a[i] != smallest_a)
         i++;
     if (i < ((len_a + 1) / 2))
@@ -298,8 +287,10 @@ int    minimum_sorting(struct s_node **a_liste, struct s_node **b_liste, int sma
     int checker_b;
     int index;
     int checker_a;
+    struct s_node *ptr_b;
 
-    while (b_liste != NULL)
+    ptr_b = *b_liste;
+    while (ptr_b != NULL)
     {
         array_a = (int *)malloc((count_of_nodes(a_liste)) * sizeof(int));
         if (!array_a)
@@ -310,21 +301,24 @@ int    minimum_sorting(struct s_node **a_liste, struct s_node **b_liste, int sma
         len_a = current_a(a_liste, array_a);
         get_smallest(array_a, len_a, b_liste, values_b, smallest_a, biggest_a);
         smallest = min(b_liste, values_b);
+        //printf("smallest val %d\n", smallest);
         checker_b = location_value(b_liste, values_b, smallest);
+        printf("checker_b %d\n", checker_b);
         index = index_value(values_b, smallest);
+        printf("index %d\n", index);
         checker_a = sorting_position_a(array_a, len_a, b_liste, index, smallest_a, biggest_a);
+        printf("checker_a %d\n", checker_a);
         runs_smallest(a_liste, b_liste, checker_b, index, array_a, len_a, checker_a);
         free(array_a);
         free(values_b);
+        ptr_b = *b_liste;
     }
     array_a = (int *)malloc((count_of_nodes(a_liste)) * sizeof(int));
     if (!array_a)
         return(0);
-    printf("drin");
     len_a = current_a(a_liste, array_a);
     final_order(a_liste, smallest_a, array_a, len_a);
     free(array_a);
     print_stack(a_liste);
-    //print_stack(b_liste);
     return(0);
 }

@@ -6,7 +6,7 @@
 /*   By: rschlott <rschlott@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/28 13:23:03 by rschlott          #+#    #+#             */
-/*   Updated: 2022/10/18 06:08:14 by rschlott         ###   ########.fr       */
+/*   Updated: 2022/10/20 06:29:27 by rschlott         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -200,34 +200,12 @@ int	main(int argc, char **argv)
 		der zur Liste zeigt durch = double pointer */
 	stack_receive(argc, argv, &a_liste);
 	print_stack(&a_liste);
-	//printf("biggest %d\n", biggest_in_a(&a_liste));
-	//printf("smallest %d\n", smallest_in_a(&a_liste));
 	smallest_a = smallest_in_a(&a_liste);
 	biggest_a = biggest_in_a(&a_liste);
-	printf("smallest a %d\n", smallest_in_a(&a_liste));
-	printf("biggest a %d\n", biggest_in_a(&a_liste));
+	//printf("smallest a %d\n", smallest_in_a(&a_liste));
+	//printf("biggest a %d\n", biggest_in_a(&a_liste));
 	set_index(&a_liste);
 	lis_process(&a_liste, &b_liste, count_of_nodes(&a_liste));
 	minimum_sorting(&a_liste, &b_liste, smallest_a, biggest_a);
-	//swap_a(&a_liste);
-	//print_stack(&a_liste);
-	//rotate_a(&a_liste);
-	//print_stack(&a_liste);
-	//reverse_rotate_a(&a_liste);
-	//reverse_rotate_b(&b_liste);
-	//print_stack(&a_liste);
-	//print_stack(&b_liste);
-	//push_to_b(&a_liste, &b_liste);
-	//print_stack(&a_liste);
-	//print_stack(&b_liste);
-	//push_to_b(&a_liste, &b_liste);
-	//print_stack(&a_liste);
-	//print_stack(&b_liste);
-	//swap_both(&a_liste, &b_liste);
-	//print_stack(&a_liste);
-	//print_stack(&b_liste);
-	//rotate_both(&a_liste, &b_liste);
-	//print_stack(&a_liste);
-	//print_stack(&b_liste);
 	return (0);
 }
