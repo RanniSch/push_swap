@@ -6,7 +6,7 @@
 /*   By: rschlott <rschlott@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/13 06:33:00 by rschlott          #+#    #+#             */
-/*   Updated: 2022/10/21 07:45:03 by rschlott         ###   ########.fr       */
+/*   Updated: 2022/10/21 17:28:54 by rschlott         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -236,23 +236,31 @@ int sorting_position_a(int *array_a, int len_a, struct s_node **b_liste, int ind
 }
 
 /* pushes the number from stack b with the smallest amount of operations to stack a */
-void    runs_smallest(struct s_node **a_liste, struct s_node **b_liste, int checker_b, unsigned int index, int *array_a, int len_a, int checker_a)
+int    runs_smallest(struct s_node **a_liste, struct s_node **b_liste, int checker_b, unsigned int index, int *array_a, int len_a, int checker_a)
 {
     struct s_node *ptr_b;
     int i;
+    int instructions;
 
+    instructions = 0;
     ptr_b = *b_liste;
     i = 0;
     if (checker_b == 0 && index > 0)
     {
         while (index--)
+        {
             rotate_b(b_liste);
+            instructions++;
+        }            
     }
     if (checker_b == 1)
     {
         index = count_of_nodes(b_liste) - index;
         while (index--)
+        {
             reverse_rotate_b(b_liste);
+            instructions++;
+        }            
     }
     //now check if rotate or reverse rotate a to push number from b to a!!!   KANN MAN 2 FUNKTIONEN DRAUS MACHEN     
     //Rotate in a and b in the same direction before push = RR or RRR*/
@@ -261,9 +269,15 @@ void    runs_smallest(struct s_node **a_liste, struct s_node **b_liste, int chec
         while(!(ptr_b->data < array_a[i] && ptr_b->data > array_a[len_a]))
         {
             if (checker_a == 1)
+            {
                 rotate_a(a_liste);
+                instructions++;
+            }                
             if (checker_a == 2)
+            {
                 reverse_rotate_a(a_liste);
+                instructions++;
+            }                
             free(array_a);
             current_a(a_liste, array_a);
         }
@@ -273,9 +287,15 @@ void    runs_smallest(struct s_node **a_liste, struct s_node **b_liste, int chec
         while (!(ptr_b->data < array_a[i] && array_a[len_a] > array_a[i]))
         {
             if (checker_a == 3)
+            {
                 rotate_a(a_liste);
+                instructions++;
+            }                
             if (checker_a == 4)
+            {
                 reverse_rotate_a(a_liste);
+                instructions++;
+            }                
             free(array_a);
             current_a(a_liste, array_a);
         }
@@ -285,14 +305,21 @@ void    runs_smallest(struct s_node **a_liste, struct s_node **b_liste, int chec
         while (!(ptr_b->data > array_a[len_a] && array_a[i] < array_a[len_a]))
         {
             if (checker_a == 5)
+            {
                 rotate_a(a_liste);
+                instructions++;
+            }                
             if (checker_a == 6)
+            {
                 reverse_rotate_a(a_liste);
+                instructions++;
+            }                
             free(array_a);
             current_a(a_liste, array_a);
         }
     }
     push_to_a(a_liste, b_liste);
+    instructions++;
     /*if (ptr_b == NULL)
     {
         free(ptr_b);
@@ -300,14 +327,17 @@ void    runs_smallest(struct s_node **a_liste, struct s_node **b_liste, int chec
     }*/
     print_stack(a_liste);       // muss noch raus
     //print_stack(b_liste);       // muss noch raus
+    return(instructions);
 }
 
-void    final_order(struct s_node **a_liste, int smallest_a, int *array_a, int len_a)
+int    final_order(struct s_node **a_liste, int smallest_a, int *array_a, int len_a)
 {
     struct s_node *ptr_a;
     int checker_rotate;
     int i;
+    int instructions;
 
+    instructions = 0;
     i = 0;
     ptr_a = *a_liste;
     while (array_a[i] != smallest_a)
@@ -319,11 +349,18 @@ void    final_order(struct s_node **a_liste, int smallest_a, int *array_a, int l
     while (ptr_a->data != smallest_a)
     {
         if (checker_rotate == 0)
+        {
             rotate_a(a_liste);
+            instructions++;
+        }            
         if (checker_rotate == 1)
+        {
             reverse_rotate_a(a_liste);
+            instructions++;
+        }            
         ptr_a = *a_liste;
     }
+    return (instructions);
 }
 
 /* runs the functions in the correct order. */
@@ -337,7 +374,9 @@ int    minimum_sorting(struct s_node **a_liste, struct s_node **b_liste, int sma
     int index;
     int checker_a;
     struct s_node *ptr_b;
+    int temp;
 
+    temp = 0;
     ptr_b = *b_liste;
     while (ptr_b != NULL)
     {
@@ -357,7 +396,7 @@ int    minimum_sorting(struct s_node **a_liste, struct s_node **b_liste, int sma
         //printf("index %d\n", index);
         checker_a = sorting_position_a(array_a, len_a, b_liste, index);
         //printf("checker_a %d\n", checker_a);
-        runs_smallest(a_liste, b_liste, checker_b, index, array_a, len_a, checker_a);
+        temp = temp + runs_smallest(a_liste, b_liste, checker_b, index, array_a, len_a, checker_a);
         free(array_a);
         free(values_b);
         ptr_b = *b_liste;
@@ -366,8 +405,8 @@ int    minimum_sorting(struct s_node **a_liste, struct s_node **b_liste, int sma
     if (!array_a)
         return(0);
     len_a = current_a(a_liste, array_a);
-    final_order(a_liste, smallest_a, array_a, len_a);
+    temp = temp + final_order(a_liste, smallest_a, array_a, len_a);
     free(array_a);
     print_stack(a_liste);
-    return(0);
+    return(temp);
 }

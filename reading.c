@@ -6,7 +6,7 @@
 /*   By: rschlott <rschlott@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/28 13:23:03 by rschlott          #+#    #+#             */
-/*   Updated: 2022/10/21 06:54:13 by rschlott         ###   ########.fr       */
+/*   Updated: 2022/10/21 17:31:49 by rschlott         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -192,6 +192,8 @@ int	main(int argc, char **argv)
 	struct s_node	*a_liste;
 	struct s_node	*b_liste;
 	int	smallest_a;
+	int	instructions_one;
+	int	instructions;
 
 	a_liste = NULL;
 	b_liste = NULL;
@@ -204,7 +206,10 @@ int	main(int argc, char **argv)
 	//printf("smallest a %d\n", smallest_in_a(&a_liste));
 	//printf("biggest a %d\n", biggest_in_a(&a_liste));
 	set_index(&a_liste);
-	lis_process(&a_liste, &b_liste, count_of_nodes(&a_liste));
-	minimum_sorting(&a_liste, &b_liste, smallest_a);
+	instructions_one = lis_process(&a_liste, &b_liste, count_of_nodes(&a_liste));
+	instructions = minimum_sorting(&a_liste, &b_liste, smallest_a);
+	instructions = instructions + instructions_one;
+	printf("Instructions %d\n", instructions); // ersetzt durch write!!!
+	//write (1, "&instructions\n", 10);
 	return (0);
 }
