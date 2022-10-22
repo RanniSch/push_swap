@@ -6,61 +6,33 @@
 /*   By: rschlott <rschlott@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/28 13:23:03 by rschlott          #+#    #+#             */
-/*   Updated: 2022/10/21 17:31:49 by rschlott         ###   ########.fr       */
+/*   Updated: 2022/10/22 13:56:56 by rschlott         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-/* converts char to int */
-/*int ft_atoi(const char *str)
-{
-	int				sign;
-	long int		convert;
-	struct s_node	*ptr;
-	struct s_node	*current;
-
-	sign = 1;
-	convert = 0;
-	while (*str == 32 || (*str >= 9 && *str <= 13))
-		str++;
-	if (*str == '-' || *str == '+')
-	{
-		if (*str == '-')
-			sign = sign * (-1);
-		str++;
-	}
-	while (*str && *str > 47 && *str < 58)
-	{
-		convert = (convert * 10) + *str - '0';
-		str++;
-		if (convert > 2147483647 && sign == 1)
-			return (-1);
-		if (convert > 2147483648 && sign == -1)
-			return (0);
-	}
-	return (convert * sign);
-}*/
 /* adds a new node to the list */
-void	add_at_end(struct s_node **a_liste, int data)
+int	add_at_end(struct s_node **a_liste, int data)
 {
-	struct s_node *ptr;
+	struct s_node *ptr_a;
     struct s_node *current;
 
-    ptr = *a_liste;
+    ptr_a = *a_liste;
 	current = (struct s_node *)malloc(sizeof(struct s_node));
+	if (!current)
+		return(0);
 	current->data = data;
 	current->link = NULL;
-	if (ptr != NULL)
+	if (ptr_a != NULL)
 	{
-		while (ptr->link != NULL)
-		{
-			ptr = ptr->link;
-		}
-		ptr->link = current;
+		while (ptr_a->link != NULL)
+			ptr_a = ptr_a->link;
+		ptr_a->link = current;
 	}
 	else
 		*a_liste = current;
+	return(0);
 }
 
 /* adds an index to each node; one node now has the value of the data and the value of the index */
@@ -118,19 +90,16 @@ void	print_stack(struct s_node **liste)
 		printf("%d ", ptr->data); // insert printf function!!!!!!!!!!!
 		ptr = ptr->link;
 	}
-	printf("\n");
-	//printf("\nnumber of nodes: %d\n", count_of_nodes(liste));      
-		// insert printf function!!!!!!!!!!!
+	printf("\n"); // noch weg!!!
 }
 
-/* receiving arguments from user input */
+/* receiving arguments from user input. argc zählt den ersten String in argv mit und der ist immer ./a.out */
 void	stack_receive(int argc, char **argv, struct s_node **a_liste)
 {
 	struct s_node	*ptr;
 	int				i;
 
 	i = 1;
-	/* argc zählt den ersten String in argv mit und der ist immer ./a.out */
 	if (argc >= 2)
 	{
 		while (i < argc)
@@ -141,10 +110,7 @@ void	stack_receive(int argc, char **argv, struct s_node **a_liste)
 		}
 		ptr = *a_liste;
 		if (ptr->link == NULL)
-		{
-			printf("%d\n", ptr->data);
 			exit(0);
-		}
 		error_manager_duplicate(a_liste);
 	}
 	else
@@ -186,30 +152,3 @@ int	smallest_in_a(struct s_node **a_liste)
 	free(array_a);
 	return (biggest_num);
 }*/
-
-int	main(int argc, char **argv)
-{
-	struct s_node	*a_liste;
-	struct s_node	*b_liste;
-	int	smallest_a;
-	int	instructions_one;
-	int	instructions;
-
-	a_liste = NULL;
-	b_liste = NULL;
-	/* &a_liste gibt die Adresse des Pointers,
-		der zur Liste zeigt durch = double pointer */
-	stack_receive(argc, argv, &a_liste);
-	print_stack(&a_liste);
-	smallest_a = smallest_in_a(&a_liste);
-	//biggest_a = biggest_in_a(&a_liste);
-	//printf("smallest a %d\n", smallest_in_a(&a_liste));
-	//printf("biggest a %d\n", biggest_in_a(&a_liste));
-	set_index(&a_liste);
-	instructions_one = lis_process(&a_liste, &b_liste, count_of_nodes(&a_liste));
-	instructions = minimum_sorting(&a_liste, &b_liste, smallest_a);
-	instructions = instructions + instructions_one;
-	printf("Instructions %d\n", instructions); // ersetzt durch write!!!
-	//write (1, "&instructions\n", 10);
-	return (0);
-}

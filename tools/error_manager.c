@@ -6,32 +6,32 @@
 /*   By: rschlott <rschlott@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/09 06:13:46 by rschlott          #+#    #+#             */
-/*   Updated: 2022/10/10 08:05:31 by rschlott         ###   ########.fr       */
+/*   Updated: 2022/10/22 13:48:41 by rschlott         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#include "../push_swap.h"
 
 /* checks if arguments are not integers */
-void	error_manager_int(const char *str)
+void	error_manager_int(const char *ptr_a)
 {
-	while (*str == 32 || (*str >= 9 && *str <= 13))
-		str++;
-	if (*str == '-' || *str == '+')
-		str++;
-	if (*str == '-' || *str == '+')
+	while (*ptr_a == 32 || (*ptr_a >= 9 && *ptr_a <= 13))
+		ptr_a++;
+	if (*ptr_a == '-' || *ptr_a == '+')
+		ptr_a++;
+	if (*ptr_a == '-' || *ptr_a == '+')
 	{
 		write(1, "Error! More than one sign.\n", 27);
 		exit(0);
 	}
-	while (*str != '\0')
+	while (*ptr_a != '\0')
 	{
-		if (!(*str > 47 && *str < 58))
+		if (!(*ptr_a > 47 && *ptr_a < 58))
 		{
 			write(1, "Error isn't int\n", 16);
 			exit(0);
 		}
-		str++;
+		ptr_a++;
 	}
 }
 

@@ -6,7 +6,7 @@
 /*   By: rschlott <rschlott@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/23 13:23:47 by rschlott          #+#    #+#             */
-/*   Updated: 2022/10/21 17:29:27 by rschlott         ###   ########.fr       */
+/*   Updated: 2022/10/22 14:50:56 by rschlott         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -128,30 +128,26 @@ int	correct_subsequence(struct s_node **a_liste, int *subsequence, int *length, 
 }
 
 /* Uses rotate and push until all numbers that are not in the lis are in stack b */
-int	only_subsequence_in_a(struct s_node **a_liste, struct s_node **b_liste, int *array_lis, int len_lis)
+void	only_subsequence_in_a(struct s_node **a_liste, struct s_node **b_liste, int *array_lis, int len_lis)
 {
 	struct s_node *ptr_a;
     int count;
 	int len_anti;
-	int	instructions;
 
 	ptr_a = *a_liste;
     count = count_of_nodes(a_liste);
 	len_anti = count - len_lis - 1;
-	instructions = 0;
 	while (count > 0 && len_anti > 0)
 	{
 		if (ptr_a->data == array_lis[len_lis])
 		{
 			rotate_a(a_liste);
 			len_lis--;
-			instructions++;
 		}
 		else
         {
             push_to_b(a_liste, b_liste);
 			len_anti--;
-			instructions++;
         }
 		count--;
 		ptr_a = *a_liste;
@@ -159,7 +155,6 @@ int	only_subsequence_in_a(struct s_node **a_liste, struct s_node **b_liste, int 
 	free (array_lis);
 	print_stack(a_liste);
 	print_stack(b_liste);
-	return(instructions);
 }
 
 /* runs the functions in the correct order. */
@@ -169,10 +164,8 @@ int	lis_process(struct s_node **a_liste, struct s_node **b_liste, int count)
 	int *length;
 	int	*array_lis;
     int len_lis;
-	int	instructions_one;
 	//int	*anti_lis;
     
-	instructions_one = 0;
 	subsequence = (int *)malloc(count * sizeof(int));
 	if (subsequence == NULL)
 		return(0);
@@ -189,8 +182,8 @@ int	lis_process(struct s_node **a_liste, struct s_node **b_liste, int count)
 	longest_increasing_subsequence(a_liste, subsequence, length);
 	len_lis = correct_subsequence(a_liste, subsequence, length, array_lis);
 	//anti_subsequence(a_liste, array_lis, anti_lis, len_lis);
-	instructions_one = only_subsequence_in_a(a_liste, b_liste, array_lis, len_lis);
-	return(instructions_one);
+	only_subsequence_in_a(a_liste, b_liste, array_lis, len_lis);
+	return(0);
 }
 
 /* Uses rotate and push until all numbers that are not in the lis are in stack b. It works but needs more operations. 
