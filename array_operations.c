@@ -1,0 +1,41 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   array_operations.c                                 :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: rschlott <rschlott@student.42wolfsburg.de> +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/10/23 08:02:14 by rschlott          #+#    #+#             */
+/*   Updated: 2022/10/23 08:36:30 by rschlott         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "push_swap.h"
+
+void    rotate_array_a(int *array_a, int len_a)
+{
+    int i;
+    int first_num;
+
+    i = 0;
+    first_num = array_a[0];
+    while(i < len_a)
+    {
+        array_a[i] = array_a[i + 1];
+        i++;
+    }
+    array_a[len_a] = first_num;
+}
+
+void    reverse_rotate_array_a(int *array_a, int len_a)
+{
+    int last_num;
+
+    last_num = array_a[len_a];
+    while(len_a > 0)
+    {
+        array_a[len_a] = array_a[len_a - 1];
+        len_a--;
+    }
+    array_a[0] = last_num;
+}

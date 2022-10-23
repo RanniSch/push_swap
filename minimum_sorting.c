@@ -6,7 +6,7 @@
 /*   By: rschlott <rschlott@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/13 06:33:00 by rschlott          #+#    #+#             */
-/*   Updated: 2022/10/22 20:02:48 by rschlott         ###   ########.fr       */
+/*   Updated: 2022/10/23 07:49:03 by rschlott         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -292,10 +292,12 @@ void    runs_smallest(struct s_node **a_liste, struct s_node **b_liste, int chec
         while(!(ptr_b->data < array_a[i] && ptr_b->data > array_a[len_a]))
         {
             //printf("b_data %d a(i) %d a(len) %d\n", ptr_b->data, array_a[i], array_a[len_a]);
+            //printf("b %d a(i) %d a(len) %d\n", ptr_b->data, array_a[i], array_a[len_a]);
             reverse_rotate_a(a_liste);
-            printf("b %d a(i) %d a(len) %d\n", ptr_b->data, array_a[i], array_a[len_a]);  // array_a != a_liste --> checken!!!
+            printf("drin\n");
             free(array_a);
             current_a(a_liste, array_a);
+            printf("b %d a(i) %d a(len) %d\n", ptr_b->data, array_a[i], array_a[len_a]);  // array_a != a_liste --> checken!!!  ggf. Zeile 275 unnötig!!!
         }
     }
     if (checker_a == 3)
