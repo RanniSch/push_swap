@@ -6,7 +6,7 @@
 /*   By: rschlott <rschlott@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/09 06:13:46 by rschlott          #+#    #+#             */
-/*   Updated: 2022/10/22 13:48:41 by rschlott         ###   ########.fr       */
+/*   Updated: 2022/10/23 17:19:00 by rschlott         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ void	error_manager_int(const char *ptr_a)
 	{
 		if (!(*ptr_a > 47 && *ptr_a < 58))
 		{
-			write(1, "Error isn't int\n", 16);
+			write(1, "Error\n", 6);
 			exit(0);
 		}
 		ptr_a++;
@@ -49,7 +49,7 @@ void	error_manager_duplicate(struct s_node **a_liste)
 		{
 			if (ptr->data == next->data)
 			{
-				write(1, "Error duplicate\n", 16);
+				write(1, "Error\n", 6);
 				exit(0);
 			}
 			else
@@ -82,7 +82,7 @@ int	ft_atoi(const char *str)
 		str++;
 		if ((convert > 2147483647 && sign == 1) || (convert > 2147483648 && sign == -1))
 		{
-			write(1, "Error bigger than int\n", 22);
+			write(1, "Error\n", 6);
 			exit(0);
 		}
 	}

@@ -6,7 +6,7 @@
 /*   By: rschlott <rschlott@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/28 13:23:03 by rschlott          #+#    #+#             */
-/*   Updated: 2022/10/22 13:56:56 by rschlott         ###   ########.fr       */
+/*   Updated: 2022/10/23 17:54:05 by rschlott         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,7 +115,6 @@ void	stack_receive(int argc, char **argv, struct s_node **a_liste)
 	}
 	else
 	{
-		write(1, "No input! Input some numbers!\n", 30);
 		exit(0);
 	}
 }

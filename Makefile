@@ -6,7 +6,7 @@
 #    By: rschlott <rschlott@student.42wolfsburg.de> +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/09/23 13:34:43 by rschlott          #+#    #+#              #
-#    Updated: 2022/10/22 13:45:12 by rschlott         ###   ########.fr        #
+#    Updated: 2022/10/23 18:19:46 by rschlott         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,6 +27,8 @@ SRCS		:=	./tools/main.c	\
 				operations_rev_rotate.c	\
 				operations_rotate.c	\
 				minimum_sorting.c	\
+				array_operations.c	\
+				five_nodes.c	\
 
 OBJS		:= ${SRCS:.c=.o}
 

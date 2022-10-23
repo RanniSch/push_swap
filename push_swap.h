@@ -6,7 +6,7 @@
 /*   By: rschlott <rschlott@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/31 09:11:10 by rschlott          #+#    #+#             */
-/*   Updated: 2022/10/22 14:29:47 by rschlott         ###   ########.fr       */
+/*   Updated: 2022/10/23 19:31:07 by rschlott         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,8 @@ void	reverse_rotate_both(struct s_node **a_liste, struct s_node **b_liste);
 void    push_first_element(struct s_node **src, struct s_node **dest);
 void	push_to_a(struct s_node **a_liste, struct s_node **b_liste);
 void	push_to_b(struct s_node **a_liste, struct s_node **b_liste);
+void    rotate_array_a(int *array_a, int len_a);
+void    reverse_rotate_array_a(int *array_a, int len_a);
 
 /* longest increasing subsequence */
 int		max(int *length, unsigned int len);
@@ -83,5 +85,11 @@ int     max_limit_checker(int *array_a, unsigned int len_a, int b_data);
 void    get_smallest(int *array_a, int len_a, struct s_node **b_liste, int *values_b);
 int     current_a(struct s_node **a_liste, int *array_a);
 int     min(struct s_node **b_liste, int *values_b);
+
+/* little input */
+void    little_input(struct s_node **a_liste, struct s_node **b_liste, int smallest_a);
+void    four_arguments(struct s_node **a_liste, struct s_node **b_liste, int smallest_a);
+void    three_arguments(struct s_node **a_liste);
+void    two_arguments(struct s_node **a_liste);
 
 #endif

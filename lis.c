@@ -6,7 +6,7 @@
 /*   By: rschlott <rschlott@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/23 13:23:47 by rschlott          #+#    #+#             */
-/*   Updated: 2022/10/22 14:50:56 by rschlott         ###   ########.fr       */
+/*   Updated: 2022/10/23 16:16:30 by rschlott         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -122,8 +122,8 @@ int	correct_subsequence(struct s_node **a_liste, int *subsequence, int *length, 
 		//printf("array: %d\n", array_lis[len_lis]);
 		len_lis++;
 	}
-	free (subsequence);
-	free (length);
+	//free (subsequence);
+	//free (length);
 	return (len_lis - 1);
 }
 
@@ -152,9 +152,9 @@ void	only_subsequence_in_a(struct s_node **a_liste, struct s_node **b_liste, int
 		count--;
 		ptr_a = *a_liste;
 	}
-	free (array_lis);
-	print_stack(a_liste);
-	print_stack(b_liste);
+	//free (array_lis);
+	//print_stack(a_liste);
+	//print_stack(b_liste);
 }
 
 /* runs the functions in the correct order. */
@@ -181,8 +181,11 @@ int	lis_process(struct s_node **a_liste, struct s_node **b_liste, int count)
 	length_initializer_lis(subsequence, length, a_liste);
 	longest_increasing_subsequence(a_liste, subsequence, length);
 	len_lis = correct_subsequence(a_liste, subsequence, length, array_lis);
+	free (subsequence);
+	free (length);
 	//anti_subsequence(a_liste, array_lis, anti_lis, len_lis);
 	only_subsequence_in_a(a_liste, b_liste, array_lis, len_lis);
+	free(array_lis);
 	return(0);
 }
 
