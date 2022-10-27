@@ -6,7 +6,7 @@
 /*   By: rschlott <rschlott@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/13 06:33:00 by rschlott          #+#    #+#             */
-/*   Updated: 2022/10/23 15:54:18 by rschlott         ###   ########.fr       */
+/*   Updated: 2022/10/27 06:44:08 by rschlott         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ int    current_a(struct s_node **a_liste, int *array_a)
         len_a++;
     }
     //printf("\n");
-    return (len_a - 1);
+    return (len_a);
 }
 
 /* checks if current b_data is smaller than the smallest entry in Stack a */
@@ -111,15 +111,15 @@ void    get_smallest(int *array_a, int len_a, struct s_node **b_liste, int *valu
         i = 0;
         op = 0;
         //limit = 0;
-        limit = min_limit_checker(array_a, len_a + 1, ptr_b->data);
+        limit = min_limit_checker(array_a, len_a, ptr_b->data);
         //printf("b %d limit %d\n", ptr_b->data, limit);
         if (limit == 0)
-            limit = max_limit_checker(array_a, len_a + 1, ptr_b->data);
+            limit = max_limit_checker(array_a, len_a, ptr_b->data);
         //printf("b %d limit %d\n", ptr_b->data, limit);
         // checks for first and last; EIGENE FUNKTION
         if (ptr_b->data > array_a[i] && ptr_b->data < array_a[i + 1])
             op = 1;
-        else if (ptr_b->data < array_a[i] && ptr_b->data > array_a[len_a])
+        else if (ptr_b->data < array_a[i] && ptr_b->data > array_a[len_a - 1])
             op = 0;
         else
         {
@@ -131,7 +131,7 @@ void    get_smallest(int *array_a, int len_a, struct s_node **b_liste, int *valu
         }
         if (limit == 1 && ptr_b->data < array_a[i + 1] && array_a[i] > array_a[i + 1])
             op = 1;
-        else if (limit == 1 && ptr_b->data < array_a[i] && array_a[len_a] > array_a[i])
+        else if (limit == 1 && ptr_b->data < array_a[i] && array_a[len_a - 1] > array_a[i])
             op = 0;
         else
         {
@@ -143,7 +143,7 @@ void    get_smallest(int *array_a, int len_a, struct s_node **b_liste, int *valu
         }
         if (limit == 2 && ptr_b->data > array_a[i] && array_a[i + 1] < array_a[i])
             op = 1;
-        else if (limit == 2 && ptr_b->data > array_a[len_a] && array_a[i] < array_a[len_a])
+        else if (limit == 2 && ptr_b->data > array_a[len_a - 1] && array_a[i] < array_a[len_a - 1])
             op = 0;
         else
         {
@@ -155,10 +155,10 @@ void    get_smallest(int *array_a, int len_a, struct s_node **b_liste, int *valu
         }        
         if (i != 0)
         {
-            if (i < ((len_a + 1) / 2))      // len_a nicht als Index sondern als echte Anzahl, daher +1
+            if (i < ((len_a) / 2))
                 op = i + 1;
             else
-                op = (len_a + 1) - (i + 1);
+                op = (len_a) - (i + 1);
         }
         if (b > (count_of_nodes(b_liste) / 2))
             values_b[j] = op + (count_of_nodes(b_liste) - b) + 1; // + 1 because of the push
@@ -217,34 +217,34 @@ int sorting_position_a(int *array_a, int len_a, struct s_node **b_liste, int ind
     while (index != ptr_b->index)
         ptr_b = ptr_b->link;
     //printf("b data %d\n", ptr_b->data);
-    limit = min_limit_checker(array_a, len_a + 1, ptr_b->data);
+    limit = min_limit_checker(array_a, len_a, ptr_b->data);
     if (limit == 0)
-        limit = max_limit_checker(array_a, len_a + 1, ptr_b->data);
+        limit = max_limit_checker(array_a, len_a, ptr_b->data);
     //printf("b %d limit %d\n", ptr_b->data, limit);
-    while (i < (len_a))
+    while (i < (len_a - 1))
     {
-        if (((ptr_b->data > array_a[i] && ptr_b->data < array_a[i + 1]) && i < (len_a / 2)) || len_a == 1)
+        if (((ptr_b->data > array_a[i] && ptr_b->data < array_a[i + 1]) && i < ((len_a - 1) / 2)) || len_a == 2)
             checker_a = 1;
-        if ((ptr_b->data > array_a[i] && ptr_b->data < array_a[i + 1]) && i >= (len_a / 2))
+        if ((ptr_b->data > array_a[i] && ptr_b->data < array_a[i + 1]) && i >= ((len_a - 1) / 2))
             checker_a = 2;
         if (limit == 1)
         {
-            if((ptr_b->data < array_a[i + 1] && array_a[i] > array_a[i + 1] && i < (len_a / 2)) || len_a == 1)
+            if((ptr_b->data < array_a[i + 1] && array_a[i] > array_a[i + 1] && i < ((len_a - 1) / 2)) || len_a == 2)
                 checker_a = 3;
         }            
         if (limit == 1)
         {
-            if((ptr_b->data < array_a[i + 1] && array_a[i] > array_a[i + 1]) && i >= (len_a / 2))
+            if((ptr_b->data < array_a[i + 1] && array_a[i] > array_a[i + 1]) && i >= ((len_a - 1) / 2))
                 checker_a = 4;
         }    
         if (limit == 2)
         {
-            if((ptr_b->data > array_a[i] && array_a[i + 1] < array_a[i] && i < (len_a / 2)) || len_a == 1)
+            if((ptr_b->data > array_a[i] && array_a[i + 1] < array_a[i] && i < ((len_a - 1) / 2)) || len_a == 2)
                 checker_a = 5;
         }   
         if (limit == 2)
         {
-            if(ptr_b->data > array_a[i] && array_a[i + 1] < array_a[i] && i >= (len_a / 2))
+            if(ptr_b->data > array_a[i] && array_a[i + 1] < array_a[i] && i >= ((len_a - 1) / 2))
                 checker_a = 6;
         }            
         i++;
@@ -278,11 +278,11 @@ void    runs_smallest(struct s_node **a_liste, struct s_node **b_liste, int chec
     //Rotate in a and b in the same direction before push = RR or RRR*/
     if (checker_a == 1)
     {
-        while(!(ptr_b->data < array_a[i] && ptr_b->data > array_a[len_a]))
+        while(!(ptr_b->data < array_a[i] && ptr_b->data > array_a[len_a - 1]))
         {
             //printf("b_data %d a(i) %d a(len) %d\n", ptr_b->data, array_a[i], array_a[len_a]);
             rotate_a(a_liste);
-            rotate_array_a(array_a, len_a);
+            rotate_array_a(array_a, len_a - 1);
             //free(array_a);
             //current_a(a_liste, array_a);
         }
@@ -290,12 +290,12 @@ void    runs_smallest(struct s_node **a_liste, struct s_node **b_liste, int chec
     if (checker_a == 2)
     {
         //printf("b data %d\n", ptr_b->data);
-        while(!(ptr_b->data < array_a[i] && ptr_b->data > array_a[len_a]))
+        while(!(ptr_b->data < array_a[i] && ptr_b->data > array_a[len_a - 1]))
         {
             //printf("b_data %d a(i) %d a(len) %d\n", ptr_b->data, array_a[i], array_a[len_a]);
             //printf("b %d a(i) %d a(len) %d\n", ptr_b->data, array_a[i], array_a[len_a]);
             reverse_rotate_a(a_liste);
-            reverse_rotate_array_a(array_a, len_a);
+            reverse_rotate_array_a(array_a, len_a - 1);
             //free(array_a);
             //current_a(a_liste, array_a);
             //printf("b %d a(i) %d a(len) %d\n", ptr_b->data, array_a[i], array_a[len_a]);  // array_a != a_liste --> checken!!!  ggf. Zeile 275 unnötig!!!
@@ -303,40 +303,40 @@ void    runs_smallest(struct s_node **a_liste, struct s_node **b_liste, int chec
     }
     if (checker_a == 3)
     {
-        while (!(ptr_b->data < array_a[i] && array_a[len_a] > array_a[i]))
+        while (!(ptr_b->data < array_a[i] && array_a[len_a - 1] > array_a[i]))
         {
             rotate_a(a_liste);
-            rotate_array_a(array_a, len_a);
+            rotate_array_a(array_a, len_a - 1);
             //free(array_a);
             //current_a(a_liste, array_a);
         }
     }
     if (checker_a == 4)
     {
-        while (!(ptr_b->data < array_a[i] && array_a[len_a] > array_a[i]))
+        while (!(ptr_b->data < array_a[i] && array_a[len_a - 1] > array_a[i]))
         {
             reverse_rotate_a(a_liste);
-            reverse_rotate_array_a(array_a, len_a);
+            reverse_rotate_array_a(array_a, len_a - 1);
             //free(array_a);
             //current_a(a_liste, array_a);
         }
     }
     if (checker_a == 5)
     {
-        while (!(ptr_b->data > array_a[len_a] && array_a[i] < array_a[len_a]))
+        while (!(ptr_b->data > array_a[len_a - 1] && array_a[i] < array_a[len_a - 1]))
         {
             rotate_a(a_liste);
-            rotate_array_a(array_a, len_a);
+            rotate_array_a(array_a, len_a - 1);
             //free(array_a);
             //current_a(a_liste, array_a);
         }
     }
         if (checker_a == 6)
     {
-        while (!(ptr_b->data > array_a[len_a] && array_a[i] < array_a[len_a]))
+        while (!(ptr_b->data > array_a[len_a - 1] && array_a[i] < array_a[len_a - 1]))
         {
             reverse_rotate_a(a_liste);
-            reverse_rotate_array_a(array_a, len_a);
+            reverse_rotate_array_a(array_a, len_a - 1);
             //free(array_a);
             //current_a(a_liste, array_a);
         }
@@ -361,7 +361,7 @@ void    final_order(struct s_node **a_liste, int smallest_a, int *array_a, int l
     ptr_a = *a_liste;
     while (array_a[i] != smallest_a)
         i++;
-    if (i < ((len_a + 1) / 2))
+    if (i < ((len_a) / 2))
         checker_rotate = 0;
     else
         checker_rotate = 1;
