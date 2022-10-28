@@ -6,7 +6,7 @@
 /*   By: rschlott <rschlott@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/23 13:23:47 by rschlott          #+#    #+#             */
-/*   Updated: 2022/10/23 16:16:30 by rschlott         ###   ########.fr       */
+/*   Updated: 2022/10/28 11:47:35 by rschlott         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -124,7 +124,7 @@ int	correct_subsequence(struct s_node **a_liste, int *subsequence, int *length, 
 	}
 	//free (subsequence);
 	//free (length);
-	return (len_lis - 1);
+	return (len_lis);
 }
 
 /* Uses rotate and push until all numbers that are not in the lis are in stack b */
@@ -136,10 +136,10 @@ void	only_subsequence_in_a(struct s_node **a_liste, struct s_node **b_liste, int
 
 	ptr_a = *a_liste;
     count = count_of_nodes(a_liste);
-	len_anti = count - len_lis - 1;
+	len_anti = count - len_lis;
 	while (count > 0 && len_anti > 0)
 	{
-		if (ptr_a->data == array_lis[len_lis])
+		if (ptr_a->data == array_lis[len_lis - 1])
 		{
 			rotate_a(a_liste);
 			len_lis--;
