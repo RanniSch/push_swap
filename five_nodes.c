@@ -6,7 +6,7 @@
 /*   By: rschlott <rschlott@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/23 18:04:11 by rschlott          #+#    #+#             */
-/*   Updated: 2022/10/28 18:13:35 by rschlott         ###   ########.fr       */
+/*   Updated: 2022/10/29 15:26:16 by rschlott         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -131,7 +131,32 @@ void    sorting_final_num(struct s_node **a_liste, struct s_node **b_liste, int 
 
     ptr_b = *b_liste;
     i = 0;
-    // sorting for last number in b_stack
+    if (max_limit_checker(array_a, len_a, ptr_b->data) == 2)
+    {
+        while (!(ptr_b->data > array_a[len_a - 1] && array_a[i] < array_a[len_a - 1]))
+        {
+            rotate_a(a_liste);
+            r_array_a_small(array_a, len_a);
+        }
+    }
+    if (min_limit_checker(array_a, len_a, ptr_b->data) == 1)
+    {
+        while (!(ptr_b->data < array_a[i] && array_a[len_a - 1] > array_a[i]))
+        {
+            rotate_a(a_liste);
+            r_array_a_small(array_a, len_a);
+        }
+    }
+    if (!(ptr_b->data < array_a[i] && ptr_b->data > array_a[len_a - 1]))
+    {
+        while (!(ptr_b->data < array_a[i] && ptr_b->data > array_a[len_a - 1]))
+        {
+            //printf("b_data %d a(i) %d a(len) %d\n", ptr_b->data, array_a[i], array_a[len_a]);
+            rotate_a(a_liste);
+            r_array_a_small(array_a, len_a);
+        }
+    }
+    push_to_a(a_liste, b_liste);
 }
 
 int sorted_numbers(struct s_node **a_liste, int *array_a, int len_a)
@@ -176,6 +201,7 @@ int    little_input(struct s_node **a_liste, struct s_node **b_liste)
             return(0);
         len_a = current_a(a_liste, array_a);
         sorting_final_num(a_liste, b_liste, array_a, len_a);
+        //smallest number in front
     }
     free(array_a);
     return(0);

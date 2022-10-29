@@ -6,7 +6,7 @@
 /*   By: rschlott <rschlott@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/28 13:23:03 by rschlott          #+#    #+#             */
-/*   Updated: 2022/10/27 05:57:02 by rschlott         ###   ########.fr       */
+/*   Updated: 2022/10/29 15:08:50 by rschlott         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -135,7 +135,7 @@ int	smallest_in_a(struct s_node **a_liste)
 	return (smallest_num);
 }
 
-/* identifies the biggest number in Stack a after receiving arguments. */
+/* identifies the biggest number in Stack a (checken its representative array) after receiving arguments. */
 int	biggest_in_a(struct s_node **a_liste)
 {
 	int	*array_a;
