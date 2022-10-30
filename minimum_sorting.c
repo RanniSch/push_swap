@@ -6,7 +6,7 @@
 /*   By: rschlott <rschlott@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/13 06:33:00 by rschlott          #+#    #+#             */
-/*   Updated: 2022/10/27 06:44:08 by rschlott         ###   ########.fr       */
+/*   Updated: 2022/10/30 07:19:49 by rschlott         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -223,6 +223,7 @@ int sorting_position_a(int *array_a, int len_a, struct s_node **b_liste, int ind
     //printf("b %d limit %d\n", ptr_b->data, limit);
     while (i < (len_a - 1))
     {
+        //printf("0: %d 1: %d i: %d len_a %d\n", array_a[i], array_a[i + 1], i, len_a);
         if (((ptr_b->data > array_a[i] && ptr_b->data < array_a[i + 1]) && i < ((len_a - 1) / 2)) || len_a == 2)
             checker_a = 1;
         if ((ptr_b->data > array_a[i] && ptr_b->data < array_a[i + 1]) && i >= ((len_a - 1) / 2))
@@ -282,9 +283,7 @@ void    runs_smallest(struct s_node **a_liste, struct s_node **b_liste, int chec
         {
             //printf("b_data %d a(i) %d a(len) %d\n", ptr_b->data, array_a[i], array_a[len_a]);
             rotate_a(a_liste);
-            rotate_array_a(array_a, len_a - 1);
-            //free(array_a);
-            //current_a(a_liste, array_a);
+            rotate_array_a(array_a, len_a);
         }
     }
     if (checker_a == 2)
@@ -295,9 +294,7 @@ void    runs_smallest(struct s_node **a_liste, struct s_node **b_liste, int chec
             //printf("b_data %d a(i) %d a(len) %d\n", ptr_b->data, array_a[i], array_a[len_a]);
             //printf("b %d a(i) %d a(len) %d\n", ptr_b->data, array_a[i], array_a[len_a]);
             reverse_rotate_a(a_liste);
-            reverse_rotate_array_a(array_a, len_a - 1);
-            //free(array_a);
-            //current_a(a_liste, array_a);
+            reverse_rotate_array_a(array_a, len_a);
             //printf("b %d a(i) %d a(len) %d\n", ptr_b->data, array_a[i], array_a[len_a]);  // array_a != a_liste --> checken!!!  ggf. Zeile 275 unnötig!!!
         }
     }
@@ -306,9 +303,7 @@ void    runs_smallest(struct s_node **a_liste, struct s_node **b_liste, int chec
         while (!(ptr_b->data < array_a[i] && array_a[len_a - 1] > array_a[i]))
         {
             rotate_a(a_liste);
-            rotate_array_a(array_a, len_a - 1);
-            //free(array_a);
-            //current_a(a_liste, array_a);
+            rotate_array_a(array_a, len_a);
         }
     }
     if (checker_a == 4)
@@ -316,9 +311,7 @@ void    runs_smallest(struct s_node **a_liste, struct s_node **b_liste, int chec
         while (!(ptr_b->data < array_a[i] && array_a[len_a - 1] > array_a[i]))
         {
             reverse_rotate_a(a_liste);
-            reverse_rotate_array_a(array_a, len_a - 1);
-            //free(array_a);
-            //current_a(a_liste, array_a);
+            reverse_rotate_array_a(array_a, len_a);
         }
     }
     if (checker_a == 5)
@@ -326,9 +319,7 @@ void    runs_smallest(struct s_node **a_liste, struct s_node **b_liste, int chec
         while (!(ptr_b->data > array_a[len_a - 1] && array_a[i] < array_a[len_a - 1]))
         {
             rotate_a(a_liste);
-            rotate_array_a(array_a, len_a - 1);
-            //free(array_a);
-            //current_a(a_liste, array_a);
+            rotate_array_a(array_a, len_a);
         }
     }
         if (checker_a == 6)
@@ -336,9 +327,7 @@ void    runs_smallest(struct s_node **a_liste, struct s_node **b_liste, int chec
         while (!(ptr_b->data > array_a[len_a - 1] && array_a[i] < array_a[len_a - 1]))
         {
             reverse_rotate_a(a_liste);
-            reverse_rotate_array_a(array_a, len_a - 1);
-            //free(array_a);
-            //current_a(a_liste, array_a);
+            reverse_rotate_array_a(array_a, len_a);
         }
     }
     push_to_a(a_liste, b_liste);

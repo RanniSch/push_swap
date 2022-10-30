@@ -6,7 +6,7 @@
 /*   By: rschlott <rschlott@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/22 13:33:55 by rschlott          #+#    #+#             */
-/*   Updated: 2022/10/27 07:39:17 by rschlott         ###   ########.fr       */
+/*   Updated: 2022/10/30 06:36:32 by rschlott         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ int	main(int argc, char **argv)
 	//print_stack(&a_liste);
 	smallest_a = smallest_in_a(&a_liste);
     if (count_of_nodes(&a_liste) >= 2 && count_of_nodes(&a_liste) <= 5)
-        little_input(&a_liste, &b_liste);
+        little_input(&a_liste, &b_liste, smallest_a);
     else
     {
         set_index(&a_liste);

@@ -6,7 +6,7 @@
 /*   By: rschlott <rschlott@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/31 09:11:10 by rschlott          #+#    #+#             */
-/*   Updated: 2022/10/28 12:23:53 by rschlott         ###   ########.fr       */
+/*   Updated: 2022/10/30 06:37:08 by rschlott         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,7 @@ int     current_a(struct s_node **a_liste, int *array_a);
 int     min(struct s_node **b_liste, int *values_b);
 
 /* little input */
-int     little_input(struct s_node **a_liste, struct s_node **b_liste);
+int     little_input(struct s_node **a_liste, struct s_node **b_liste, int smallest_a);
 void    three_arguments(struct s_node **a_liste, int *array_a, int len_a);
 void    array_ajustment(int *array_a, int len_a);
 int     sorted_numbers(struct s_node **a_liste, int *array_a, int len_a);
