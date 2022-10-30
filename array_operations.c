@@ -6,7 +6,7 @@
 /*   By: rschlott <rschlott@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/23 08:02:14 by rschlott          #+#    #+#             */
-/*   Updated: 2022/10/30 07:04:11 by rschlott         ###   ########.fr       */
+/*   Updated: 2022/10/30 10:01:51 by rschlott         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,4 +38,13 @@ void    reverse_rotate_array_a(int *array_a, int len_a)
         len_a--;
     }
     array_a[0] = last_num;
+}
+
+void    swap_array_a(int *array_a)
+{
+    int temp;
+    
+    temp = array_a[0];
+    array_a[0] = array_a[1];
+    array_a[1] = temp;
 }

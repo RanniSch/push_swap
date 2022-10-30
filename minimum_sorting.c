@@ -6,7 +6,7 @@
 /*   By: rschlott <rschlott@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/13 06:33:00 by rschlott          #+#    #+#             */
-/*   Updated: 2022/10/30 07:19:49 by rschlott         ###   ########.fr       */
+/*   Updated: 2022/10/30 08:08:04 by rschlott         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -258,10 +258,8 @@ int sorting_position_a(int *array_a, int len_a, struct s_node **b_liste, int ind
 void    runs_smallest(struct s_node **a_liste, struct s_node **b_liste, int checker_b, unsigned int index, int *array_a, int len_a, int checker_a)
 {
     struct s_node *ptr_b;
-    int i;
 
     ptr_b = *b_liste;
-    i = 0;
     if (checker_b == 0 && index > 0)
     {
         while (index--)
@@ -279,7 +277,7 @@ void    runs_smallest(struct s_node **a_liste, struct s_node **b_liste, int chec
     //Rotate in a and b in the same direction before push = RR or RRR*/
     if (checker_a == 1)
     {
-        while(!(ptr_b->data < array_a[i] && ptr_b->data > array_a[len_a - 1]))
+        while(!(ptr_b->data < array_a[0] && ptr_b->data > array_a[len_a - 1]))
         {
             //printf("b_data %d a(i) %d a(len) %d\n", ptr_b->data, array_a[i], array_a[len_a]);
             rotate_a(a_liste);
@@ -289,7 +287,7 @@ void    runs_smallest(struct s_node **a_liste, struct s_node **b_liste, int chec
     if (checker_a == 2)
     {
         //printf("b data %d\n", ptr_b->data);
-        while(!(ptr_b->data < array_a[i] && ptr_b->data > array_a[len_a - 1]))
+        while(!(ptr_b->data < array_a[0] && ptr_b->data > array_a[len_a - 1]))
         {
             //printf("b_data %d a(i) %d a(len) %d\n", ptr_b->data, array_a[i], array_a[len_a]);
             //printf("b %d a(i) %d a(len) %d\n", ptr_b->data, array_a[i], array_a[len_a]);
@@ -300,7 +298,7 @@ void    runs_smallest(struct s_node **a_liste, struct s_node **b_liste, int chec
     }
     if (checker_a == 3)
     {
-        while (!(ptr_b->data < array_a[i] && array_a[len_a - 1] > array_a[i]))
+        while (!(ptr_b->data < array_a[0] && array_a[len_a - 1] > array_a[0]))
         {
             rotate_a(a_liste);
             rotate_array_a(array_a, len_a);
@@ -308,7 +306,7 @@ void    runs_smallest(struct s_node **a_liste, struct s_node **b_liste, int chec
     }
     if (checker_a == 4)
     {
-        while (!(ptr_b->data < array_a[i] && array_a[len_a - 1] > array_a[i]))
+        while (!(ptr_b->data < array_a[0] && array_a[len_a - 1] > array_a[0]))
         {
             reverse_rotate_a(a_liste);
             reverse_rotate_array_a(array_a, len_a);
@@ -316,7 +314,7 @@ void    runs_smallest(struct s_node **a_liste, struct s_node **b_liste, int chec
     }
     if (checker_a == 5)
     {
-        while (!(ptr_b->data > array_a[len_a - 1] && array_a[i] < array_a[len_a - 1]))
+        while (!(ptr_b->data > array_a[len_a - 1] && array_a[0] < array_a[len_a - 1]))
         {
             rotate_a(a_liste);
             rotate_array_a(array_a, len_a);
@@ -324,7 +322,7 @@ void    runs_smallest(struct s_node **a_liste, struct s_node **b_liste, int chec
     }
         if (checker_a == 6)
     {
-        while (!(ptr_b->data > array_a[len_a - 1] && array_a[i] < array_a[len_a - 1]))
+        while (!(ptr_b->data > array_a[len_a - 1] && array_a[0] < array_a[len_a - 1]))
         {
             reverse_rotate_a(a_liste);
             reverse_rotate_array_a(array_a, len_a);

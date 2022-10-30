@@ -6,7 +6,7 @@
 /*   By: rschlott <rschlott@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/31 09:11:10 by rschlott          #+#    #+#             */
-/*   Updated: 2022/10/30 06:37:08 by rschlott         ###   ########.fr       */
+/*   Updated: 2022/10/30 10:19:35 by rschlott         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,7 @@ void	push_to_a(struct s_node **a_liste, struct s_node **b_liste);
 void	push_to_b(struct s_node **a_liste, struct s_node **b_liste);
 void    rotate_array_a(int *array_a, int len_a);
 void    reverse_rotate_array_a(int *array_a, int len_a);
+void    swap_array_a(int *array_a);
 
 /* longest increasing subsequence */
 int		max(int *length, unsigned int len);
@@ -88,15 +89,12 @@ int     min(struct s_node **b_liste, int *values_b);
 
 /* little input */
 int     little_input(struct s_node **a_liste, struct s_node **b_liste, int smallest_a);
+int     sorted_numbers(struct s_node **a_liste);
 void    three_arguments(struct s_node **a_liste, int *array_a, int len_a);
-void    array_ajustment(int *array_a, int len_a);
-int     sorted_numbers(struct s_node **a_liste, int *array_a, int len_a);
-void    four_arguments(struct s_node **a_liste, struct s_node **b_liste, int *array_a, int len_a);
+void    four_arguments(struct s_node **a_liste, struct s_node **b_liste, int *array_a);
 void    two_arguments(struct s_node **a_liste);
-
-/* array_a operations little input */
-void    s_array_a_small(int *array_a, int len_a);
-void    r_array_a_small(int *array_a, int len_a);
-void    rr_array_a_small(int *array_a, int len_a);
+int     five_arguments(struct s_node **a_liste, struct s_node **b_liste);
+void    shorten_stack_a(struct s_node **a_liste, struct s_node **b_liste);
+void    sorting_two_nums(struct s_node **a_liste, struct s_node **b_liste, unsigned int index, int *array_a, int len_a, int checker_a);
 
 #endif
