@@ -6,7 +6,7 @@
 /*   By: rschlott <rschlott@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/13 06:33:00 by rschlott          #+#    #+#             */
-/*   Updated: 2022/10/30 08:08:04 by rschlott         ###   ########.fr       */
+/*   Updated: 2022/10/30 17:13:56 by rschlott         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -338,7 +338,7 @@ void    runs_smallest(struct s_node **a_liste, struct s_node **b_liste, int chec
     //print_stack(b_liste);       // muss noch raus
 }
 
-void    final_order(struct s_node **a_liste, int smallest_a, int *array_a, int len_a)
+void    final_order(struct s_node **a_liste, int smallest_a)
 {
     struct s_node *ptr_a;
     int checker_rotate;
@@ -346,12 +346,16 @@ void    final_order(struct s_node **a_liste, int smallest_a, int *array_a, int l
 
     i = 0;
     ptr_a = *a_liste;
-    while (array_a[i] != smallest_a)
+    while (ptr_a->data != smallest_a && ptr_a != NULL)
+    {
+        ptr_a = ptr_a->link;
         i++;
-    if (i < ((len_a) / 2))
+    }   
+    if (i < (count_of_nodes(a_liste) / 2))
         checker_rotate = 0;
     else
         checker_rotate = 1;
+    ptr_a = *a_liste;
     while (ptr_a->data != smallest_a)
     {
         if (checker_rotate == 0)
@@ -398,12 +402,7 @@ int    minimum_sorting(struct s_node **a_liste, struct s_node **b_liste, int sma
         free(values_b);
         ptr_b = *b_liste;
     }
-    array_a = (int *)malloc((count_of_nodes(a_liste)) * sizeof(int));
-    if (!array_a)
-        return(0);
-    len_a = current_a(a_liste, array_a);
-    final_order(a_liste, smallest_a, array_a, len_a);
-    free(array_a);
+    final_order(a_liste, smallest_a);
     //print_stack(a_liste);
     return(0);
 }

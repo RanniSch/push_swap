@@ -6,7 +6,7 @@
 /*   By: rschlott <rschlott@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/31 09:11:10 by rschlott          #+#    #+#             */
-/*   Updated: 2022/10/30 10:19:35 by rschlott         ###   ########.fr       */
+/*   Updated: 2022/10/30 17:12:24 by rschlott         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,7 @@ int 	anti_subsequence(struct s_node **a_liste, int *array_lis, int *anti_lis, in
 void    only_subsequence_in_a(struct s_node **a_liste, struct s_node **b_liste, int *array_lis, int len_lis);
 
 /* minimum sorting value to put a number from b to a */
-void    final_order(struct s_node **a_liste, int smallest_a, int *array_a, int len_a);
+void    final_order(struct s_node **a_liste, int smallest_a);
 int     minimum_sorting(struct s_node **a_liste, struct s_node **b_liste, int smallest_a);
 void    runs_smallest(struct s_node **a_liste, struct s_node **b_liste, int checker_b, unsigned int index, int *array_a, int len_a, int checker_a);
 int     sorting_position_a(int *array_a, int len_a, struct s_node **b_liste, int index);
@@ -91,10 +91,16 @@ int     min(struct s_node **b_liste, int *values_b);
 int     little_input(struct s_node **a_liste, struct s_node **b_liste, int smallest_a);
 int     sorted_numbers(struct s_node **a_liste);
 void    three_arguments(struct s_node **a_liste, int *array_a, int len_a);
-void    four_arguments(struct s_node **a_liste, struct s_node **b_liste, int *array_a);
+void    run_four_arguments(struct s_node **a_liste, struct s_node **b_liste, int *array_a);
+int     four_arguments(struct s_node **a_liste, struct s_node **b_liste);
 void    two_arguments(struct s_node **a_liste);
-int     five_arguments(struct s_node **a_liste, struct s_node **b_liste);
+void    best_num_b(struct s_node **b_liste, unsigned int index);
+void    sorting_normal_num(struct s_node **a_liste, struct s_node **b_liste, int *array_a, int checker_a);
+void    sorting_smallest_num(struct s_node **a_liste, struct s_node **b_liste, int *array_a, int checker_a);
+void    sorting_biggest_num(struct s_node **a_liste, struct s_node **b_liste, int *array_a, int checker_a);
+int     five_arguments(struct s_node **a_liste, struct s_node **b_liste, int smallest_a);
+void    run_five_arguments(struct s_node **a_liste, struct s_node **b_liste, int *array_a, int *values_b);
 void    shorten_stack_a(struct s_node **a_liste, struct s_node **b_liste);
-void    sorting_two_nums(struct s_node **a_liste, struct s_node **b_liste, unsigned int index, int *array_a, int len_a, int checker_a);
+void    sorting_five_args_one(struct s_node **a_liste, struct s_node **b_liste, int *array_a, int len_a, int checker_a);
 
 #endif
