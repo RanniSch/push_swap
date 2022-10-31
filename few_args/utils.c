@@ -6,11 +6,11 @@
 /*   By: rschlott <rschlott@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/30 17:31:56 by rschlott          #+#    #+#             */
-/*   Updated: 2022/10/30 17:36:23 by rschlott         ###   ########.fr       */
+/*   Updated: 2022/10/31 05:01:17 by rschlott         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#include "../push_swap.h"
 
 int	sorted_numbers(struct s_node **a_liste)
 {
@@ -48,6 +48,7 @@ int	little_input(struct s_node **a_liste, struct s_node **b_liste,
 {
 	int	*array_a;
 	int	len_a;
+	int	count;
 
 	if (count_of_nodes(a_liste) == 2)
 		two_arguments(a_liste);
@@ -55,6 +56,7 @@ int	little_input(struct s_node **a_liste, struct s_node **b_liste,
 	{
 		if (sorted_numbers(a_liste) == 0)
 		{
+			count = count_of_nodes(a_liste);
 			shorten_stack_a(a_liste, b_liste);
 			array_a = (int *)malloc((count_of_nodes(a_liste)) * sizeof(int));
 			if (!array_a)
@@ -62,9 +64,9 @@ int	little_input(struct s_node **a_liste, struct s_node **b_liste,
 			len_a = current_a(a_liste, array_a);
 			three_arguments(a_liste, array_a, len_a);
 			free(array_a);
-			if (count_of_nodes(b_liste) == 1)
+			if (count == 4)
 				four_arguments(a_liste, b_liste);
-			else if (count_of_nodes(b_liste) == 2)
+			if (count == 5)
 				five_arguments(a_liste, b_liste, smallest_a);
 		}
 	}

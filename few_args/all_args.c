@@ -6,11 +6,11 @@
 /*   By: rschlott <rschlott@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/23 18:04:11 by rschlott          #+#    #+#             */
-/*   Updated: 2022/10/30 17:52:17 by rschlott         ###   ########.fr       */
+/*   Updated: 2022/10/31 05:04:42 by rschlott         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#include "../push_swap.h"
 
 void	two_arguments(struct s_node **a_liste)
 {
@@ -23,22 +23,22 @@ void	two_arguments(struct s_node **a_liste)
 
 void	three_arguments(struct s_node **a_liste, int *array_a, int len_a)
 {
-	if (array_a[len_a - 3] > array_a[len_a - 2] && array_a[len_a
-		- 2] > array_a[len_a - 1])
+	if (array_a[len_a - 3] > array_a[len_a - 2]
+		&& array_a[len_a - 2] > array_a[len_a - 1])
 	{
 		swap_a(a_liste);
 		reverse_rotate_a(a_liste);
 	}
-	if (array_a[len_a - 3] > array_a[len_a - 2] && array_a[len_a
-		- 2] < array_a[len_a - 1])
+	if (array_a[len_a - 3] > array_a[len_a - 2]
+		&& array_a[len_a - 2] < array_a[len_a - 1])
 	{
 		if (array_a[len_a - 3] > array_a[len_a - 1])
 			rotate_a(a_liste);
 		else
 			swap_a(a_liste);
 	}
-	if (array_a[len_a - 3] < array_a[len_a - 2] && array_a[len_a
-		- 2] > array_a[len_a - 1])
+	if (array_a[len_a - 3] < array_a[len_a - 2]
+		&& array_a[len_a - 2] > array_a[len_a - 1])
 	{
 		reverse_rotate_a(a_liste);
 		if (array_a[len_a - 3] < array_a[len_a - 1])

@@ -6,11 +6,11 @@
 /*   By: rschlott <rschlott@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/30 17:20:48 by rschlott          #+#    #+#             */
-/*   Updated: 2022/10/30 17:38:50 by rschlott         ###   ########.fr       */
+/*   Updated: 2022/10/31 05:03:12 by rschlott         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#include "../push_swap.h"
 
 void	best_num_b(struct s_node **b_liste, unsigned int index)
 {
@@ -83,8 +83,8 @@ void	sorting_biggest_num(struct s_node **a_liste, struct s_node **b_liste,
 	ptr_b = *b_liste;
 	if (checker_a == 5)
 	{
-		while (!(ptr_b->data > array_a[len_a - 1] && array_a[0] < array_a[len_a
-				- 1]))
+		while (!(ptr_b->data > array_a[len_a - 1]
+				&& array_a[0] < array_a[len_a - 1]))
 		{
 			rotate_a(a_liste);
 			rotate_array_a(array_a, len_a);
@@ -92,8 +92,8 @@ void	sorting_biggest_num(struct s_node **a_liste, struct s_node **b_liste,
 	}
 	if (checker_a == 6)
 	{
-		while (!(ptr_b->data > array_a[len_a - 1] && array_a[0] < array_a[len_a
-				- 1]))
+		while (!(ptr_b->data > array_a[len_a - 1]
+				&& array_a[0] < array_a[len_a - 1]))
 		{
 			reverse_rotate_a(a_liste);
 			reverse_rotate_array_a(array_a, len_a);
