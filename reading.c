@@ -6,22 +6,18 @@
 /*   By: rschlott <rschlott@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/28 13:23:03 by rschlott          #+#    #+#             */
-/*   Updated: 2022/10/31 05:22:15 by rschlott         ###   ########.fr       */
+/*   Updated: 2022/11/01 07:22:29 by rschlott         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
 /* adds a new node to the list */
-int	add_at_end(struct s_node **a_liste, int data)
+int	add_at_end(struct s_node **a_liste, struct s_node *current, int data)
 {
 	struct s_node *ptr_a;
-    struct s_node *current;
 
     ptr_a = *a_liste;
-	current = (struct s_node *)malloc(sizeof(struct s_node));
-	if (!current)
-		return(0);
 	current->data = data;
 	current->link = NULL;
 	if (ptr_a != NULL)
@@ -93,30 +89,55 @@ void	print_stack(struct s_node **liste)
 	printf("\n"); // noch weg!!!
 }
 
-/* receiving arguments from user input. argc zählt den ersten String in argv mit und der ist immer ./a.out */
-void	stack_receive(int argc, char **argv, struct s_node **a_liste)
+/* runs all functions if number of arguments are 2-5 or > 5 */
+void	run_sorting_process(struct s_node **a_liste, struct s_node **b_liste)
 {
-	struct s_node	*ptr;
+	int	smallest_a;
+	
+	smallest_a = smallest_in_a(a_liste);
+	//printf("drin\n");
+    if (count_of_nodes(a_liste) >= 2 && count_of_nodes(a_liste) <= 5)
+        little_input(a_liste, b_liste, smallest_a);
+    else
+    {
+        set_index(a_liste);
+	    lis_process(a_liste, b_liste, count_of_nodes(a_liste));
+	    minimum_sorting(a_liste, b_liste, smallest_a);
+    }
+}
+
+/* receiving arguments from user input. argc zählt den ersten String in argv mit und der ist immer ./a.out */
+int		stack_receive(int argc, char **argv, struct s_node **a_liste, struct s_node **b_liste)
+{
+	struct s_node	*current;
+	//struct s_node	*ptr_a;
 	int				i;
 
 	i = 1;
-	if (argc >= 2)
+	if (argc < 2)
+		exit(0);
+	while (i < argc)
 	{
-		while (i < argc)
+		current = (struct s_node *)malloc(sizeof(struct s_node));
+		if (!current)
+			return(0);
+		if (!error_manager_int(argv[i]) || !error_manager_outta_int(argv[i]))
 		{
-			error_manager_int(argv[i]);
-			add_at_end(a_liste, ft_atoi(argv[i]));
-			i++;
-		}
-		ptr = *a_liste;
-		if (ptr->link == NULL)
+			free(current);
 			exit(0);
-		error_manager_duplicate(a_liste);
+		}
+		add_at_end(a_liste, current, ft_atoi(argv[i]));
+		i++;
 	}
-	else
+	current = *a_liste;
+	if (current->link == NULL || !error_manager_duplicate(a_liste))
 	{
+		free(current);
 		exit(0);
 	}
+	run_sorting_process(a_liste, b_liste);
+	free(current);
+	return(0);
 }
 
 /* identifies the smallest number in Stack a after receiving arguments. */

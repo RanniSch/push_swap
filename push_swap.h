@@ -6,7 +6,7 @@
 /*   By: rschlott <rschlott@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/31 09:11:10 by rschlott          #+#    #+#             */
-/*   Updated: 2022/10/31 04:24:49 by rschlott         ###   ########.fr       */
+/*   Updated: 2022/11/01 06:41:40 by rschlott         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 # include <stdio.h>
 # include <stdlib.h>
 # include <unistd.h>
+# include <stdbool.h>
 
 /* defines the data structure; in front needs to be typedef to declare the data type */
 typedef struct s_node
@@ -32,17 +33,19 @@ typedef struct s_node
 }               t_program;*/
 
 /* reading */
-int     add_at_end(struct s_node **a_liste, int data);
+int     add_at_end(struct s_node **a_liste, struct s_node *current, int data);
 void    set_index(struct s_node **a_liste);
 int     count_of_nodes(struct s_node **liste);
 void    print_stack(struct s_node **liste);
-void    stack_receive(int argc, char **argv, struct s_node **a_liste);
+void	run_sorting_process(struct s_node **a_liste, struct s_node **b_liste);
+int		stack_receive(int argc, char **argv, struct s_node **a_liste, struct s_node **b_liste);
 int     smallest_in_a(struct s_node **a_liste);
 int     biggest_in_a(struct s_node **a_liste);
 
 /* error manager */
-void    error_manager_int(const char *str);
-void    error_manager_duplicate(struct s_node **a_liste);
+bool	error_manager_int(const char *str);
+bool	error_manager_duplicate(struct s_node **a_liste);
+bool	error_manager_outta_int(const char *str);
 int     ft_atoi(const char *str);
 
 /* operations */
@@ -98,7 +101,7 @@ void	sorting_smallest_num(struct s_node **a_liste, struct s_node **b_liste, int 
 void	sorting_biggest_num(struct s_node **a_liste, struct s_node **b_liste, int *array_a, int checker_a);
 void	run_five_arguments(struct s_node **a_liste, struct s_node **b_liste, int *array_a, int *values_b);
 int     five_arguments(struct s_node **a_liste, struct s_node **b_liste, int smallest_a);
-int     sorted_numbers(struct s_node **a_liste);
+bool	sorted_numbers(struct s_node **a_liste);
 void	shorten_stack_a(struct s_node **a_liste, struct s_node **b_liste);
 int     little_input(struct s_node **a_liste, struct s_node **b_liste, int smallest_a);
 
