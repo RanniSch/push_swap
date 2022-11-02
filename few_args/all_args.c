@@ -6,7 +6,7 @@
 /*   By: rschlott <rschlott@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/23 18:04:11 by rschlott          #+#    #+#             */
-/*   Updated: 2022/10/31 05:04:42 by rschlott         ###   ########.fr       */
+/*   Updated: 2022/11/02 07:24:09 by rschlott         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,13 +47,13 @@ void	three_arguments(struct s_node **a_liste, int *array_a, int len_a)
 }
 
 void	run_four_arguments(struct s_node **a_liste, struct s_node **b_liste,
-		int *array_a)
+		int *array_a, int len_a)
 {
 	struct s_node	*ptr_b;
-	int				biggest_a;
+	int				limit;
 
 	ptr_b = *b_liste;
-	biggest_a = biggest_in_a(a_liste);
+	limit = max_limit_checker(array_a, len_a, ptr_b->data);
 	if (ptr_b->data > array_a[1] && ptr_b->data < array_a[2])
 	{
 		reverse_rotate_a(a_liste);
@@ -63,7 +63,7 @@ void	run_four_arguments(struct s_node **a_liste, struct s_node **b_liste,
 	}
 	else
 		push_to_a(a_liste, b_liste);
-	if (ptr_b->data > biggest_a)
+	if (limit == 2)
 		rotate_a(a_liste);
 	if (ptr_b->data > array_a[0] && ptr_b->data < array_a[1])
 		swap_a(a_liste);
@@ -72,12 +72,13 @@ void	run_four_arguments(struct s_node **a_liste, struct s_node **b_liste,
 int	four_arguments(struct s_node **a_liste, struct s_node **b_liste)
 {
 	int	*array_a;
+	int	len_a;
 
 	array_a = (int *)malloc((count_of_nodes(a_liste)) * sizeof(int));
 	if (!array_a)
 		return (0);
-	current_a(a_liste, array_a);
-	run_four_arguments(a_liste, b_liste, array_a);
+	len_a = current_a(a_liste, array_a);
+	run_four_arguments(a_liste, b_liste, array_a, len_a);
 	free(array_a);
 	return (0);
 }

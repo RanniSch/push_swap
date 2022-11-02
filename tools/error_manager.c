@@ -6,7 +6,7 @@
 /*   By: rschlott <rschlott@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/09 06:13:46 by rschlott          #+#    #+#             */
-/*   Updated: 2022/11/01 06:38:41 by rschlott         ###   ########.fr       */
+/*   Updated: 2022/11/02 07:26:00 by rschlott         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,28 +89,4 @@ bool	error_manager_outta_int(const char *str)
 		}
 	}
 	return (true);
-}
-
-/* modified with checker if arguments are bigger than an integer */
-int	ft_atoi(const char *str)
-{
-	int			sign;
-	long int	convert;
-
-	sign = 1;
-	convert = 0;
-	while (*str == 32 || (*str >= 9 && *str <= 13))
-		str++;
-	if (*str == '-' || *str == '+')
-	{
-		if (*str == '-')
-			sign = sign * (-1);
-		str++;
-	}
-	while (*str && *str > 47 && *str < 58)
-	{
-		convert = (convert * 10) + *str - '0';
-		str++;
-	}
-	return (convert * sign);
 }

@@ -6,11 +6,35 @@
 /*   By: rschlott <rschlott@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/28 13:23:03 by rschlott          #+#    #+#             */
-/*   Updated: 2022/11/01 07:22:29 by rschlott         ###   ########.fr       */
+/*   Updated: 2022/11/02 07:25:09 by rschlott         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
+
+/* modified for only changing char to int */
+int	ft_atoi(const char *str)
+{
+	int			sign;
+	long int	convert;
+
+	sign = 1;
+	convert = 0;
+	while (*str == 32 || (*str >= 9 && *str <= 13))
+		str++;
+	if (*str == '-' || *str == '+')
+	{
+		if (*str == '-')
+			sign = sign * (-1);
+		str++;
+	}
+	while (*str && *str > 47 && *str < 58)
+	{
+		convert = (convert * 10) + *str - '0';
+		str++;
+	}
+	return (convert * sign);
+}
 
 /* adds a new node to the list */
 int	add_at_end(struct s_node **a_liste, struct s_node *current, int data)
@@ -106,11 +130,28 @@ void	run_sorting_process(struct s_node **a_liste, struct s_node **b_liste)
     }
 }
 
+/* deletes the whole list from head until NULL */
+void	del_list(struct s_node **a_liste)
+{
+	struct s_node *ptr_a;
+	struct s_node *temp;
+
+	ptr_a = *a_liste;
+	temp = *a_liste;
+	while (ptr_a != NULL)
+	{
+		temp = ptr_a;
+		ptr_a = ptr_a->link;
+		free(temp);
+	}
+	free(ptr_a);
+}
+
 /* receiving arguments from user input. argc zählt den ersten String in argv mit und der ist immer ./a.out */
 int		stack_receive(int argc, char **argv, struct s_node **a_liste, struct s_node **b_liste)
 {
 	struct s_node	*current;
-	//struct s_node	*ptr_a;
+	struct s_node	*ptr_a;
 	int				i;
 
 	i = 1;
@@ -124,19 +165,22 @@ int		stack_receive(int argc, char **argv, struct s_node **a_liste, struct s_node
 		if (!error_manager_int(argv[i]) || !error_manager_outta_int(argv[i]))
 		{
 			free(current);
+			del_list(a_liste);
 			exit(0);
 		}
 		add_at_end(a_liste, current, ft_atoi(argv[i]));
 		i++;
 	}
-	current = *a_liste;
-	if (current->link == NULL || !error_manager_duplicate(a_liste))
+	ptr_a = *a_liste;
+	if (ptr_a->link == NULL || !error_manager_duplicate(a_liste))
 	{
-		free(current);
+		del_list(a_liste);
+		//free(current);
 		exit(0);
 	}
 	run_sorting_process(a_liste, b_liste);
-	free(current);
+	del_list(a_liste);
+	//free(current);
 	return(0);
 }
 
