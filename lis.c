@@ -6,7 +6,7 @@
 /*   By: rschlott <rschlott@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/23 13:23:47 by rschlott          #+#    #+#             */
-/*   Updated: 2022/11/02 08:01:17 by rschlott         ###   ########.fr       */
+/*   Updated: 2022/11/02 17:47:09 by rschlott         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,12 +30,12 @@ int	max(int *length, unsigned int len)
 
 /* creates an array "length" and fills it with ones. Creates an array "subsequence" and fills it with zeroes.
 Both have the same size as the list. */
-void	length_initializer_lis(int *subsequence, int *length, struct s_node **a_liste)
+void	length_initializer_lis(int *subsequence, int *length, int count)
 {
 	int	i;
 
 	i = 0;
-	while (i < count_of_nodes(a_liste))
+	while (i < count)
 	{
 		subsequence[i] = 0;
 		length[i] = 1;
@@ -96,20 +96,20 @@ int	correct_subsequence(struct s_node **a_liste, int *subsequence, int *length, 
 	int				biggest_num;
 	struct s_node	*ptr;
 	int				i;
-	int				len_lis;
+	int				lis_index;
 
 	ptr = *a_liste;
 	i = 0;
-	len_lis = 0;
+	lis_index = 0;
 	biggest_num = max(length, count_of_nodes(a_liste));
 	while (length[ptr->index] != biggest_num)
 	{
 		ptr = ptr->link;
 		i++;
 	}
-	array_lis[len_lis] = ptr->data;
-	//printf("array: %d\n", array_lis[len_lis]);
-	len_lis++;
+	array_lis[lis_index] = ptr->data;
+	//printf("array: %d\n", array_lis[lis_index]);
+	lis_index++;
 	while (ptr->index != 0 && length[ptr->index] != 1)
 	{
 		ptr = *a_liste;
@@ -118,43 +118,43 @@ int	correct_subsequence(struct s_node **a_liste, int *subsequence, int *length, 
 		i = 0;
 		while (i < ptr->index)
 			i++;
-		array_lis[len_lis] = ptr->data;
-		//printf("array: %d\n", array_lis[len_lis]);
-		len_lis++;
+		array_lis[lis_index] = ptr->data;
+		//printf("array: %d\n", array_lis[lis_index]);
+		lis_index++;
 	}
 	//free (subsequence);
 	//free (length);
-	return (len_lis);
+	return (lis_index - 1);
 }
 
 /* Uses rotate and push until all numbers that are not in the lis are in stack b */
-void	only_subsequence_in_a(struct s_node **a_liste, struct s_node **b_liste, int *array_lis, int len_lis)
+void	only_subsequence_in_a(struct s_node **a_liste, struct s_node **b_liste, int *array_lis, int lis_index)
 {
 	struct s_node *ptr_a;
     int count;
-	int len_anti;
+	//int	anti_index;
 
 	ptr_a = *a_liste;
     count = count_of_nodes(a_liste);
-	len_anti = count - len_lis;
-	while (count > 0 && len_anti > 0)
+	//anti_index = (count - 1) - lis_index;
+	while (ptr_a->link != NULL && count > 0 && lis_index >= 0)
 	{
-		if (ptr_a->data == array_lis[len_lis - 1])
+		if (ptr_a->data == array_lis[lis_index])
 		{
-			rotate_a(a_liste);
-			len_lis--;
+			if (lis_index > count / 2)
+				reverse_rotate_a(a_liste);
+			else
+				rotate_a(a_liste);
+			lis_index--;
 		}
 		else
-        {
-            push_to_b(a_liste, b_liste);
-			len_anti--;
-        }
+        {    
+			push_to_b(a_liste, b_liste);
+			//anti_index--;
+		}
 		count--;
 		ptr_a = *a_liste;
 	}
-	//free (array_lis);
-	//print_stack(a_liste);
-	//print_stack(b_liste);
 }
 
 /* runs the functions in the correct order. */
@@ -163,8 +163,7 @@ int	lis_process(struct s_node **a_liste, struct s_node **b_liste, int count)
 	int	*subsequence;
 	int *length;
 	int	*array_lis;
-    int len_lis;
-	//int	*anti_lis;
+    int lis_index;
     
 	subsequence = (int *)malloc(count * sizeof(int));
 	if (subsequence == NULL)
@@ -175,48 +174,15 @@ int	lis_process(struct s_node **a_liste, struct s_node **b_liste, int count)
 	array_lis = (int *)malloc(count * sizeof(int));
 	if (array_lis == NULL)
 		return(0);
-	//anti_lis = (int *)malloc(count * sizeof(int));
-	//if (anti_lis == NULL)
-		//return(NULL);
-	length_initializer_lis(subsequence, length, a_liste);
+	length_initializer_lis(subsequence, length, count);
 	longest_increasing_subsequence(a_liste, subsequence, length);
-	len_lis = correct_subsequence(a_liste, subsequence, length, array_lis);
+	lis_index = correct_subsequence(a_liste, subsequence, length, array_lis);
 	free (subsequence);
 	free (length);
-	//anti_subsequence(a_liste, array_lis, anti_lis, len_lis);
-	only_subsequence_in_a(a_liste, b_liste, array_lis, len_lis);
+	only_subsequence_in_a(a_liste, b_liste, array_lis, lis_index);
 	free(array_lis);
 	return(0);
 }
-
-/* Uses rotate and push until all numbers that are not in the lis are in stack b. It works but needs more operations. 
-void	only_subsequence_in_a(struct s_node **a_liste, struct s_node **b_liste, int *array_lis, int len_lis)
-{
-	struct s_node *ptr_a;
-    int count;
-
-	ptr_a = *a_liste;
-    count = count_of_nodes(a_liste);
-	while (count > 0)
-	{
-		//printf("count: %d\n", count);
-		if (ptr_a->data == array_lis[len_lis])
-		{
-			rotate_a(a_liste);
-			len_lis--;
-            count--;
-		}
-		else
-        {
-            push_to_b(a_liste, b_liste);
-            count--;
-        }
-		ptr_a = *a_liste;
-	}
-	free (array_lis);
-	print_stack(a_liste);
-	print_stack(b_liste);
-}*/
 
 /* puts all numbers that are not in the lis in the array anti_lis. Function works, but I don't need it!
 int	anti_subsequence(struct s_node **a_liste, int *array_lis, int *anti_lis, int len_lis)

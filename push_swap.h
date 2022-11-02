@@ -6,7 +6,7 @@
 /*   By: rschlott <rschlott@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/31 09:11:10 by rschlott          #+#    #+#             */
-/*   Updated: 2022/11/02 07:50:04 by rschlott         ###   ########.fr       */
+/*   Updated: 2022/11/02 16:55:12 by rschlott         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ void    swap_array_a(int *array_a);
 
 /* longest increasing subsequence */
 int		max(int *length, unsigned int len);
-void    length_initializer_lis(int *subsequence, int *length, struct s_node **a_liste);
+void	length_initializer_lis(int *subsequence, int *length, int count);
 int     lis_process(struct s_node **a_liste, struct s_node **b_liste, int count);
 void    longest_increasing_subsequence(struct s_node **a_liste, int *subsequence, int *length);
 int     correct_subsequence(struct s_node **a_liste, int *subsequence, int *length, int *array_lis);
