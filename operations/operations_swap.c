@@ -6,11 +6,11 @@
 /*   By: rschlott <rschlott@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/22 13:44:09 by rschlott          #+#    #+#             */
-/*   Updated: 2022/10/10 08:05:45 by rschlott         ###   ########.fr       */
+/*   Updated: 2022/11/03 06:44:27 by rschlott         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#include "../push_swap.h"
 
 /* swap function: Swap the first two elements at the top of the stack */
 void	swap_elements(struct s_node **liste)
@@ -22,15 +22,9 @@ void	swap_elements(struct s_node **liste)
 	ptr_to_head = *liste;
 	temp1 = ptr_to_head->link;
 	temp2 = temp1->link;
-	// später error handling an eigener Stelle; head = NULL abbruch; count = 1 ausdrucken
-    if (*liste != NULL && count_of_nodes(liste) > 1)
-	{
-		*liste = temp1;
-		ptr_to_head->link = temp2; // 2000 link wird zu 3000 link
-		temp1->link = ptr_to_head; // 3000 link wird zu 1000 link
-	}
-	else
-		write(1, "Error\n", 6);
+	*liste = temp1;
+	ptr_to_head->link = temp2;
+	temp1->link = ptr_to_head;
 }
 
 /* Swaps the first two elements at the top of a */

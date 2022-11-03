@@ -6,7 +6,7 @@
 /*   By: rschlott <rschlott@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/13 06:33:00 by rschlott          #+#    #+#             */
-/*   Updated: 2022/10/30 17:13:56 by rschlott         ###   ########.fr       */
+/*   Updated: 2022/11/03 05:39:09 by rschlott         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -397,11 +397,13 @@ int    minimum_sorting(struct s_node **a_liste, struct s_node **b_liste, int sma
         //printf("index %d\n", index);
         checker_a = sorting_position_a(array_a, len_a, b_liste, index);
         //printf("checker_a %d b %d\n", checker_a, ptr_b->data);
+        //(void) checker_b;
         runs_smallest(a_liste, b_liste, checker_b, index, array_a, len_a, checker_a);
         free(array_a);
         free(values_b);
         ptr_b = *b_liste;
     }
+    //(void) smallest_a;
     final_order(a_liste, smallest_a);
     //print_stack(a_liste);
     return(0);

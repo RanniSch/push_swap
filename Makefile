@@ -6,7 +6,7 @@
 #    By: rschlott <rschlott@student.42wolfsburg.de> +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/09/23 13:34:43 by rschlott          #+#    #+#              #
-#    Updated: 2022/10/31 04:57:11 by rschlott         ###   ########.fr        #
+#    Updated: 2022/11/03 06:54:52 by rschlott         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,13 +24,15 @@ SRCS		:=	./tools/main.c	\
 				./few_args/all_args.c	\
 				./few_args/utils.c	\
 				./few_args/five_args_utils.c	\
-				lis.c	\
-				operations_swap.c	\
-				operations_push.c	\
-				operations_rev_rotate.c	\
-				operations_rotate.c	\
-				minimum_sorting.c	\
-				array_operations.c			
+				./longest_increasing_subsequence/lis_utils.c	\
+				./longest_increasing_subsequence/lis.c	\
+				./operations/operations_swap.c	\
+				./operations/operations_push.c	\
+				./operations/operations_rev_rotate.c	\
+				./operations/operations_rotate.c	\
+				./operations/array_operations.c	\
+				minimum_sorting.c
+							
 
 OBJS		:= ${SRCS:.c=.o}
 

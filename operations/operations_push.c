@@ -6,15 +6,13 @@
 /*   By: rschlott <rschlott@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/10 06:36:09 by rschlott          #+#    #+#             */
-/*   Updated: 2022/10/10 08:05:38 by rschlott         ###   ########.fr       */
+/*   Updated: 2022/11/03 06:44:01 by rschlott         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#include "../push_swap.h"
 
-/*  Take the first argument at the top of one stack and put it at the top of the other stack. Do nothing if first stack is empty. 
-    For pushing there is a source list and a destination list. When the source list is empty -> error 
-    When destination list is empty -> new node; If it is not empty, adding element to the top. */
+/* Takes first arg at top of one stack and puts it at top of other stack. */
 void	push_first_element(struct s_node **src, struct s_node **dest)
 {
 	struct s_node	*ptr_to_head;
@@ -24,8 +22,6 @@ void	push_first_element(struct s_node **src, struct s_node **dest)
 	ptr_to_head = *src;
 	ptr_dest = *dest;
 	temp = ptr_to_head;
-	//if (ptr_src = NULL)
-	//    ft_error();
 	*src = ptr_to_head->link;
 	if (ptr_dest != NULL)
 	{

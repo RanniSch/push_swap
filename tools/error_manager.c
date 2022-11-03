@@ -6,7 +6,7 @@
 /*   By: rschlott <rschlott@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/09 06:13:46 by rschlott          #+#    #+#             */
-/*   Updated: 2022/11/02 07:26:00 by rschlott         ###   ########.fr       */
+/*   Updated: 2022/11/03 06:48:56 by rschlott         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,18 +22,18 @@ bool	error_manager_int(const char *str)
 	if (*str == '-' || *str == '+')
 	{
 		write(1, "Error\n", 6);
-		return(false);
+		return (false);
 	}
 	while (*str != '\0')
 	{
 		if (!(*str > 47 && *str < 58))
 		{
 			write(1, "Error\n", 6);
-			return(false);
+			return (false);
 		}
 		str++;
 	}
-	return(true);
+	return (true);
 }
 
 /* checks if arguments are duplicates */
@@ -51,7 +51,7 @@ bool	error_manager_duplicate(struct s_node **a_liste)
 			if (ptr->data == next->data)
 			{
 				write(1, "Error\n", 6);
-				return(false);
+				return (false);
 			}
 			else
 				next = next->link;
@@ -59,7 +59,7 @@ bool	error_manager_duplicate(struct s_node **a_liste)
 		ptr = ptr->link;
 		next = ptr->link;
 	}
-	return(true);
+	return (true);
 }
 
 /* checks if arguments are smaller or bigger than an int */
@@ -82,10 +82,11 @@ bool	error_manager_outta_int(const char *str)
 	{
 		convert = (convert * 10) + *str - '0';
 		str++;
-		if ((convert > 2147483647 && sign == 1) || (convert > 2147483648 && sign == -1))
+		if ((convert > 2147483647 && sign == 1) || (convert > 2147483648
+				&& sign == -1))
 		{
 			write(1, "Error\n", 6);
-			return(false);
+			return (false);
 		}
 	}
 	return (true);

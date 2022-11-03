@@ -6,13 +6,13 @@
 /*   By: rschlott <rschlott@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/10 07:06:25 by rschlott          #+#    #+#             */
-/*   Updated: 2022/10/10 08:05:43 by rschlott         ###   ########.fr       */
+/*   Updated: 2022/11/03 06:44:15 by rschlott         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#include "../push_swap.h"
 
-/* rotate function: Shift up all elements of the stack by 1. The first element becomes the last one */
+/* rotate function: The first element becomes the last one */
 void	rotate_elements(struct s_node **liste)
 {
 	struct s_node	*temp1;
@@ -24,20 +24,14 @@ void	rotate_elements(struct s_node **liste)
 	temp2 = ptr_to_head;
 	temp1 = temp2->link;
 	i = 1;
-	// später error handling an eigener Stelle; head = NULL abbruch; count = 1 ausdrucken
-    if (*liste != NULL && count_of_nodes(liste) > 1)
+	*liste = temp1;
+	while (i <= count_of_nodes(liste))
 	{
-		*liste = temp1;
-		while (i <= count_of_nodes(liste))
-		{
-			temp2 = temp2->link;
-			i++;
-		}
-		temp2->link = ptr_to_head; // letzter link wird zum ersten Link
-		ptr_to_head->link = NULL;  // erster link wird zu NULL
+		temp2 = temp2->link;
+		i++;
 	}
-	else
-		write(1, "Error\n", 6);
+	temp2->link = ptr_to_head;
+	ptr_to_head->link = NULL;
 }
 
 /* rotates a. The first element becomes the last */
