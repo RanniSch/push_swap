@@ -6,7 +6,7 @@
 /*   By: rschlott <rschlott@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/31 09:11:10 by rschlott          #+#    #+#             */
-/*   Updated: 2022/11/03 08:01:20 by rschlott         ###   ########.fr       */
+/*   Updated: 2022/11/03 15:35:40 by rschlott         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,12 +82,14 @@ void	only_subsequence_in_a(struct s_node **a_liste, struct s_node **b_liste, int
 /* minimum sorting value to put a number from b to a */
 void    final_order(struct s_node **a_liste, int smallest_a);
 int     minimum_sorting(struct s_node **a_liste, struct s_node **b_liste, int smallest_a);
-void    runs_smallest(struct s_node **a_liste, struct s_node **b_liste, int checker_b, unsigned int index, int *array_a, int len_a, int checker_a);
+bool    location_value_b(struct s_node **b_liste, int *values_b, int smallest);
+void    best_b(struct s_node **b_liste, int *values_b, int smallest, int index);
+void    the_process(struct s_node **a_liste, struct s_node **b_liste, int *array_a, int *values_b);
+void    runs_smallest(struct s_node **a_liste, struct s_node **b_liste, int *array_a, int len_a, int checker_a);
 int     sorting_position_a(int *array_a, int len_a, struct s_node **b_liste, int index);
 int     index_value(int *values_b, int smallest);
-int     location_value(struct s_node **b_liste, int *values_b, int smallest);
-int     min_limit_checker(int *array_a, unsigned int len_a, int b_data);
-int     max_limit_checker(int *array_a, unsigned int len_a, int b_data);
+bool	min_limit_checker(int *array_a, unsigned int len_a, int b_data);
+bool    max_limit_checker(int *array_a, unsigned int len_a, int b_data);
 void    get_smallest(int *array_a, int len_a, struct s_node **b_liste, int *values_b);
 int     current_a(struct s_node **a_liste, int *array_a);
 int     min(struct s_node **b_liste, int *values_b);
