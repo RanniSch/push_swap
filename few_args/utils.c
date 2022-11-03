@@ -6,7 +6,7 @@
 /*   By: rschlott <rschlott@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/30 17:31:56 by rschlott          #+#    #+#             */
-/*   Updated: 2022/11/02 07:23:50 by rschlott         ###   ########.fr       */
+/*   Updated: 2022/11/03 06:24:37 by rschlott         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ bool	sorted_numbers(struct s_node **a_liste)
 	}
 	i++;
 	if (i == count_of_nodes(a_liste))
-		return(true);
+		return (true);
 	return (false);
 }
 
