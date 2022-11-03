@@ -6,7 +6,7 @@
 /*   By: rschlott <rschlott@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/28 13:23:03 by rschlott          #+#    #+#             */
-/*   Updated: 2022/11/02 07:25:09 by rschlott         ###   ########.fr       */
+/*   Updated: 2022/11/03 08:08:06 by rschlott         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,7 +119,6 @@ void	run_sorting_process(struct s_node **a_liste, struct s_node **b_liste)
 	int	smallest_a;
 	
 	smallest_a = smallest_in_a(a_liste);
-	//printf("drin\n");
     if (count_of_nodes(a_liste) >= 2 && count_of_nodes(a_liste) <= 5)
         little_input(a_liste, b_liste, smallest_a);
     else
@@ -147,17 +146,17 @@ void	del_list(struct s_node **a_liste)
 	free(ptr_a);
 }
 
-/* receiving arguments from user input. argc zählt den ersten String in argv mit und der ist immer ./a.out */
+/* receiving arguments from user input. argc counts first string of argv (./a.out) as well */
 int		stack_receive(int argc, char **argv, struct s_node **a_liste, struct s_node **b_liste)
 {
 	struct s_node	*current;
 	struct s_node	*ptr_a;
 	int				i;
 
-	i = 1;
+	i = 0;
 	if (argc < 2)
 		exit(0);
-	while (i < argc)
+	while (++i < argc)
 	{
 		current = (struct s_node *)malloc(sizeof(struct s_node));
 		if (!current)
@@ -169,18 +168,11 @@ int		stack_receive(int argc, char **argv, struct s_node **a_liste, struct s_node
 			exit(0);
 		}
 		add_at_end(a_liste, current, ft_atoi(argv[i]));
-		i++;
 	}
 	ptr_a = *a_liste;
-	if (ptr_a->link == NULL || !error_manager_duplicate(a_liste))
-	{
-		del_list(a_liste);
-		//free(current);
-		exit(0);
-	}
+	ft_more_exit(a_liste, ptr_a);
 	run_sorting_process(a_liste, b_liste);
 	del_list(a_liste);
-	//free(current);
 	return(0);
 }
 
@@ -194,7 +186,6 @@ int	smallest_in_a(struct s_node **a_liste)
     if (!array_a)
 		return(0);
 	current_a(a_liste, array_a);
-	//printf("len a %d\n", len_a);
 	smallest_num = min(a_liste, array_a);
 	free(array_a);
 	return (smallest_num);
@@ -211,7 +202,6 @@ int	biggest_in_a(struct s_node **a_liste)
     if (!array_a)
 		return(0);
 	len_a = current_a(a_liste, array_a) + 1;
-	//printf("len a %d\n", len_a);
 	biggest_num = max(array_a, len_a);
 	free(array_a);
 	return (biggest_num);

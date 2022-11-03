@@ -6,7 +6,7 @@
 /*   By: rschlott <rschlott@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/09 06:13:46 by rschlott          #+#    #+#             */
-/*   Updated: 2022/11/03 06:48:56 by rschlott         ###   ########.fr       */
+/*   Updated: 2022/11/03 07:58:10 by rschlott         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,4 +90,15 @@ bool	error_manager_outta_int(const char *str)
 		}
 	}
 	return (true);
+}
+
+/* checks if input is only one arg or duplicates */
+void	ft_more_exit(struct s_node **a_liste, struct s_node *ptr_a)
+{
+	ptr_a = *a_liste;
+	if (ptr_a->link == NULL || !error_manager_duplicate(a_liste))
+	{
+		del_list(a_liste);
+		exit(0);
+	}
 }

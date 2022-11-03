@@ -6,7 +6,7 @@
 /*   By: rschlott <rschlott@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/31 09:11:10 by rschlott          #+#    #+#             */
-/*   Updated: 2022/11/02 16:55:12 by rschlott         ###   ########.fr       */
+/*   Updated: 2022/11/03 08:01:20 by rschlott         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,12 +42,13 @@ int		stack_receive(int argc, char **argv, struct s_node **a_liste, struct s_node
 void	del_list(struct s_node **a_liste);
 int     smallest_in_a(struct s_node **a_liste);
 int     biggest_in_a(struct s_node **a_liste);
+int     ft_atoi(const char *str);
 
 /* error manager */
 bool	error_manager_int(const char *str);
 bool	error_manager_duplicate(struct s_node **a_liste);
 bool	error_manager_outta_int(const char *str);
-int     ft_atoi(const char *str);
+void	ft_more_exit(struct s_node **a_liste, struct s_node *ptr_a);
 
 /* operations */
 void    swap_elements(struct s_node **liste);
