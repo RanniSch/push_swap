@@ -6,7 +6,7 @@
 /*   By: rschlott <rschlott@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/28 13:23:03 by rschlott          #+#    #+#             */
-/*   Updated: 2022/11/03 12:48:24 by rschlott         ###   ########.fr       */
+/*   Updated: 2022/11/06 12:40:30 by rschlott         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,9 +65,12 @@ void	run_sorting_process(struct s_node **a_liste, struct s_node **b_liste)
 		little_input(a_liste, b_liste, smallest_a);
 	else
 	{
-		set_index(a_liste);
-		lis_process(a_liste, b_liste, count_of_nodes(a_liste));
-		minimum_sorting(a_liste, b_liste, smallest_a);
+		if (!sorted_numbers(a_liste))
+		{
+			set_index(a_liste);
+			lis_process(a_liste, b_liste, count_of_nodes(a_liste));
+			minimum_sorting(a_liste, b_liste, smallest_a);
+		}
 	}
 }
 

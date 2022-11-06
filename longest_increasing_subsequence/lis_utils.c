@@ -6,7 +6,7 @@
 /*   By: rschlott <rschlott@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/03 06:53:51 by rschlott          #+#    #+#             */
-/*   Updated: 2022/11/03 06:56:29 by rschlott         ###   ########.fr       */
+/*   Updated: 2022/11/06 10:12:35 by rschlott         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ int	max(int *length, unsigned int len)
 }
 
 /* creates an array "length" and fills it with ones. Creates an array 
-"subsequence" and fills it with zeroes. Arrays have same size as list. */
+"subsequence" and fills it with zeroes. Arrays have same length as list. */
 void	length_initializer_lis(int *subsequence, int *length, int count)
 {
 	int	i;

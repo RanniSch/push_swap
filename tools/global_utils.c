@@ -6,7 +6,7 @@
 /*   By: rschlott <rschlott@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/03 12:36:34 by rschlott          #+#    #+#             */
-/*   Updated: 2022/11/03 12:45:53 by rschlott         ###   ########.fr       */
+/*   Updated: 2022/11/06 11:34:01 by rschlott         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,6 +78,35 @@ int	biggest_in_a(struct s_node **a_liste)
 	biggest_num = max(array_a, len_a);
 	free(array_a);
 	return (biggest_num);
+}
+
+/* rotating stack a until smallest num is at the beginning */
+void	final_order(struct s_node **a_liste, int smallest_a)
+{
+	struct s_node	*ptr_a;
+	int				checker_rotate;
+	int				i;
+
+	i = 0;
+	ptr_a = *a_liste;
+	while (ptr_a->data != smallest_a && ptr_a != NULL)
+	{
+		ptr_a = ptr_a->link;
+		i++;
+	}
+	if (i < (count_of_nodes(a_liste) / 2))
+		checker_rotate = 0;
+	else
+		checker_rotate = 1;
+	ptr_a = *a_liste;
+	while (ptr_a->data != smallest_a)
+	{
+		if (checker_rotate == 0)
+			rotate_a(a_liste);
+		if (checker_rotate == 1)
+			reverse_rotate_a(a_liste);
+		ptr_a = *a_liste;
+	}
 }
 
 /* print the data of a linked list */

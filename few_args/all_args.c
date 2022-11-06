@@ -6,12 +6,13 @@
 /*   By: rschlott <rschlott@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/23 18:04:11 by rschlott          #+#    #+#             */
-/*   Updated: 2022/11/02 07:24:09 by rschlott         ###   ########.fr       */
+/*   Updated: 2022/11/06 11:08:29 by rschlott         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../push_swap.h"
 
+/* swap if two args are descending */
 void	two_arguments(struct s_node **a_liste)
 {
 	struct s_node	*ptr_a;
@@ -21,6 +22,7 @@ void	two_arguments(struct s_node **a_liste)
 		swap_a(a_liste);
 }
 
+/* sorts three args in correct order without stack b */
 void	three_arguments(struct s_node **a_liste, int *array_a, int len_a)
 {
 	if (array_a[len_a - 3] > array_a[len_a - 2]
@@ -46,6 +48,7 @@ void	three_arguments(struct s_node **a_liste, int *array_a, int len_a)
 	}
 }
 
+/* pushes first arg to stack b and runs "three_arguments" */
 void	run_four_arguments(struct s_node **a_liste, struct s_node **b_liste,
 		int *array_a, int len_a)
 {
@@ -69,6 +72,7 @@ void	run_four_arguments(struct s_node **a_liste, struct s_node **b_liste,
 		swap_a(a_liste);
 }
 
+/* allocates memory and calls "run_four_arguments" */
 int	four_arguments(struct s_node **a_liste, struct s_node **b_liste)
 {
 	int	*array_a;
@@ -83,6 +87,7 @@ int	four_arguments(struct s_node **a_liste, struct s_node **b_liste)
 	return (0);
 }
 
+/* allocates memory and calls "run_five_arguments" */
 int	five_arguments(struct s_node **a_liste, struct s_node **b_liste,
 		int smallest_a)
 {

@@ -6,7 +6,7 @@
 /*   By: rschlott <rschlott@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/23 13:23:47 by rschlott          #+#    #+#             */
-/*   Updated: 2022/11/03 07:49:28 by rschlott         ###   ########.fr       */
+/*   Updated: 2022/11/06 10:47:11 by rschlott         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,14 +83,11 @@ void	only_subsequence_in_a(struct s_node **a_liste, struct s_node **b_liste,
 	ptr_a = *a_liste;
 	count = count_of_nodes(a_liste);
 	len_anti = count - len_lis;
-	while (ptr_a->link != NULL && count > 0 && len_lis >= 0 && len_anti > 0)
+	while (count > 0 && len_lis >= 0 && len_anti >= 0)
 	{
 		if (ptr_a->data == array_lis[len_lis - 1])
 		{
-			if (len_lis > count / 2)
-				reverse_rotate_a(a_liste);
-			else
-				rotate_a(a_liste);
+			rotate_a(a_liste);
 			len_lis--;
 		}
 		else
